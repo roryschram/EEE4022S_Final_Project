@@ -305,60 +305,49 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
+  //Set a flag high when the GPS sends data
   flag = 1;
-  //HAL_UART_DMAPause(&huart1);
 
-  //memset(line_out, '\0', sizeof(line_out));
-  //memcpy(line_out, gps_raw, 512);
-
-  //HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
-
+  //Set memory of line_out to emtpy
   memset(line_out, '\0', sizeof(line_out));
+
+  //Copy a new line character to line_out
   memcpy(line_out, "\r\n\n", sizeof("\r\n\n"));
 
+  //Transmit the data over uart2
   HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
 
+  //Search for the \n character
+  uint8_t *token = strtok(gps_raw, "\n");
 
-uint8_t *token = strtok(gps_raw, "\n");
+  if (token == NULL) {
+    //break
+  } else {
+    memset(line, '\0', sizeof(line));
+    strcpy(line, token);
+    struct minmea_sentence_rmc frame;
+    if (minmea_parse_rmc(&frame, line)) {
+      memset(line_out, '\0', sizeof(line_out));
+      sprintf(line_out,"\n  $xxRMC raw coordinates and speed: (%d/%d,%d/%d) %d/%d\n",frame.latitude.value, frame.latitude.scale,frame.longitude.value, frame.longitude.scale,frame.speed.value, frame.speed.scale);
+      HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
 
-  //for(uint16_t i = 0; i < 7; i++) {
-    if (token == NULL) {
-      //break;
-    } else {
-      memset(line, '\0', sizeof(line));
-      strcpy(line, token);
-      struct minmea_sentence_rmc frame;
-      if (minmea_parse_rmc(&frame, line)) {
-        memset(line_out, '\0', sizeof(line_out));
-        sprintf(line_out,"\n  $xxRMC raw coordinates and speed: (%d/%d,%d/%d) %d/%d\n",frame.latitude.value, frame.latitude.scale,frame.longitude.value, frame.longitude.scale,frame.speed.value, frame.speed.scale);
-        HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
+      memset(line_out, '\0', sizeof(line_out));
+      sprintf(line_out, "  $xxRMC fixed-point coordinates and speed scaled to three decimal places: (%d,%d) %d\n",minmea_rescale(&frame.latitude, 1000),minmea_rescale(&frame.longitude, 1000),minmea_rescale(&frame.speed, 1000));
+      HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
 
-        memset(line_out, '\0', sizeof(line_out));
-        sprintf(line_out, "  $xxRMC fixed-point coordinates and speed scaled to three decimal places: (%d,%d) %d\n",minmea_rescale(&frame.latitude, 1000),minmea_rescale(&frame.longitude, 1000),minmea_rescale(&frame.speed, 1000));
-        HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
-
-        memset(line_out, '\0', sizeof(line_out));
-        sprintf(line_out, "  $xxRMC floating point degree coordinates and speed: (%f,%f) %f\n",minmea_tocoord(&frame.latitude),minmea_tocoord(&frame.longitude),minmea_tofloat(&frame.speed));
-        HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
-      }
+      memset(line_out, '\0', sizeof(line_out));
+      sprintf(line_out, "  $xxRMC floating point degree coordinates and speed: (%f,%f) %f\n",minmea_tocoord(&frame.latitude),minmea_tocoord(&frame.longitude),minmea_tofloat(&frame.speed));
+      HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
     }
-    //token = strtok(NULL, "\n");
-  //}
+  }
 
-
-
-
-
-
-
-
-
-
-
+  //Set gps_raw data register to empty
   memset(gps_raw, '\0', sizeof(gps_raw));
-  HAL_UART_DMAResume(&huart1);
+
+  //Set flag low to indicate that data transfer is done
   flag = 0;
   
+  //Send interrupt when data from GPS is sent again
   HAL_UARTEx_ReceiveToIdle_IT(&huart1,(uint8_t*)gps_raw, 512);
 
 }

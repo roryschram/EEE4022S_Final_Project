@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
   27:Core/Inc/minmea.h **** #endif
   28:Core/Inc/minmea.h **** 
   29:Core/Inc/minmea.h **** enum minmea_sentence_id {
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 2
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 2
 
 
   30:Core/Inc/minmea.h ****     MINMEA_INVALID = -1,
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
   84:Core/Inc/minmea.h ****     struct minmea_time time;
   85:Core/Inc/minmea.h ****     struct minmea_float latitude;
   86:Core/Inc/minmea.h ****     struct minmea_float longitude;
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 3
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 3
 
 
   87:Core/Inc/minmea.h ****     int fix_quality;
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  141:Core/Inc/minmea.h **** struct minmea_sentence_gsa {
  142:Core/Inc/minmea.h ****     char mode;
  143:Core/Inc/minmea.h ****     int fix_type;
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 4
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 4
 
 
  144:Core/Inc/minmea.h ****     int sats[12];
@@ -238,7 +238,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  198:Core/Inc/minmea.h **** 
  199:Core/Inc/minmea.h **** /**
  200:Core/Inc/minmea.h ****  * Scanf-like processor for NMEA sentences. Supports the following formats:
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 5
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 5
 
 
  201:Core/Inc/minmea.h ****  * c - single character (char *)
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  255:Core/Inc/minmea.h ****  * Returns NaN for "unknown" values.
  256:Core/Inc/minmea.h ****  */
  257:Core/Inc/minmea.h **** static inline float minmea_tofloat(const struct minmea_float *f)
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 6
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 6
 
 
  258:Core/Inc/minmea.h **** {
@@ -358,7 +358,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
   54              	.L6:
  286:Core/Inc/minmea.h ****     return isprint((unsigned char) c) && c != ',' && c != '*';
   55              		.loc 2 286 51 view .LVU8
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 7
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 7
 
 
   56 0016 0020     		movs	r0, #0
@@ -418,7 +418,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
   18:Core/Src/minmea.c **** {
   90              		.loc 1 18 1 is_stmt 1 view -0
   91              		.cfi_startproc
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 8
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 8
 
 
   92              		@ args = 0, pretend = 0, frame = 0
@@ -478,7 +478,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  135              	.LVL13:
   22:Core/Src/minmea.c ****         return c - 'A' + 10;
  136              		.loc 1 22 24 view .LVU32
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 9
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 9
 
 
  137 0028 7047     		bx	lr
@@ -538,7 +538,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  184              	.LVL20:
  185              	.L20:
   33:Core/Src/minmea.c **** 
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 10
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 10
 
 
   34:Core/Src/minmea.c ****     uint8_t checksum = 0x00;
@@ -598,7 +598,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  227              		.cfi_offset 4, -20
  228              		.cfi_offset 5, -16
  229              		.cfi_offset 6, -12
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 11
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 11
 
 
  230              		.cfi_offset 7, -8
@@ -658,7 +658,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  268              		.loc 1 52 42 discriminator 2 view .LVU69
  269 0020 12F0970F 		tst	r2, #151
  270 0024 F4D1     		bne	.L26
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 12
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 12
 
 
  271              	.L25:
@@ -718,7 +718,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
   62:Core/Src/minmea.c ****         if (lower == -1)
  299              		.loc 1 62 38 is_stmt 0 view .LVU82
  300 003e E71C     		adds	r7, r4, #3
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 13
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 13
 
 
  301              	.LVL33:
@@ -778,7 +778,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  337 005e FBD0     		beq	.L30
   76:Core/Src/minmea.c ****         sentence++;
  338              		.loc 1 76 30 discriminator 1 view .LVU98
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 14
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 14
 
 
  339 0060 0A2B     		cmp	r3, #10
@@ -838,7 +838,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  378              	.L36:
   69:Core/Src/minmea.c ****     } else if (strict) {
  379              		.loc 1 69 20 view .LVU110
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 15
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 15
 
 
  380              	.LBE3:
@@ -898,7 +898,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  428              		.loc 1 92 5 view .LVU116
  429              		.loc 1 92 8 is_stmt 0 view .LVU117
  430 000a 08B9     		cbnz	r0, .L130
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 16
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 16
 
 
   93:Core/Src/minmea.c ****         return false;
@@ -958,7 +958,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  120:Core/Src/minmea.c ****         }
  121:Core/Src/minmea.c **** 
  122:Core/Src/minmea.c ****         if (!field && !optional) {
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 17
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 17
 
 
  456              		.loc 1 122 20 discriminator 1 view .LVU128
@@ -1018,7 +1018,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  495              	.LVL58:
  496              	.L102:
  497              	.LBB6:
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 18
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 18
 
 
  129:Core/Src/minmea.c **** 
@@ -1078,7 +1078,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  543 007c 6302     		.2byte	(.L105-.L59)/2
  544 007e 6302     		.2byte	(.L105-.L59)/2
  545 0080 1E00     		.2byte	(.L106-.L59)/2
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 19
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 19
 
 
  546              		.p2align 1
@@ -1138,7 +1138,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  581              	.LBE8:
  582              	.LBB9:
  157:Core/Src/minmea.c **** 
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 20
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 20
 
 
  158:Core/Src/minmea.c ****             case 'f': { // Fractional value with scale (struct minmea_float).
@@ -1198,7 +1198,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  194:Core/Src/minmea.c ****                             goto parse_error;
  195:Core/Src/minmea.c ****                         }
  196:Core/Src/minmea.c ****                         field++;
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 21
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 21
 
 
  197:Core/Src/minmea.c ****                     }
@@ -1258,7 +1258,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  634              	.LBE9:
  215:Core/Src/minmea.c ****             } break;
  635              		.loc 1 215 15 is_stmt 1 view .LVU180
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 22
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 22
 
 
  636 00e2 96E1     		b	.L95
@@ -1318,7 +1318,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  678              	.LBE12:
  679              	.LBE40:
   89:Core/Src/minmea.c ****     bool optional = false;
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 23
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 23
 
 
  680              		.loc 1 89 10 view .LVU193
@@ -1378,7 +1378,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  721              		.loc 1 165 28 is_stmt 0 view .LVU206
  722 014c B8F12B0F 		cmp	r8, #43
  723 0150 C8D0     		beq	.L134
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 24
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 24
 
 
  724              	.L63:
@@ -1438,7 +1438,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  763              	.LVL83:
  183:Core/Src/minmea.c ****                             if (scale)
  764              		.loc 1 183 35 view .LVU222
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 25
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 25
 
 
  765 018a 08EB4909 		add	r9, r8, r9, lsl #1
@@ -1498,7 +1498,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  804              		.loc 1 203 20 is_stmt 0 view .LVU237
  805 01b6 B9F1FF3F 		cmp	r9, #-1
  806 01ba 82D1     		bne	.L73
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 26
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 26
 
 
  205:Core/Src/minmea.c ****                     scale = 0;
@@ -1558,7 +1558,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  848              		.loc 1 223 24 view .LVU253
  849 01dc 28B9     		cbnz	r0, .L138
  850              	.LVL99:
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 27
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 27
 
 
  851              	.L76:
@@ -1618,7 +1618,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  892              	.LVL103:
  893              		.loc 1 231 23 view .LVU266
  894 01f4 1A1D     		adds	r2, r3, #4
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 28
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 28
 
 
  895 01f6 0392     		str	r2, [sp, #12]
@@ -1678,7 +1678,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  935              	.L47:
  235:Core/Src/minmea.c ****                 }
  936              		.loc 1 235 29 view .LVU279
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 29
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 29
 
 
  937              	.LBE20:
@@ -1738,7 +1738,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  978 024e 0392     		str	r2, [sp, #12]
  979 0250 1B68     		ldr	r3, [r3]
  253:Core/Src/minmea.c ****                 memcpy(buf, field+1, 5);
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 30
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 30
 
 
  980              		.loc 1 253 17 is_stmt 1 view .LVU294
@@ -1798,7 +1798,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  260:Core/Src/minmea.c **** 
  1023              		.loc 1 260 21 view .LVU309
  1024 0282 8146     		mov	r9, r0
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 31
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 31
 
 
  1025              	.LVL123:
@@ -1858,7 +1858,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  1059 0296 0023     		movs	r3, #0
  1060              	.L84:
  1061              	.LVL126:
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 32
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 32
 
 
  264:Core/Src/minmea.c ****                         if (!isdigit((unsigned char) field[f]))
@@ -1918,7 +1918,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  1100 02ca 8DF806A0 		strb	r10, [sp, #6]
  270:Core/Src/minmea.c ****                     d = strtol(dArr, NULL, 10);
  1101              		.loc 1 270 21 is_stmt 1 view .LVU336
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 33
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 33
 
 
  270:Core/Src/minmea.c ****                     d = strtol(dArr, NULL, 10);
@@ -1978,7 +1978,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  1143              	.L122:
  273:Core/Src/minmea.c ****                 }
  1144              		.loc 1 273 25 view .LVU350
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 34
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 34
 
 
  1145              	.LBE27:
@@ -2038,7 +2038,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  284:Core/Src/minmea.c **** 
  1186              		.loc 1 284 29 view .LVU366
  1187 032c 9946     		mov	r9, r3
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 35
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 35
 
 
  284:Core/Src/minmea.c **** 
@@ -2098,7 +2098,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  1209              	.LBB37:
  1210              	.LBB31:
  1211              	.LBB32:
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 36
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 36
 
 
  290:Core/Src/minmea.c **** 
@@ -2158,7 +2158,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  1253 0360 6B78     		ldrb	r3, [r5, #1]	@ zero_extendqisi2
  1254              	.LVL148:
  292:Core/Src/minmea.c ****                     char iArr[] = {field[2], field[3], '\0'};
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 37
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 37
 
 
  1255              		.loc 1 292 26 view .LVU390
@@ -2218,7 +2218,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  1294              		.loc 1 296 25 view .LVU405
  1295 03a0 FFF7FEFF 		bl	strtol
  1296              	.LVL152:
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 38
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 38
 
 
  1297 03a4 8146     		mov	r9, r0
@@ -2278,7 +2278,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  1336              		.loc 1 306 29 is_stmt 1 view .LVU420
  306:Core/Src/minmea.c ****                         }
  1337              		.loc 1 306 35 is_stmt 0 view .LVU421
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 39
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 39
 
 
  1338 03ce 0E4A     		ldr	r2, .L147+8
@@ -2338,7 +2338,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  1379              		.loc 1 284 37 view .LVU434
  1380 03f8 1846     		mov	r0, r3
  284:Core/Src/minmea.c **** 
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 40
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 40
 
 
  1381              		.loc 1 284 29 view .LVU435
@@ -2398,7 +2398,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  114:Core/Src/minmea.c **** 
  1422              		.loc 1 114 9 view .LVU444
  114:Core/Src/minmea.c **** 
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 41
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 41
 
 
  1423              		.loc 1 114 28 is_stmt 0 view .LVU445
@@ -2458,7 +2458,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  1471 04ac 17050000 		.word	.L101+1
  1472 04b0 13040000 		.word	.L95+1
  1473 04b4 17050000 		.word	.L101+1
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 42
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 42
 
 
  1474 04b8 17050000 		.word	.L101+1
@@ -2518,7 +2518,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  1521              		.loc 1 127 9 view .LVU459
  1522 0516 0020     		movs	r0, #0
  1523              	.LVL178:
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 43
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 43
 
 
  1524              	.L42:
@@ -2578,7 +2578,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  1570 052e 0020     		movs	r0, #0
  1571 0530 F2E7     		b	.L42
  1572              	.L133:
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 44
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 44
 
 
  1573 0532 0020     		movs	r0, #0
@@ -2638,7 +2638,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  1620              		.cfi_def_cfa_offset 16
  1621 0004 0446     		mov	r4, r0
  1622 0006 0846     		mov	r0, r1
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 45
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 45
 
 
  1623              	.LVL184:
@@ -2698,7 +2698,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  1668 0000 47425300 		.ascii	"GBS\000"
  1669              		.align	2
  1670              	.LC2:
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 46
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 46
 
 
  1671 0004 47474100 		.ascii	"GGA\000"
@@ -2758,7 +2758,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  354:Core/Src/minmea.c ****         return MINMEA_INVALID;
  355:Core/Src/minmea.c **** 
  356:Core/Src/minmea.c ****     char type[6];
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 47
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 47
 
 
  1722              		.loc 1 356 5 is_stmt 1 view .LVU495
@@ -2818,7 +2818,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  368:Core/Src/minmea.c ****     if (!strcmp(type+2, "GST"))
  1765              		.loc 1 368 5 is_stmt 1 view .LVU511
  1766              		.loc 1 368 10 is_stmt 0 view .LVU512
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 48
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 48
 
 
  1767 004c 2149     		ldr	r1, .L168+20
@@ -2878,7 +2878,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  1809              		.loc 1 354 16 view .LVU527
  1810 008c 4FF0FF30 		mov	r0, #-1
  1811 0090 03E0     		b	.L155
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 49
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 49
 
 
  1812              	.L157:
@@ -2938,7 +2938,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  1856              	.L166:
  377:Core/Src/minmea.c **** 
  1857              		.loc 1 377 16 view .LVU538
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 50
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 50
 
 
  1858 00ba 0920     		movs	r0, #9
@@ -2998,7 +2998,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  1906              		.loc 1 386 10 is_stmt 0 view .LVU543
  1907 0008 03F13C02 		add	r2, r3, #60
  1908 000c 0692     		str	r2, [sp, #24]
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 51
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 51
 
 
  1909 000e 03F13402 		add	r2, r3, #52
@@ -3058,7 +3058,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  1947              		.cfi_restore_state
  399:Core/Src/minmea.c ****         return false;
  1948              		.loc 1 399 16 view .LVU550
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 52
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 52
 
 
  1949 0050 0024     		movs	r4, #0
@@ -3118,7 +3118,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  412:Core/Src/minmea.c ****     if (!minmea_scan(sentence, "tTcfdfdffDfd",
  1993              		.loc 1 412 5 view .LVU558
  1994              		.loc 1 412 10 is_stmt 0 view .LVU559
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 53
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 53
 
 
  1995 0008 0AAB     		add	r3, sp, #40
@@ -3178,7 +3178,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2035 0058 9DF83730 		ldrb	r3, [sp, #55]	@ zero_extendqisi2
  2036 005c 412B     		cmp	r3, #65
  2037 005e 14BF     		ite	ne
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 54
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 54
 
 
  2038 0060 0023     		movne	r3, #0
@@ -3238,7 +3238,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2086              		.section	.rodata.minmea_parse_gga.str1.4,"aMS",%progbits,1
  2087              		.align	2
  2088              	.LC12:
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 55
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 55
 
 
  2089 0000 74546664 		.ascii	"tTfdfdiiffcfcf_\000"
@@ -3298,7 +3298,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2132 002c 04F12403 		add	r3, r4, #36
  2133 0030 0593     		str	r3, [sp, #20]
  2134 0032 04F12003 		add	r3, r4, #32
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 56
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 56
 
 
  2135 0036 0493     		str	r3, [sp, #16]
@@ -3358,7 +3358,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2173 0072 0C9B     		ldr	r3, [sp, #48]
  2174 0074 02FB03F3 		mul	r3, r2, r3
  2175 0078 A361     		str	r3, [r4, #24]
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 57
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 57
 
 
  458:Core/Src/minmea.c **** 
@@ -3418,7 +3418,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2221              		.cfi_offset 14, -4
  2222 0002 92B0     		sub	sp, sp, #72
  2223              		.cfi_def_cfa_offset 80
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 58
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 58
 
 
  2224 0004 0346     		mov	r3, r0
@@ -3478,7 +3478,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  471:Core/Src/minmea.c ****             &frame->sats[0],
  472:Core/Src/minmea.c ****             &frame->sats[1],
  473:Core/Src/minmea.c ****             &frame->sats[2],
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 59
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 59
 
 
  474:Core/Src/minmea.c ****             &frame->sats[3],
@@ -3538,7 +3538,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2305              		.align	1
  2306              		.global	minmea_parse_gll
  2307              		.syntax unified
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 60
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 60
 
 
  2308              		.thumb
@@ -3598,7 +3598,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2354 0032 0546     		mov	r5, r0
  2355 0034 78B1     		cbz	r0, .L197
  501:Core/Src/minmea.c ****             type,
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 61
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 61
 
 
  502:Core/Src/minmea.c ****             &frame->latitude, &latitude_direction,
@@ -3658,7 +3658,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2395              	.L200:
  2396 0060 00000000 		.word	.LC14
  2397 0064 08000000 		.word	.LC3
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 62
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 62
 
 
  2398              		.cfi_endproc
@@ -3718,7 +3718,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2445 0030 0092     		str	r2, [sp]
  2446 0032 08AA     		add	r2, sp, #32
  2447 0034 0749     		ldr	r1, .L207
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 63
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 63
 
 
  2448              	.LVL231:
@@ -3778,7 +3778,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2487 0000 74696969 		.ascii	"tiii;iiiiiiiiiiiiiiii\000"
  2487      3B696969 
  2487      69696969 
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 64
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 64
 
 
  2487      69696969 
@@ -3838,7 +3838,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2530 0036 0A92     		str	r2, [sp, #40]
  2531 0038 03F12802 		add	r2, r3, #40
  2532 003c 0992     		str	r2, [sp, #36]
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 65
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 65
 
 
  2533 003e 03F12402 		add	r2, r3, #36
@@ -3898,7 +3898,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2563 0080 0DF14A00 		add	r0, sp, #74
  2564 0084 FFF7FEFF 		bl	strcmp
  2565              	.LVL238:
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 66
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 66
 
 
  2566              		.loc 1 572 8 view .LVU655
@@ -3958,7 +3958,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2612              		.cfi_offset 14, -4
  2613 0002 8DB0     		sub	sp, sp, #52
  2614              		.cfi_def_cfa_offset 64
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 67
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 67
 
 
  2615 0004 0446     		mov	r4, r0
@@ -4018,7 +4018,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2649              		.loc 1 599 9 is_stmt 0 view .LVU667
  2650 0044 1449     		ldr	r1, .L224+4
  2651 0046 0DF12A00 		add	r0, sp, #42
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 68
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 68
 
 
  2652 004a FFF7FEFF 		bl	strcmp
@@ -4078,7 +4078,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2696              		.loc 1 609 32 is_stmt 0 view .LVU688
  2697 007c 0023     		movs	r3, #0
  2698 007e E361     		str	r3, [r4, #28]
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 69
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 69
 
 
  2699              	.L221:
@@ -4138,7 +4138,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2746 0000 30B5     		push	{r4, r5, lr}
  2747              		.cfi_def_cfa_offset 12
  2748              		.cfi_offset 4, -12
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 70
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 70
 
 
  2749              		.cfi_offset 5, -8
@@ -4198,7 +4198,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  633:Core/Src/minmea.c ****   if (abs(frame->hour_offset) > 13 ||
  2787              		.loc 1 633 3 is_stmt 1 view .LVU704
  2788              		.loc 1 633 16 is_stmt 0 view .LVU705
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 71
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 71
 
 
  2789 0040 E369     		ldr	r3, [r4, #28]
@@ -4258,7 +4258,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2834              	.LFE19:
  2836              		.section	.text.minmea_getdatetime,"ax",%progbits
  2837              		.align	1
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 72
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 72
 
 
  2838              		.global	minmea_getdatetime
@@ -4318,7 +4318,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2885              		.loc 1 647 8 view .LVU727
  2886 0024 4F2B     		cmp	r3, #79
  2887 0026 0EDC     		bgt	.L237
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 73
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 73
 
 
  648:Core/Src/minmea.c ****         tm->tm_year = 2000 + date->year - 1900; // 2000-2079
@@ -4378,7 +4378,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2928              	.LVL257:
  2929              	.L237:
  649:Core/Src/minmea.c ****         tm->tm_year = date->year - 1900;        // 4 digit year, use directly
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 74
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 74
 
 
  2930              		.loc 1 649 12 is_stmt 1 view .LVU750
@@ -4438,7 +4438,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  2975              		.loc 1 666 5 view .LVU760
  2976              		.loc 1 666 9 is_stmt 0 view .LVU761
  2977 0008 01A8     		add	r0, sp, #4
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 75
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 75
 
 
  2978              	.LVL259:
@@ -4498,7 +4498,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  3021 003a 70BD     		pop	{r4, r5, r6, pc}
  3022              	.LVL265:
  3023              	.L243:
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 76
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 76
 
 
  3024              		.cfi_restore_state
@@ -4528,80 +4528,80 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 1
  3047              		.file 12 "/Users/roryschram/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vsco
  3048              		.file 13 "/Users/roryschram/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vsco
  3049              		.file 14 "<built-in>"
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 77
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 77
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 minmea.c
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:21     .text.minmea_isfield:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:26     .text.minmea_isfield:00000000 minmea_isfield
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:77     .text.minmea_isfield:00000024 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:82     .text.hex2int:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:87     .text.hex2int:00000000 hex2int
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:149    .text.minmea_checksum:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:155    .text.minmea_checksum:00000000 minmea_checksum
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:210    .text.minmea_check:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:216    .text.minmea_check:00000000 minmea_check
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:387    .text.minmea_check:00000080 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:392    .text.minmea_scan:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:398    .text.minmea_scan:00000000 minmea_scan
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:527    .text.minmea_scan:0000005c $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:546    .text.minmea_scan:00000082 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1389   .text.minmea_scan:00000400 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1398   .text.minmea_scan:00000410 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1445   .text.minmea_scan:00000444 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1495   .text.minmea_scan:00000508 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1597   .rodata.minmea_talker_id.str1.4:00000000 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1601   .text.minmea_talker_id:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1607   .text.minmea_talker_id:00000000 minmea_talker_id
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1661   .text.minmea_talker_id:00000028 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1666   .rodata.minmea_sentence_id.str1.4:00000000 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1694   .text.minmea_sentence_id:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1700   .text.minmea_sentence_id:00000000 minmea_sentence_id
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1863   .text.minmea_sentence_id:000000c0 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1877   .rodata.minmea_parse_gbs.str1.4:00000000 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1881   .text.minmea_parse_gbs:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1887   .text.minmea_parse_gbs:00000000 minmea_parse_gbs
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1954   .text.minmea_parse_gbs:00000054 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1960   .rodata.minmea_parse_rmc.str1.4:00000000 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1964   .text.minmea_parse_rmc:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:1970   .text.minmea_parse_rmc:00000000 minmea_parse_rmc
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2081   .text.minmea_parse_rmc:00000090 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2087   .rodata.minmea_parse_gga.str1.4:00000000 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2091   .text.minmea_parse_gga:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2097   .text.minmea_parse_gga:00000000 minmea_parse_gga
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2194   .text.minmea_parse_gga:00000084 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2200   .rodata.minmea_parse_gsa.str1.4:00000000 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2204   .text.minmea_parse_gsa:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2210   .text.minmea_parse_gsa:00000000 minmea_parse_gsa
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2295   .text.minmea_parse_gsa:00000088 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2301   .rodata.minmea_parse_gll.str1.4:00000000 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2305   .text.minmea_parse_gll:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2311   .text.minmea_parse_gll:00000000 minmea_parse_gll
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2396   .text.minmea_parse_gll:00000060 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2402   .rodata.minmea_parse_gst.str1.4:00000000 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2406   .text.minmea_parse_gst:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2412   .text.minmea_parse_gst:00000000 minmea_parse_gst
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2479   .text.minmea_parse_gst:00000054 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2485   .rodata.minmea_parse_gsv.str1.4:00000000 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2489   .text.minmea_parse_gsv:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2495   .text.minmea_parse_gsv:00000000 minmea_parse_gsv
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2584   .text.minmea_parse_gsv:00000094 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2590   .rodata.minmea_parse_vtg.str1.4:00000000 $d
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s 			page 78
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:21     .text.minmea_isfield:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:26     .text.minmea_isfield:00000000 minmea_isfield
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:77     .text.minmea_isfield:00000024 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:82     .text.hex2int:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:87     .text.hex2int:00000000 hex2int
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:149    .text.minmea_checksum:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:155    .text.minmea_checksum:00000000 minmea_checksum
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:210    .text.minmea_check:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:216    .text.minmea_check:00000000 minmea_check
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:387    .text.minmea_check:00000080 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:392    .text.minmea_scan:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:398    .text.minmea_scan:00000000 minmea_scan
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:527    .text.minmea_scan:0000005c $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:546    .text.minmea_scan:00000082 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1389   .text.minmea_scan:00000400 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1398   .text.minmea_scan:00000410 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1445   .text.minmea_scan:00000444 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1495   .text.minmea_scan:00000508 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1597   .rodata.minmea_talker_id.str1.4:00000000 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1601   .text.minmea_talker_id:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1607   .text.minmea_talker_id:00000000 minmea_talker_id
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1661   .text.minmea_talker_id:00000028 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1666   .rodata.minmea_sentence_id.str1.4:00000000 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1694   .text.minmea_sentence_id:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1700   .text.minmea_sentence_id:00000000 minmea_sentence_id
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1863   .text.minmea_sentence_id:000000c0 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1877   .rodata.minmea_parse_gbs.str1.4:00000000 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1881   .text.minmea_parse_gbs:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1887   .text.minmea_parse_gbs:00000000 minmea_parse_gbs
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1954   .text.minmea_parse_gbs:00000054 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1960   .rodata.minmea_parse_rmc.str1.4:00000000 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1964   .text.minmea_parse_rmc:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:1970   .text.minmea_parse_rmc:00000000 minmea_parse_rmc
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2081   .text.minmea_parse_rmc:00000090 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2087   .rodata.minmea_parse_gga.str1.4:00000000 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2091   .text.minmea_parse_gga:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2097   .text.minmea_parse_gga:00000000 minmea_parse_gga
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2194   .text.minmea_parse_gga:00000084 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2200   .rodata.minmea_parse_gsa.str1.4:00000000 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2204   .text.minmea_parse_gsa:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2210   .text.minmea_parse_gsa:00000000 minmea_parse_gsa
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2295   .text.minmea_parse_gsa:00000088 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2301   .rodata.minmea_parse_gll.str1.4:00000000 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2305   .text.minmea_parse_gll:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2311   .text.minmea_parse_gll:00000000 minmea_parse_gll
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2396   .text.minmea_parse_gll:00000060 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2402   .rodata.minmea_parse_gst.str1.4:00000000 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2406   .text.minmea_parse_gst:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2412   .text.minmea_parse_gst:00000000 minmea_parse_gst
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2479   .text.minmea_parse_gst:00000054 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2485   .rodata.minmea_parse_gsv.str1.4:00000000 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2489   .text.minmea_parse_gsv:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2495   .text.minmea_parse_gsv:00000000 minmea_parse_gsv
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2584   .text.minmea_parse_gsv:00000094 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2590   .rodata.minmea_parse_vtg.str1.4:00000000 $d
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s 			page 78
 
 
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2594   .text.minmea_parse_vtg:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2600   .text.minmea_parse_vtg:00000000 minmea_parse_vtg
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2722   .text.minmea_parse_vtg:00000094 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2728   .rodata.minmea_parse_zda.str1.4:00000000 $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2732   .text.minmea_parse_zda:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2738   .text.minmea_parse_zda:00000000 minmea_parse_zda
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2831   .text.minmea_parse_zda:0000006c $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2837   .text.minmea_getdatetime:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2843   .text.minmea_getdatetime:00000000 minmea_getdatetime
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2950   .text.minmea_gettime:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccM86DqO.s:2956   .text.minmea_gettime:00000000 minmea_gettime
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2594   .text.minmea_parse_vtg:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2600   .text.minmea_parse_vtg:00000000 minmea_parse_vtg
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2722   .text.minmea_parse_vtg:00000094 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2728   .rodata.minmea_parse_zda.str1.4:00000000 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2732   .text.minmea_parse_zda:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2738   .text.minmea_parse_zda:00000000 minmea_parse_zda
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2831   .text.minmea_parse_zda:0000006c $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2837   .text.minmea_getdatetime:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2843   .text.minmea_getdatetime:00000000 minmea_getdatetime
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2950   .text.minmea_gettime:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cccQgbb2.s:2956   .text.minmea_gettime:00000000 minmea_gettime
 
 UNDEFINED SYMBOLS
 _ctype_
