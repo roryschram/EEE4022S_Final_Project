@@ -26,6 +26,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+#include "bmp280.h"
+#include <float.h>
+#include <math.h>
 
 /* USER CODE END Includes */
 
@@ -56,6 +59,27 @@ uint8_t gps_raw[512] = {"\0"};
 uint8_t flag = 0;
 char line_out[512] = {"\0"};
 char line[512] = {"\0"};
+bool bme280p;
+
+//Variables to work out altitude
+
+//Pressure at sea level
+float P_b = 101325;
+
+//Height that we are calculating
+float altitude = 0;
+
+
+BMP280_HandleTypedef bmp280;
+
+float pressure, temperature, humidity;
+char sPressure[128] = {"\0"};
+char sTemperature[128] = {"\0"};
+char sHumidity[128] = {"\0"};
+char sAltitude[128] = {"\0"};
+
+uint16_t size;
+uint8_t Data[256] = {"\0"};
 
 /* USER CODE END PV */
 
@@ -108,9 +132,44 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 
+/*
+  
+  uint8_t Buffer[25] = {0};
+  uint8_t Space[] = " - ";
+  uint8_t StartMSG[] = "Starting I2C Scanning: \r\n";
+  uint8_t EndMSG[] = "Done! \r\n\r\n";
+  int i = 0, ret;
 
-  //HAL_UARTEx_ReceiveToIdle_DMA(&huart1,(uint8_t*)gps_raw,512);
-  HAL_UARTEx_ReceiveToIdle_IT(&huart1,(uint8_t*)gps_raw,512);
+  for(i=1; i<128; i++)
+    {
+        ret = HAL_I2C_IsDeviceReady(&hi2c1, (uint16_t)(i<<1), 3, 5);
+        if (ret != HAL_OK) 
+        {
+            HAL_UART_Transmit(&huart2, Space, sizeof(Space), 1000);
+        }
+        else if(ret == HAL_OK)
+        {
+            sprintf(Buffer, "0x%X", i);
+            HAL_UART_Transmit(&huart2, Buffer, sizeof(Buffer), 1000);
+        }
+    }
+    HAL_UART_Transmit(&huart2, EndMSG, sizeof(EndMSG), 1000);
+
+*/
+
+  bmp280_init_default_params(&bmp280.params);
+	bmp280.addr = 0x77;
+	bmp280.i2c = &hi2c1;
+
+	while (!bmp280_init(&bmp280, &bmp280.params)) {
+		size = sprintf((char *)Data, "BMP280 initialization failed\n");
+		HAL_UART_Transmit(&huart2, Data, size, 1000);
+		HAL_Delay(2000);
+	}
+	bool bme280p = bmp280.id == BME280_CHIP_ID;
+	size = sprintf((char *)Data, "BMP280: found %s\n", bme280p ? "BME280" : "BMP280");
+	HAL_UART_Transmit(&huart2, Data, size, 1000);
+
 
   /* USER CODE END 2 */
 
@@ -118,7 +177,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    //HAL_UARTEx_ReceiveToIdle_IT(&huart1, (uint8_t *)Gpsdata, sizeof(Gpsdata));
+    //HAL_UARTEx_ReceiveToIdle_DMA(&huart1,(uint8_t*)gps_raw,512);
+    HAL_UARTEx_ReceiveToIdle_IT(&huart1,(uint8_t*)gps_raw,512);
     
     /* USER CODE END WHILE */
 
@@ -317,6 +377,8 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
   //Transmit the data over uart2
   HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
 
+
+  
   //Search for the \n character
   uint8_t *token = strtok(gps_raw, "\n");
 
@@ -328,27 +390,66 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
     struct minmea_sentence_rmc frame;
     if (minmea_parse_rmc(&frame, line)) {
       memset(line_out, '\0', sizeof(line_out));
-      sprintf(line_out,"\n  $xxRMC raw coordinates and speed: (%d/%d,%d/%d) %d/%d\n",frame.latitude.value, frame.latitude.scale,frame.longitude.value, frame.longitude.scale,frame.speed.value, frame.speed.scale);
+      sprintf(line_out,"\nTime: %d:%d:%d\n",frame.time.hours, frame.time.minutes,frame.time.seconds);
       HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
 
       memset(line_out, '\0', sizeof(line_out));
-      sprintf(line_out, "  $xxRMC fixed-point coordinates and speed scaled to three decimal places: (%d,%d) %d\n",minmea_rescale(&frame.latitude, 1000),minmea_rescale(&frame.longitude, 1000),minmea_rescale(&frame.speed, 1000));
+      sprintf(line_out, "Co-Ordinates: (%d,%d) \n",minmea_rescale(&frame.latitude, 1000),minmea_rescale(&frame.longitude, 1000));
       HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
-
-      memset(line_out, '\0', sizeof(line_out));
-      sprintf(line_out, "  $xxRMC floating point degree coordinates and speed: (%f,%f) %f\n",minmea_tocoord(&frame.latitude),minmea_tocoord(&frame.longitude),minmea_tofloat(&frame.speed));
-      HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
+      
     }
   }
 
   //Set gps_raw data register to empty
   memset(gps_raw, '\0', sizeof(gps_raw));
 
+
+
+  	//HAL_Delay(100);
+	while (!bmp280_read_float(&bmp280, &temperature, &pressure, &humidity)) {
+	  size = sprintf(Data,"Temperature/pressure reading failed\n");
+	  HAL_UART_Transmit(&huart2, Data, size, 1000);
+	}
+
+
+
+
+  //altitude = H_b + (T_b/L_b)*(pow((pressure/P_b),(-1*R*L_b)/(G_0*M))-1);
+
+  altitude = 44330*(1-pow((pressure/P_b),(1/5.255)));
+
+  gcvt(altitude, 8, sAltitude);
+  gcvt(pressure, 8, sPressure);
+  gcvt(temperature, 4, sTemperature);
+  gcvt(humidity, 4, sHumidity);
+
+	size = sprintf(Data,"Pressure: %s Pa, Temperature: %s C, Humidity: %s Altitude: %s\n",sPressure, sTemperature, sHumidity, sAltitude);
+	HAL_UART_Transmit(&huart2, Data, size, 1000);
+  memset(Data, '\0', sizeof(Data));
+
+	//HAL_Delay(2000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //Set flag low to indicate that data transfer is done
   flag = 0;
   
   //Send interrupt when data from GPS is sent again
-  HAL_UARTEx_ReceiveToIdle_IT(&huart1,(uint8_t*)gps_raw, 512);
+  //HAL_UARTEx_ReceiveToIdle_IT(&huart1,(uint8_t*)gps_raw, 512);
 
 }
 

@@ -36,6 +36,7 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
+Core/Src/bmp280.c \
 Core/Src/main.c \
 Core/Src/minmea.c \
 Core/Src/stm32f4xx_hal_msp.c \
