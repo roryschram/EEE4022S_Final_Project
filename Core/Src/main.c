@@ -29,6 +29,7 @@
 #include "bmp280.h"
 #include <float.h>
 #include <math.h>
+#include <LoRa.h>
 
 /* USER CODE END Includes */
 
@@ -51,6 +52,8 @@
 /* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c1;
 
+SPI_HandleTypeDef hspi3;
+
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 
@@ -60,6 +63,9 @@ uint8_t flag = 0;
 char line_out[512] = {"\0"};
 char line[512] = {"\0"};
 bool bme280p;
+uint8_t transmit_data[256] = {"\0"};
+LoRa myLoRa;
+bool isLoraReady = true;
 
 //Variables to work out altitude
 
@@ -81,6 +87,7 @@ char sAltitude[128] = {"\0"};
 uint16_t size;
 uint8_t Data[256] = {"\0"};
 
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -89,6 +96,7 @@ static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_I2C1_Init(void);
+static void MX_SPI3_Init(void);
 /* USER CODE BEGIN PFP */
 
 
@@ -130,32 +138,8 @@ int main(void)
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   MX_I2C1_Init();
+  MX_SPI3_Init();
   /* USER CODE BEGIN 2 */
-
-/*
-  
-  uint8_t Buffer[25] = {0};
-  uint8_t Space[] = " - ";
-  uint8_t StartMSG[] = "Starting I2C Scanning: \r\n";
-  uint8_t EndMSG[] = "Done! \r\n\r\n";
-  int i = 0, ret;
-
-  for(i=1; i<128; i++)
-    {
-        ret = HAL_I2C_IsDeviceReady(&hi2c1, (uint16_t)(i<<1), 3, 5);
-        if (ret != HAL_OK) 
-        {
-            HAL_UART_Transmit(&huart2, Space, sizeof(Space), 1000);
-        }
-        else if(ret == HAL_OK)
-        {
-            sprintf(Buffer, "0x%X", i);
-            HAL_UART_Transmit(&huart2, Buffer, sizeof(Buffer), 1000);
-        }
-    }
-    HAL_UART_Transmit(&huart2, EndMSG, sizeof(EndMSG), 1000);
-
-*/
 
   bmp280_init_default_params(&bmp280.params);
 	bmp280.addr = 0x77;
@@ -167,8 +151,40 @@ int main(void)
 		HAL_Delay(2000);
 	}
 	bool bme280p = bmp280.id == BME280_CHIP_ID;
-	size = sprintf((char *)Data, "BMP280: found %s\n", bme280p ? "BME280" : "BMP280");
+	size = sprintf((char *)Data, "\nBMP280: found %s\n", bme280p ? "BME280" : "BMP280");
 	HAL_UART_Transmit(&huart2, Data, size, 1000);
+
+  myLoRa = newLoRa();
+  myLoRa.CS_port         = GPIOA;
+  myLoRa.CS_pin          = GPIO_PIN_4;
+  myLoRa.reset_port      = GPIOB;
+  myLoRa.reset_pin       = GPIO_PIN_8;
+  myLoRa.DIO0_port       = GPIOB;
+  myLoRa.DIO0_pin        = GPIO_PIN_9;
+  myLoRa.hSPIx           = &hspi3;
+
+  uint16_t ret = LoRa_init(&myLoRa);
+  uint8_t buff[128] = {"\0"};
+
+
+
+if (ret==LORA_OK){
+  snprintf(buff,sizeof(buff),"LoRa is running... :) \n\r");
+  LoRa_transmit(&myLoRa, (uint8_t*)buff, 120, 100);
+  HAL_UART_Transmit(&huart2, buff, sizeof(buff)/sizeof(buff[0]), 1000);
+}
+else{
+  snprintf(buff,sizeof(buff),"\n\r LoRa failed :( \n\r Error code: %d \n\r", ret);
+  HAL_UART_Transmit(&huart2, buff, sizeof(buff)/sizeof(buff[0]), 1000);
+}
+
+myLoRa.frequency             = 433;             // default = 433 MHz
+myLoRa.spredingFactor        = SF_7;            // default = SF_7
+myLoRa.bandWidth             = BW_250KHz;       // default = BW_125KHz
+myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+myLoRa.power                 = POWER_20db;      // default = 20db
+myLoRa.overCurrentProtection = 100;             // default = 100 mA
+myLoRa.preamble              = 8;              // default = 8;
 
 
   /* USER CODE END 2 */
@@ -178,7 +194,16 @@ int main(void)
   while (1)
   {
     //HAL_UARTEx_ReceiveToIdle_DMA(&huart1,(uint8_t*)gps_raw,512);
-    HAL_UARTEx_ReceiveToIdle_IT(&huart1,(uint8_t*)gps_raw,512);
+    if (isLoraReady){
+      HAL_UARTEx_ReceiveToIdle_IT(&huart1,(uint8_t*)gps_raw,512);
+      if (flag == 1) {
+      LoRa_transmit(&myLoRa, (uint8_t*)transmit_data, 113, 100);
+      flag = 0;
+      memset(transmit_data, '\0', sizeof(transmit_data));
+    }
+    }
+    
+    
     
     /* USER CODE END WHILE */
 
@@ -268,6 +293,44 @@ static void MX_I2C1_Init(void)
 }
 
 /**
+  * @brief SPI3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_SPI3_Init(void)
+{
+
+  /* USER CODE BEGIN SPI3_Init 0 */
+
+  /* USER CODE END SPI3_Init 0 */
+
+  /* USER CODE BEGIN SPI3_Init 1 */
+
+  /* USER CODE END SPI3_Init 1 */
+  /* SPI3 parameter configuration*/
+  hspi3.Instance = SPI3;
+  hspi3.Init.Mode = SPI_MODE_MASTER;
+  hspi3.Init.Direction = SPI_DIRECTION_2LINES;
+  hspi3.Init.DataSize = SPI_DATASIZE_8BIT;
+  hspi3.Init.CLKPolarity = SPI_POLARITY_LOW;
+  hspi3.Init.CLKPhase = SPI_PHASE_1EDGE;
+  hspi3.Init.NSS = SPI_NSS_SOFT;
+  hspi3.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+  hspi3.Init.FirstBit = SPI_FIRSTBIT_MSB;
+  hspi3.Init.TIMode = SPI_TIMODE_DISABLE;
+  hspi3.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+  hspi3.Init.CRCPolynomial = 10;
+  if (HAL_SPI_Init(&hspi3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN SPI3_Init 2 */
+
+  /* USER CODE END SPI3_Init 2 */
+
+}
+
+/**
   * @brief USART1 Initialization Function
   * @param None
   * @retval None
@@ -352,12 +415,38 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
+
   /*Configure GPIO pin : PC13 */
   GPIO_InitStruct.Pin = GPIO_PIN_13;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PA4 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PB8 */
+  GPIO_InitStruct.Pin = GPIO_PIN_8;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PB9 */
+  GPIO_InitStruct.Pin = GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
@@ -369,13 +458,15 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
   flag = 1;
 
   //Set memory of line_out to emtpy
-  memset(line_out, '\0', sizeof(line_out));
+  //memset(line_out, '\0', sizeof(line_out));
+  memset(transmit_data, '\0', sizeof(transmit_data));
 
   //Copy a new line character to line_out
-  memcpy(line_out, "\r\n\n", sizeof("\r\n\n"));
+  //memcpy(line_out, "\r\n\n", sizeof("\r\n\n"));
+  //memcpy(transmit_data, "\r\n\n", sizeof("\r\n\n"));
 
   //Transmit the data over uart2
-  HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
+  //HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
 
 
   
@@ -385,17 +476,17 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
   if (token == NULL) {
     //break
   } else {
-    memset(line, '\0', sizeof(line));
+    //memset(line, '\0', sizeof(line));
     strcpy(line, token);
     struct minmea_sentence_rmc frame;
     if (minmea_parse_rmc(&frame, line)) {
-      memset(line_out, '\0', sizeof(line_out));
-      sprintf(line_out,"\nTime: %d:%d:%d\n",frame.time.hours, frame.time.minutes,frame.time.seconds);
-      HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
+      //memset(line_out, '\0', sizeof(line_out));
+      sprintf(transmit_data + strlen(transmit_data),"\n%d:%d:%d,",frame.time.hours, frame.time.minutes,frame.time.seconds);
+      //HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
 
-      memset(line_out, '\0', sizeof(line_out));
-      sprintf(line_out, "Co-Ordinates: (%d,%d) \n",minmea_rescale(&frame.latitude, 1000),minmea_rescale(&frame.longitude, 1000));
-      HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
+      //memset(line_out, '\0', sizeof(line_out));
+      sprintf(transmit_data + strlen(transmit_data), "(%d,%d),",minmea_rescale(&frame.latitude, 1000),minmea_rescale(&frame.longitude, 1000));
+      //HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
       
     }
   }
@@ -407,8 +498,8 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
 
   	//HAL_Delay(100);
 	while (!bmp280_read_float(&bmp280, &temperature, &pressure, &humidity)) {
-	  size = sprintf(Data,"Temperature/pressure reading failed\n");
-	  HAL_UART_Transmit(&huart2, Data, size, 1000);
+	  size = sprintf(transmit_data + strlen(transmit_data),"Temperature/pressure reading failed\n");
+	  //HAL_UART_Transmit(&huart2, Data, size, 1000);
 	}
 
 
@@ -418,35 +509,17 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
 
   altitude = 44330*(1-pow((pressure/P_b),(1/5.255)));
 
-  gcvt(altitude, 8, sAltitude);
+  gcvt(altitude, 6, sAltitude);
   gcvt(pressure, 8, sPressure);
   gcvt(temperature, 4, sTemperature);
   gcvt(humidity, 4, sHumidity);
 
-	size = sprintf(Data,"Pressure: %s Pa, Temperature: %s C, Humidity: %s Altitude: %s\n",sPressure, sTemperature, sHumidity, sAltitude);
-	HAL_UART_Transmit(&huart2, Data, size, 1000);
-  memset(Data, '\0', sizeof(Data));
-
-	//HAL_Delay(2000);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	size = sprintf(transmit_data + strlen(transmit_data),"%s,%s,%s,%s",sPressure, sTemperature, sHumidity, sAltitude);
+	HAL_UART_Transmit(&huart2, transmit_data, sizeof(transmit_data)/sizeof(transmit_data[0]), 1000);
 
 
 
   //Set flag low to indicate that data transfer is done
-  flag = 0;
   
   //Send interrupt when data from GPS is sent again
   //HAL_UARTEx_ReceiveToIdle_IT(&huart1,(uint8_t*)gps_raw, 512);

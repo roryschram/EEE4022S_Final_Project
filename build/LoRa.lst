@@ -1,0 +1,2407 @@
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"LoRa.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/LoRa.c"
+  20              		.section	.text.newLoRa,"ax",%progbits
+  21              		.align	1
+  22              		.global	newLoRa
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	newLoRa:
+  28              	.LVL0:
+  29              	.LFB130:
+   1:Core/Src/LoRa.c **** #include "LoRa.h"
+   2:Core/Src/LoRa.c **** 
+   3:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+   4:Core/Src/LoRa.c **** 		name        : newLoRa
+   5:Core/Src/LoRa.c **** 
+   6:Core/Src/LoRa.c **** 		description : it's a constructor for LoRa structure that assign default values
+   7:Core/Src/LoRa.c **** 									and pass created object (LoRa struct instanse)
+   8:Core/Src/LoRa.c **** 
+   9:Core/Src/LoRa.c **** 		arguments   : Nothing
+  10:Core/Src/LoRa.c **** 
+  11:Core/Src/LoRa.c **** 		returns     : A LoRa object whith these default values:
+  12:Core/Src/LoRa.c **** 											----------------------------------------
+  13:Core/Src/LoRa.c **** 										  |   carrier frequency = 433 MHz        |
+  14:Core/Src/LoRa.c **** 										  |    spreading factor = 7				       |
+  15:Core/Src/LoRa.c **** 											|           bandwidth = 125 KHz        |
+  16:Core/Src/LoRa.c **** 											| 		    coding rate = 4/5            |
+  17:Core/Src/LoRa.c **** 											----------------------------------------
+  18:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+  19:Core/Src/LoRa.c **** LoRa newLoRa(){
+  30              		.loc 1 19 15 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  20:Core/Src/LoRa.c **** 	LoRa new_LoRa;
+  35              		.loc 1 20 2 view .LVU1
+  21:Core/Src/LoRa.c **** 
+  22:Core/Src/LoRa.c **** 	new_LoRa.frequency             = 433       ;
+  36              		.loc 1 22 2 view .LVU2
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 2
+
+
+  37              		.loc 1 22 33 is_stmt 0 view .LVU3
+  38 0000 40F2B112 		movw	r2, #433
+  39 0004 0262     		str	r2, [r0, #32]
+  23:Core/Src/LoRa.c **** 	new_LoRa.spredingFactor        = SF_7      ;
+  40              		.loc 1 23 2 is_stmt 1 view .LVU4
+  41              		.loc 1 23 33 is_stmt 0 view .LVU5
+  42 0006 0722     		movs	r2, #7
+  43 0008 80F82420 		strb	r2, [r0, #36]
+  24:Core/Src/LoRa.c **** 	new_LoRa.bandWidth			   = BW_125KHz ;
+  44              		.loc 1 24 2 is_stmt 1 view .LVU6
+  45              		.loc 1 24 26 is_stmt 0 view .LVU7
+  46 000c 80F82520 		strb	r2, [r0, #37]
+  25:Core/Src/LoRa.c **** 	new_LoRa.crcRate               = CR_4_5    ;
+  47              		.loc 1 25 2 is_stmt 1 view .LVU8
+  48              		.loc 1 25 33 is_stmt 0 view .LVU9
+  49 0010 0122     		movs	r2, #1
+  50 0012 80F82620 		strb	r2, [r0, #38]
+  26:Core/Src/LoRa.c **** 	new_LoRa.power				   = POWER_20db;
+  51              		.loc 1 26 2 is_stmt 1 view .LVU10
+  52              		.loc 1 26 23 is_stmt 0 view .LVU11
+  53 0016 FF22     		movs	r2, #255
+  54 0018 80F82A20 		strb	r2, [r0, #42]
+  27:Core/Src/LoRa.c **** 	new_LoRa.overCurrentProtection = 100       ;
+  55              		.loc 1 27 2 is_stmt 1 view .LVU12
+  56              		.loc 1 27 33 is_stmt 0 view .LVU13
+  57 001c 6422     		movs	r2, #100
+  58 001e 80F82B20 		strb	r2, [r0, #43]
+  28:Core/Src/LoRa.c **** 	new_LoRa.preamble			   = 8         ;
+  59              		.loc 1 28 2 is_stmt 1 view .LVU14
+  60              		.loc 1 28 25 is_stmt 0 view .LVU15
+  61 0022 0822     		movs	r2, #8
+  62 0024 0285     		strh	r2, [r0, #40]	@ movhi
+  29:Core/Src/LoRa.c **** 
+  30:Core/Src/LoRa.c **** 	return new_LoRa;
+  63              		.loc 1 30 2 is_stmt 1 view .LVU16
+  31:Core/Src/LoRa.c **** }
+  64              		.loc 1 31 1 is_stmt 0 view .LVU17
+  65 0026 7047     		bx	lr
+  66              		.cfi_endproc
+  67              	.LFE130:
+  69              		.section	.text.LoRa_reset,"ax",%progbits
+  70              		.align	1
+  71              		.global	LoRa_reset
+  72              		.syntax unified
+  73              		.thumb
+  74              		.thumb_func
+  76              	LoRa_reset:
+  77              	.LVL1:
+  78              	.LFB131:
+  32:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+  33:Core/Src/LoRa.c **** 		name        : LoRa_reset
+  34:Core/Src/LoRa.c **** 
+  35:Core/Src/LoRa.c **** 		description : reset module
+  36:Core/Src/LoRa.c **** 
+  37:Core/Src/LoRa.c **** 		arguments   :
+  38:Core/Src/LoRa.c **** 			LoRa* LoRa --> LoRa object handler
+  39:Core/Src/LoRa.c **** 
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 3
+
+
+  40:Core/Src/LoRa.c **** 		returns     : Nothing
+  41:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+  42:Core/Src/LoRa.c **** void LoRa_reset(LoRa* _LoRa){
+  79              		.loc 1 42 29 is_stmt 1 view -0
+  80              		.cfi_startproc
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  83              		.loc 1 42 29 is_stmt 0 view .LVU19
+  84 0000 10B5     		push	{r4, lr}
+  85              		.cfi_def_cfa_offset 8
+  86              		.cfi_offset 4, -8
+  87              		.cfi_offset 14, -4
+  88 0002 0446     		mov	r4, r0
+  43:Core/Src/LoRa.c **** 	HAL_GPIO_WritePin(_LoRa->reset_port, _LoRa->reset_pin, GPIO_PIN_RESET);
+  89              		.loc 1 43 2 is_stmt 1 view .LVU20
+  90 0004 0022     		movs	r2, #0
+  91 0006 8189     		ldrh	r1, [r0, #12]
+  92 0008 8068     		ldr	r0, [r0, #8]
+  93              	.LVL2:
+  94              		.loc 1 43 2 is_stmt 0 view .LVU21
+  95 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+  96              	.LVL3:
+  44:Core/Src/LoRa.c **** 	HAL_Delay(1);
+  97              		.loc 1 44 2 is_stmt 1 view .LVU22
+  98 000e 0120     		movs	r0, #1
+  99 0010 FFF7FEFF 		bl	HAL_Delay
+ 100              	.LVL4:
+  45:Core/Src/LoRa.c **** 	HAL_GPIO_WritePin(_LoRa->reset_port, _LoRa->reset_pin, GPIO_PIN_SET);
+ 101              		.loc 1 45 2 view .LVU23
+ 102 0014 0122     		movs	r2, #1
+ 103 0016 A189     		ldrh	r1, [r4, #12]
+ 104 0018 A068     		ldr	r0, [r4, #8]
+ 105 001a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 106              	.LVL5:
+  46:Core/Src/LoRa.c **** 	HAL_Delay(100);
+ 107              		.loc 1 46 2 view .LVU24
+ 108 001e 6420     		movs	r0, #100
+ 109 0020 FFF7FEFF 		bl	HAL_Delay
+ 110              	.LVL6:
+  47:Core/Src/LoRa.c **** }
+ 111              		.loc 1 47 1 is_stmt 0 view .LVU25
+ 112 0024 10BD     		pop	{r4, pc}
+ 113              		.loc 1 47 1 view .LVU26
+ 114              		.cfi_endproc
+ 115              	.LFE131:
+ 117              		.section	.text.LoRa_readReg,"ax",%progbits
+ 118              		.align	1
+ 119              		.global	LoRa_readReg
+ 120              		.syntax unified
+ 121              		.thumb
+ 122              		.thumb_func
+ 124              	LoRa_readReg:
+ 125              	.LVL7:
+ 126              	.LFB133:
+  48:Core/Src/LoRa.c **** 
+  49:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+  50:Core/Src/LoRa.c **** 		name        : LoRa_gotoMode
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 4
+
+
+  51:Core/Src/LoRa.c **** 
+  52:Core/Src/LoRa.c **** 		description : set LoRa Op mode
+  53:Core/Src/LoRa.c **** 
+  54:Core/Src/LoRa.c **** 		arguments   :
+  55:Core/Src/LoRa.c **** 			LoRa* LoRa    --> LoRa object handler
+  56:Core/Src/LoRa.c **** 			mode	        --> select from defined modes
+  57:Core/Src/LoRa.c **** 
+  58:Core/Src/LoRa.c **** 		returns     : Nothing
+  59:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+  60:Core/Src/LoRa.c **** void LoRa_gotoMode(LoRa* _LoRa, int mode){
+  61:Core/Src/LoRa.c **** 	uint8_t    read;
+  62:Core/Src/LoRa.c **** 	uint8_t    data;
+  63:Core/Src/LoRa.c **** 
+  64:Core/Src/LoRa.c **** 	read = LoRa_read(_LoRa, RegOpMode);
+  65:Core/Src/LoRa.c **** 	data = read;
+  66:Core/Src/LoRa.c **** 
+  67:Core/Src/LoRa.c **** 	if(mode == SLEEP_MODE){
+  68:Core/Src/LoRa.c **** 		data = (read & 0xF8) | 0x00;
+  69:Core/Src/LoRa.c **** 		_LoRa->current_mode = SLEEP_MODE;
+  70:Core/Src/LoRa.c **** 	}else if (mode == STNBY_MODE){
+  71:Core/Src/LoRa.c **** 		data = (read & 0xF8) | 0x01;
+  72:Core/Src/LoRa.c **** 		_LoRa->current_mode = STNBY_MODE;
+  73:Core/Src/LoRa.c **** 	}else if (mode == TRANSMIT_MODE){
+  74:Core/Src/LoRa.c **** 		data = (read & 0xF8) | 0x03;
+  75:Core/Src/LoRa.c **** 		_LoRa->current_mode = TRANSMIT_MODE;
+  76:Core/Src/LoRa.c **** 	}else if (mode == RXCONTIN_MODE){
+  77:Core/Src/LoRa.c **** 		data = (read & 0xF8) | 0x05;
+  78:Core/Src/LoRa.c **** 		_LoRa->current_mode = RXCONTIN_MODE;
+  79:Core/Src/LoRa.c **** 	}else if (mode == RXSINGLE_MODE){
+  80:Core/Src/LoRa.c **** 		data = (read & 0xF8) | 0x06;
+  81:Core/Src/LoRa.c **** 		_LoRa->current_mode = RXSINGLE_MODE;
+  82:Core/Src/LoRa.c **** 	}
+  83:Core/Src/LoRa.c **** 
+  84:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegOpMode, data);
+  85:Core/Src/LoRa.c **** 	//HAL_Delay(10);
+  86:Core/Src/LoRa.c **** }
+  87:Core/Src/LoRa.c **** 
+  88:Core/Src/LoRa.c **** 
+  89:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+  90:Core/Src/LoRa.c **** 		name        : LoRa_readReg
+  91:Core/Src/LoRa.c **** 
+  92:Core/Src/LoRa.c **** 		description : read a register(s) by an address and a length,
+  93:Core/Src/LoRa.c **** 									then store value(s) at outpur array.
+  94:Core/Src/LoRa.c **** 		arguments   :
+  95:Core/Src/LoRa.c **** 			LoRa* LoRa        --> LoRa object handler
+  96:Core/Src/LoRa.c **** 			uint8_t* address  -->	pointer to the beginning of address array
+  97:Core/Src/LoRa.c **** 			uint16_t r_length -->	detemines number of addresse bytes that
+  98:Core/Src/LoRa.c **** 														you want to send
+  99:Core/Src/LoRa.c **** 			uint8_t* output		--> pointer to the beginning of output array
+ 100:Core/Src/LoRa.c **** 			uint16_t w_length	--> detemines number of bytes that you want to read
+ 101:Core/Src/LoRa.c **** 
+ 102:Core/Src/LoRa.c **** 		returns     : Nothing
+ 103:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+ 104:Core/Src/LoRa.c **** void LoRa_readReg(LoRa* _LoRa, uint8_t* address, uint16_t r_length, uint8_t* output, uint16_t w_len
+ 127              		.loc 1 104 104 is_stmt 1 view -0
+ 128              		.cfi_startproc
+ 129              		@ args = 4, pretend = 0, frame = 0
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 5
+
+
+ 130              		@ frame_needed = 0, uses_anonymous_args = 0
+ 131              		.loc 1 104 104 is_stmt 0 view .LVU28
+ 132 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 133              		.cfi_def_cfa_offset 24
+ 134              		.cfi_offset 3, -24
+ 135              		.cfi_offset 4, -20
+ 136              		.cfi_offset 5, -16
+ 137              		.cfi_offset 6, -12
+ 138              		.cfi_offset 7, -8
+ 139              		.cfi_offset 14, -4
+ 140 0002 0446     		mov	r4, r0
+ 141 0004 0E46     		mov	r6, r1
+ 142 0006 1746     		mov	r7, r2
+ 143 0008 1D46     		mov	r5, r3
+ 105:Core/Src/LoRa.c **** 	HAL_GPIO_WritePin(_LoRa->CS_port, _LoRa->CS_pin, GPIO_PIN_RESET);
+ 144              		.loc 1 105 2 is_stmt 1 view .LVU29
+ 145 000a 0022     		movs	r2, #0
+ 146              	.LVL8:
+ 147              		.loc 1 105 2 is_stmt 0 view .LVU30
+ 148 000c 8188     		ldrh	r1, [r0, #4]
+ 149              	.LVL9:
+ 150              		.loc 1 105 2 view .LVU31
+ 151 000e 0068     		ldr	r0, [r0]
+ 152              	.LVL10:
+ 153              		.loc 1 105 2 view .LVU32
+ 154 0010 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 155              	.LVL11:
+ 106:Core/Src/LoRa.c **** 	HAL_SPI_Transmit(_LoRa->hSPIx, address, r_length, TRANSMIT_TIMEOUT);
+ 156              		.loc 1 106 2 is_stmt 1 view .LVU33
+ 157 0014 4FF4FA63 		mov	r3, #2000
+ 158 0018 3A46     		mov	r2, r7
+ 159 001a 3146     		mov	r1, r6
+ 160 001c A069     		ldr	r0, [r4, #24]
+ 161 001e FFF7FEFF 		bl	HAL_SPI_Transmit
+ 162              	.LVL12:
+ 107:Core/Src/LoRa.c **** 	while (HAL_SPI_GetState(_LoRa->hSPIx) != HAL_SPI_STATE_READY)
+ 163              		.loc 1 107 2 view .LVU34
+ 164              	.L5:
+ 165              		.loc 1 107 40 discriminator 1 view .LVU35
+ 166              		.loc 1 107 9 is_stmt 0 discriminator 1 view .LVU36
+ 167 0022 A069     		ldr	r0, [r4, #24]
+ 168 0024 FFF7FEFF 		bl	HAL_SPI_GetState
+ 169              	.LVL13:
+ 170              		.loc 1 107 40 discriminator 1 view .LVU37
+ 171 0028 0128     		cmp	r0, #1
+ 172 002a FAD1     		bne	.L5
+ 108:Core/Src/LoRa.c **** 		;
+ 109:Core/Src/LoRa.c **** 	HAL_SPI_Receive(_LoRa->hSPIx, output, w_length, RECEIVE_TIMEOUT);
+ 173              		.loc 1 109 2 is_stmt 1 view .LVU38
+ 174 002c 4FF4FA63 		mov	r3, #2000
+ 175 0030 BDF81820 		ldrh	r2, [sp, #24]
+ 176 0034 2946     		mov	r1, r5
+ 177 0036 A069     		ldr	r0, [r4, #24]
+ 178 0038 FFF7FEFF 		bl	HAL_SPI_Receive
+ 179              	.LVL14:
+ 110:Core/Src/LoRa.c **** 	while (HAL_SPI_GetState(_LoRa->hSPIx) != HAL_SPI_STATE_READY)
+ 180              		.loc 1 110 2 view .LVU39
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 6
+
+
+ 181              	.L6:
+ 182              		.loc 1 110 40 discriminator 1 view .LVU40
+ 183              		.loc 1 110 9 is_stmt 0 discriminator 1 view .LVU41
+ 184 003c A069     		ldr	r0, [r4, #24]
+ 185 003e FFF7FEFF 		bl	HAL_SPI_GetState
+ 186              	.LVL15:
+ 187              		.loc 1 110 40 discriminator 1 view .LVU42
+ 188 0042 0128     		cmp	r0, #1
+ 189 0044 FAD1     		bne	.L6
+ 111:Core/Src/LoRa.c **** 		;
+ 112:Core/Src/LoRa.c **** 	HAL_GPIO_WritePin(_LoRa->CS_port, _LoRa->CS_pin, GPIO_PIN_SET);
+ 190              		.loc 1 112 2 is_stmt 1 view .LVU43
+ 191 0046 0122     		movs	r2, #1
+ 192 0048 A188     		ldrh	r1, [r4, #4]
+ 193 004a 2068     		ldr	r0, [r4]
+ 194 004c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 195              	.LVL16:
+ 113:Core/Src/LoRa.c **** }
+ 196              		.loc 1 113 1 is_stmt 0 view .LVU44
+ 197 0050 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 198              		.loc 1 113 1 view .LVU45
+ 199              		.cfi_endproc
+ 200              	.LFE133:
+ 202              		.section	.text.LoRa_writeReg,"ax",%progbits
+ 203              		.align	1
+ 204              		.global	LoRa_writeReg
+ 205              		.syntax unified
+ 206              		.thumb
+ 207              		.thumb_func
+ 209              	LoRa_writeReg:
+ 210              	.LVL17:
+ 211              	.LFB134:
+ 114:Core/Src/LoRa.c **** 
+ 115:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+ 116:Core/Src/LoRa.c **** 		name        : LoRa_writeReg
+ 117:Core/Src/LoRa.c **** 
+ 118:Core/Src/LoRa.c **** 		description : write a value(s) in a register(s) by an address
+ 119:Core/Src/LoRa.c **** 
+ 120:Core/Src/LoRa.c **** 		arguments   :
+ 121:Core/Src/LoRa.c **** 			LoRa* LoRa        --> LoRa object handler
+ 122:Core/Src/LoRa.c **** 			uint8_t* address  -->	pointer to the beginning of address array
+ 123:Core/Src/LoRa.c **** 			uint16_t r_length -->	detemines number of addresse bytes that
+ 124:Core/Src/LoRa.c **** 														you want to send
+ 125:Core/Src/LoRa.c **** 			uint8_t* output		--> pointer to the beginning of values array
+ 126:Core/Src/LoRa.c **** 			uint16_t w_length	--> detemines number of bytes that you want to send
+ 127:Core/Src/LoRa.c **** 
+ 128:Core/Src/LoRa.c **** 		returns     : Nothing
+ 129:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+ 130:Core/Src/LoRa.c **** void LoRa_writeReg(LoRa* _LoRa, uint8_t* address, uint16_t r_length, uint8_t* values, uint16_t w_le
+ 212              		.loc 1 130 105 is_stmt 1 view -0
+ 213              		.cfi_startproc
+ 214              		@ args = 4, pretend = 0, frame = 0
+ 215              		@ frame_needed = 0, uses_anonymous_args = 0
+ 216              		.loc 1 130 105 is_stmt 0 view .LVU47
+ 217 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 218              		.cfi_def_cfa_offset 24
+ 219              		.cfi_offset 3, -24
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 7
+
+
+ 220              		.cfi_offset 4, -20
+ 221              		.cfi_offset 5, -16
+ 222              		.cfi_offset 6, -12
+ 223              		.cfi_offset 7, -8
+ 224              		.cfi_offset 14, -4
+ 225 0002 0446     		mov	r4, r0
+ 226 0004 0E46     		mov	r6, r1
+ 227 0006 1746     		mov	r7, r2
+ 228 0008 1D46     		mov	r5, r3
+ 131:Core/Src/LoRa.c **** 	HAL_GPIO_WritePin(_LoRa->CS_port, _LoRa->CS_pin, GPIO_PIN_RESET);
+ 229              		.loc 1 131 2 is_stmt 1 view .LVU48
+ 230 000a 0022     		movs	r2, #0
+ 231              	.LVL18:
+ 232              		.loc 1 131 2 is_stmt 0 view .LVU49
+ 233 000c 8188     		ldrh	r1, [r0, #4]
+ 234              	.LVL19:
+ 235              		.loc 1 131 2 view .LVU50
+ 236 000e 0068     		ldr	r0, [r0]
+ 237              	.LVL20:
+ 238              		.loc 1 131 2 view .LVU51
+ 239 0010 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 240              	.LVL21:
+ 132:Core/Src/LoRa.c **** 	HAL_SPI_Transmit(_LoRa->hSPIx, address, r_length, TRANSMIT_TIMEOUT);
+ 241              		.loc 1 132 2 is_stmt 1 view .LVU52
+ 242 0014 4FF4FA63 		mov	r3, #2000
+ 243 0018 3A46     		mov	r2, r7
+ 244 001a 3146     		mov	r1, r6
+ 245 001c A069     		ldr	r0, [r4, #24]
+ 246 001e FFF7FEFF 		bl	HAL_SPI_Transmit
+ 247              	.LVL22:
+ 133:Core/Src/LoRa.c **** 	while (HAL_SPI_GetState(_LoRa->hSPIx) != HAL_SPI_STATE_READY)
+ 248              		.loc 1 133 2 view .LVU53
+ 249              	.L9:
+ 250              		.loc 1 133 40 discriminator 1 view .LVU54
+ 251              		.loc 1 133 9 is_stmt 0 discriminator 1 view .LVU55
+ 252 0022 A069     		ldr	r0, [r4, #24]
+ 253 0024 FFF7FEFF 		bl	HAL_SPI_GetState
+ 254              	.LVL23:
+ 255              		.loc 1 133 40 discriminator 1 view .LVU56
+ 256 0028 0128     		cmp	r0, #1
+ 257 002a FAD1     		bne	.L9
+ 134:Core/Src/LoRa.c **** 		;
+ 135:Core/Src/LoRa.c **** 	HAL_SPI_Transmit(_LoRa->hSPIx, values, w_length, TRANSMIT_TIMEOUT);
+ 258              		.loc 1 135 2 is_stmt 1 view .LVU57
+ 259 002c 4FF4FA63 		mov	r3, #2000
+ 260 0030 BDF81820 		ldrh	r2, [sp, #24]
+ 261 0034 2946     		mov	r1, r5
+ 262 0036 A069     		ldr	r0, [r4, #24]
+ 263 0038 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 264              	.LVL24:
+ 136:Core/Src/LoRa.c **** 	while (HAL_SPI_GetState(_LoRa->hSPIx) != HAL_SPI_STATE_READY)
+ 265              		.loc 1 136 2 view .LVU58
+ 266              	.L10:
+ 267              		.loc 1 136 40 discriminator 1 view .LVU59
+ 268              		.loc 1 136 9 is_stmt 0 discriminator 1 view .LVU60
+ 269 003c A069     		ldr	r0, [r4, #24]
+ 270 003e FFF7FEFF 		bl	HAL_SPI_GetState
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 8
+
+
+ 271              	.LVL25:
+ 272              		.loc 1 136 40 discriminator 1 view .LVU61
+ 273 0042 0128     		cmp	r0, #1
+ 274 0044 FAD1     		bne	.L10
+ 137:Core/Src/LoRa.c **** 		;
+ 138:Core/Src/LoRa.c **** 	HAL_GPIO_WritePin(_LoRa->CS_port, _LoRa->CS_pin, GPIO_PIN_SET);
+ 275              		.loc 1 138 2 is_stmt 1 view .LVU62
+ 276 0046 0122     		movs	r2, #1
+ 277 0048 A188     		ldrh	r1, [r4, #4]
+ 278 004a 2068     		ldr	r0, [r4]
+ 279 004c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 280              	.LVL26:
+ 139:Core/Src/LoRa.c **** }
+ 281              		.loc 1 139 1 is_stmt 0 view .LVU63
+ 282 0050 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 283              		.loc 1 139 1 view .LVU64
+ 284              		.cfi_endproc
+ 285              	.LFE134:
+ 287              		.section	.text.LoRa_read,"ax",%progbits
+ 288              		.align	1
+ 289              		.global	LoRa_read
+ 290              		.syntax unified
+ 291              		.thumb
+ 292              		.thumb_func
+ 294              	LoRa_read:
+ 295              	.LVL27:
+ 296              	.LFB140:
+ 140:Core/Src/LoRa.c **** 
+ 141:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+ 142:Core/Src/LoRa.c **** 		name        : LoRa_setFrequency
+ 143:Core/Src/LoRa.c **** 
+ 144:Core/Src/LoRa.c **** 		description : set carrier frequency e.g 433 MHz
+ 145:Core/Src/LoRa.c **** 
+ 146:Core/Src/LoRa.c **** 		arguments   :
+ 147:Core/Src/LoRa.c **** 			LoRa* LoRa        --> LoRa object handler
+ 148:Core/Src/LoRa.c **** 			int   freq        --> desired frequency in MHz unit, e.g 434
+ 149:Core/Src/LoRa.c **** 
+ 150:Core/Src/LoRa.c **** 		returns     : Nothing
+ 151:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+ 152:Core/Src/LoRa.c **** void LoRa_setFrequency(LoRa* _LoRa, int freq){
+ 153:Core/Src/LoRa.c **** 	uint8_t  data;
+ 154:Core/Src/LoRa.c **** 	uint32_t F;
+ 155:Core/Src/LoRa.c **** 	F = (freq * 524288)>>5;
+ 156:Core/Src/LoRa.c **** 
+ 157:Core/Src/LoRa.c **** 	// write Msb:
+ 158:Core/Src/LoRa.c **** 	data = F >> 16;
+ 159:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegFrMsb, data);
+ 160:Core/Src/LoRa.c **** 	HAL_Delay(5);
+ 161:Core/Src/LoRa.c **** 
+ 162:Core/Src/LoRa.c **** 	// write Mid:
+ 163:Core/Src/LoRa.c **** 	data = F >> 8;
+ 164:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegFrMid, data);
+ 165:Core/Src/LoRa.c **** 	HAL_Delay(5);
+ 166:Core/Src/LoRa.c **** 
+ 167:Core/Src/LoRa.c **** 	// write Lsb:
+ 168:Core/Src/LoRa.c **** 	data = F >> 0;
+ 169:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegFrLsb, data);
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 9
+
+
+ 170:Core/Src/LoRa.c **** 	HAL_Delay(5);
+ 171:Core/Src/LoRa.c **** }
+ 172:Core/Src/LoRa.c **** 
+ 173:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+ 174:Core/Src/LoRa.c **** 		name        : LoRa_setSpreadingFactor
+ 175:Core/Src/LoRa.c **** 
+ 176:Core/Src/LoRa.c **** 		description : set spreading factor, from 7 to 12.
+ 177:Core/Src/LoRa.c **** 
+ 178:Core/Src/LoRa.c **** 		arguments   :
+ 179:Core/Src/LoRa.c **** 			LoRa* LoRa        --> LoRa object handler
+ 180:Core/Src/LoRa.c **** 			int   SP          --> desired spreading factor e.g 7
+ 181:Core/Src/LoRa.c **** 
+ 182:Core/Src/LoRa.c **** 		returns     : Nothing
+ 183:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+ 184:Core/Src/LoRa.c **** void LoRa_setSpreadingFactor(LoRa* _LoRa, int SF){
+ 185:Core/Src/LoRa.c **** 	uint8_t	data;
+ 186:Core/Src/LoRa.c **** 	uint8_t	read;
+ 187:Core/Src/LoRa.c **** 
+ 188:Core/Src/LoRa.c **** 	if(SF>12)
+ 189:Core/Src/LoRa.c **** 		SF = 12;
+ 190:Core/Src/LoRa.c **** 	if(SF<7)
+ 191:Core/Src/LoRa.c **** 		SF = 7;
+ 192:Core/Src/LoRa.c **** 
+ 193:Core/Src/LoRa.c **** 	read = LoRa_read(_LoRa, RegModemConfig2);
+ 194:Core/Src/LoRa.c **** 	HAL_Delay(10);
+ 195:Core/Src/LoRa.c **** 
+ 196:Core/Src/LoRa.c **** 	data = (SF << 4) + (read & 0x0F);
+ 197:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegModemConfig2, data);
+ 198:Core/Src/LoRa.c **** 	HAL_Delay(10);
+ 199:Core/Src/LoRa.c **** }
+ 200:Core/Src/LoRa.c **** 
+ 201:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+ 202:Core/Src/LoRa.c **** 		name        : LoRa_setPower
+ 203:Core/Src/LoRa.c **** 
+ 204:Core/Src/LoRa.c **** 		description : set power gain.
+ 205:Core/Src/LoRa.c **** 
+ 206:Core/Src/LoRa.c **** 		arguments   :
+ 207:Core/Src/LoRa.c **** 			LoRa* LoRa        --> LoRa object handler
+ 208:Core/Src/LoRa.c **** 			int   power       --> desired power like POWER_17db
+ 209:Core/Src/LoRa.c **** 
+ 210:Core/Src/LoRa.c **** 		returns     : Nothing
+ 211:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+ 212:Core/Src/LoRa.c **** void LoRa_setPower(LoRa* _LoRa, uint8_t power){
+ 213:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegPaConfig, power);
+ 214:Core/Src/LoRa.c **** 	HAL_Delay(10);
+ 215:Core/Src/LoRa.c **** }
+ 216:Core/Src/LoRa.c **** 
+ 217:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+ 218:Core/Src/LoRa.c **** 		name        : LoRa_setOCP
+ 219:Core/Src/LoRa.c **** 
+ 220:Core/Src/LoRa.c **** 		description : set maximum allowed current.
+ 221:Core/Src/LoRa.c **** 
+ 222:Core/Src/LoRa.c **** 		arguments   :
+ 223:Core/Src/LoRa.c **** 			LoRa* LoRa        --> LoRa object handler
+ 224:Core/Src/LoRa.c **** 			int   current     --> desired max currnet in mA, e.g 120
+ 225:Core/Src/LoRa.c **** 
+ 226:Core/Src/LoRa.c **** 		returns     : Nothing
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 10
+
+
+ 227:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+ 228:Core/Src/LoRa.c **** void LoRa_setOCP(LoRa* _LoRa, uint8_t current){
+ 229:Core/Src/LoRa.c **** 	uint8_t	OcpTrim = 0;
+ 230:Core/Src/LoRa.c **** 
+ 231:Core/Src/LoRa.c **** 	if(current<45)
+ 232:Core/Src/LoRa.c **** 		current = 45;
+ 233:Core/Src/LoRa.c **** 	if(current>240)
+ 234:Core/Src/LoRa.c **** 		current = 240;
+ 235:Core/Src/LoRa.c **** 
+ 236:Core/Src/LoRa.c **** 	if(current <= 120)
+ 237:Core/Src/LoRa.c **** 		OcpTrim = (current - 45)/5;
+ 238:Core/Src/LoRa.c **** 	else if(current <= 240)
+ 239:Core/Src/LoRa.c **** 		OcpTrim = (current + 30)/10;
+ 240:Core/Src/LoRa.c **** 
+ 241:Core/Src/LoRa.c **** 	OcpTrim = OcpTrim + (1 << 5);
+ 242:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegOcp, OcpTrim);
+ 243:Core/Src/LoRa.c **** 	HAL_Delay(10);
+ 244:Core/Src/LoRa.c **** }
+ 245:Core/Src/LoRa.c **** 
+ 246:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+ 247:Core/Src/LoRa.c **** 		name        : LoRa_setTOMsb_setCRCon
+ 248:Core/Src/LoRa.c **** 
+ 249:Core/Src/LoRa.c **** 		description : set timeout msb to 0xFF + set CRC enable.
+ 250:Core/Src/LoRa.c **** 
+ 251:Core/Src/LoRa.c **** 		arguments   :
+ 252:Core/Src/LoRa.c **** 			LoRa* LoRa        --> LoRa object handler
+ 253:Core/Src/LoRa.c **** 
+ 254:Core/Src/LoRa.c **** 		returns     : Nothing
+ 255:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+ 256:Core/Src/LoRa.c **** void LoRa_setTOMsb_setCRCon(LoRa* _LoRa){
+ 257:Core/Src/LoRa.c **** 	uint8_t read, data;
+ 258:Core/Src/LoRa.c **** 
+ 259:Core/Src/LoRa.c **** 	read = LoRa_read(_LoRa, RegModemConfig2);
+ 260:Core/Src/LoRa.c **** 
+ 261:Core/Src/LoRa.c **** 	data = read | 0x07;
+ 262:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegModemConfig2, data);\
+ 263:Core/Src/LoRa.c **** 	HAL_Delay(10);
+ 264:Core/Src/LoRa.c **** }
+ 265:Core/Src/LoRa.c **** 
+ 266:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+ 267:Core/Src/LoRa.c **** 		name        : LoRa_read
+ 268:Core/Src/LoRa.c **** 
+ 269:Core/Src/LoRa.c **** 		description : read a register by an address
+ 270:Core/Src/LoRa.c **** 
+ 271:Core/Src/LoRa.c **** 		arguments   :
+ 272:Core/Src/LoRa.c **** 			LoRa*   LoRa        --> LoRa object handler
+ 273:Core/Src/LoRa.c **** 			uint8_t address     -->	address of the register e.g 0x1D
+ 274:Core/Src/LoRa.c **** 
+ 275:Core/Src/LoRa.c **** 		returns     : register value
+ 276:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+ 277:Core/Src/LoRa.c **** uint8_t LoRa_read(LoRa* _LoRa, uint8_t address){
+ 297              		.loc 1 277 48 is_stmt 1 view -0
+ 298              		.cfi_startproc
+ 299              		@ args = 0, pretend = 0, frame = 8
+ 300              		@ frame_needed = 0, uses_anonymous_args = 0
+ 301              		.loc 1 277 48 is_stmt 0 view .LVU66
+ 302 0000 00B5     		push	{lr}
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 11
+
+
+ 303              		.cfi_def_cfa_offset 4
+ 304              		.cfi_offset 14, -4
+ 305 0002 85B0     		sub	sp, sp, #20
+ 306              		.cfi_def_cfa_offset 24
+ 278:Core/Src/LoRa.c **** 	uint8_t read_data;
+ 307              		.loc 1 278 2 is_stmt 1 view .LVU67
+ 279:Core/Src/LoRa.c **** 	uint8_t data_addr;
+ 308              		.loc 1 279 2 view .LVU68
+ 280:Core/Src/LoRa.c **** 
+ 281:Core/Src/LoRa.c **** 	data_addr = address & 0x7F;
+ 309              		.loc 1 281 2 view .LVU69
+ 310              		.loc 1 281 22 is_stmt 0 view .LVU70
+ 311 0004 01F07F01 		and	r1, r1, #127
+ 312              	.LVL28:
+ 313              		.loc 1 281 12 view .LVU71
+ 314 0008 8DF80E10 		strb	r1, [sp, #14]
+ 282:Core/Src/LoRa.c **** 	LoRa_readReg(_LoRa, &data_addr, 1, &read_data, 1);
+ 315              		.loc 1 282 2 is_stmt 1 view .LVU72
+ 316 000c 0122     		movs	r2, #1
+ 317 000e 0092     		str	r2, [sp]
+ 318 0010 0DF10F03 		add	r3, sp, #15
+ 319 0014 0DF10E01 		add	r1, sp, #14
+ 320 0018 FFF7FEFF 		bl	LoRa_readReg
+ 321              	.LVL29:
+ 283:Core/Src/LoRa.c **** 	//HAL_Delay(5);
+ 284:Core/Src/LoRa.c **** 
+ 285:Core/Src/LoRa.c **** 	return read_data;
+ 322              		.loc 1 285 2 view .LVU73
+ 286:Core/Src/LoRa.c **** }
+ 323              		.loc 1 286 1 is_stmt 0 view .LVU74
+ 324 001c 9DF80F00 		ldrb	r0, [sp, #15]	@ zero_extendqisi2
+ 325 0020 05B0     		add	sp, sp, #20
+ 326              		.cfi_def_cfa_offset 4
+ 327              		@ sp needed
+ 328 0022 5DF804FB 		ldr	pc, [sp], #4
+ 329              		.cfi_endproc
+ 330              	.LFE140:
+ 332              		.section	.text.LoRa_write,"ax",%progbits
+ 333              		.align	1
+ 334              		.global	LoRa_write
+ 335              		.syntax unified
+ 336              		.thumb
+ 337              		.thumb_func
+ 339              	LoRa_write:
+ 340              	.LVL30:
+ 341              	.LFB141:
+ 287:Core/Src/LoRa.c **** 
+ 288:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+ 289:Core/Src/LoRa.c **** 		name        : LoRa_write
+ 290:Core/Src/LoRa.c **** 
+ 291:Core/Src/LoRa.c **** 		description : write a value in a register by an address
+ 292:Core/Src/LoRa.c **** 
+ 293:Core/Src/LoRa.c **** 		arguments   :
+ 294:Core/Src/LoRa.c **** 			LoRa*   LoRa        --> LoRa object handler
+ 295:Core/Src/LoRa.c **** 			uint8_t address     -->	address of the register e.g 0x1D
+ 296:Core/Src/LoRa.c **** 			uint8_t value       --> value that you want to write
+ 297:Core/Src/LoRa.c **** 
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 12
+
+
+ 298:Core/Src/LoRa.c **** 		returns     : Nothing
+ 299:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+ 300:Core/Src/LoRa.c **** void LoRa_write(LoRa* _LoRa, uint8_t address, uint8_t value){
+ 342              		.loc 1 300 61 is_stmt 1 view -0
+ 343              		.cfi_startproc
+ 344              		@ args = 0, pretend = 0, frame = 8
+ 345              		@ frame_needed = 0, uses_anonymous_args = 0
+ 346              		.loc 1 300 61 is_stmt 0 view .LVU76
+ 347 0000 00B5     		push	{lr}
+ 348              		.cfi_def_cfa_offset 4
+ 349              		.cfi_offset 14, -4
+ 350 0002 85B0     		sub	sp, sp, #20
+ 351              		.cfi_def_cfa_offset 24
+ 301:Core/Src/LoRa.c **** 	uint8_t data;
+ 352              		.loc 1 301 2 is_stmt 1 view .LVU77
+ 302:Core/Src/LoRa.c **** 	uint8_t addr;
+ 353              		.loc 1 302 2 view .LVU78
+ 303:Core/Src/LoRa.c **** 
+ 304:Core/Src/LoRa.c **** 	addr = address | 0x80;
+ 354              		.loc 1 304 2 view .LVU79
+ 355              		.loc 1 304 7 is_stmt 0 view .LVU80
+ 356 0004 61F07F01 		orn	r1, r1, #127
+ 357              	.LVL31:
+ 358              		.loc 1 304 7 view .LVU81
+ 359 0008 8DF80E10 		strb	r1, [sp, #14]
+ 305:Core/Src/LoRa.c **** 	data = value;
+ 360              		.loc 1 305 2 is_stmt 1 view .LVU82
+ 361              		.loc 1 305 7 is_stmt 0 view .LVU83
+ 362 000c 8DF80F20 		strb	r2, [sp, #15]
+ 306:Core/Src/LoRa.c **** 	LoRa_writeReg(_LoRa, &addr, 1, &data, 1);
+ 363              		.loc 1 306 2 is_stmt 1 view .LVU84
+ 364 0010 0122     		movs	r2, #1
+ 365              	.LVL32:
+ 366              		.loc 1 306 2 is_stmt 0 view .LVU85
+ 367 0012 0092     		str	r2, [sp]
+ 368 0014 0DF10F03 		add	r3, sp, #15
+ 369              	.LVL33:
+ 370              		.loc 1 306 2 view .LVU86
+ 371 0018 0DF10E01 		add	r1, sp, #14
+ 372 001c FFF7FEFF 		bl	LoRa_writeReg
+ 373              	.LVL34:
+ 307:Core/Src/LoRa.c **** 	//HAL_Delay(5);
+ 308:Core/Src/LoRa.c **** }
+ 374              		.loc 1 308 1 view .LVU87
+ 375 0020 05B0     		add	sp, sp, #20
+ 376              		.cfi_def_cfa_offset 4
+ 377              		@ sp needed
+ 378 0022 5DF804FB 		ldr	pc, [sp], #4
+ 379              		.cfi_endproc
+ 380              	.LFE141:
+ 382              		.section	.text.LoRa_gotoMode,"ax",%progbits
+ 383              		.align	1
+ 384              		.global	LoRa_gotoMode
+ 385              		.syntax unified
+ 386              		.thumb
+ 387              		.thumb_func
+ 389              	LoRa_gotoMode:
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 13
+
+
+ 390              	.LVL35:
+ 391              	.LFB132:
+  60:Core/Src/LoRa.c **** 	uint8_t    read;
+ 392              		.loc 1 60 42 is_stmt 1 view -0
+ 393              		.cfi_startproc
+ 394              		@ args = 0, pretend = 0, frame = 0
+ 395              		@ frame_needed = 0, uses_anonymous_args = 0
+  60:Core/Src/LoRa.c **** 	uint8_t    read;
+ 396              		.loc 1 60 42 is_stmt 0 view .LVU89
+ 397 0000 38B5     		push	{r3, r4, r5, lr}
+ 398              		.cfi_def_cfa_offset 16
+ 399              		.cfi_offset 3, -16
+ 400              		.cfi_offset 4, -12
+ 401              		.cfi_offset 5, -8
+ 402              		.cfi_offset 14, -4
+ 403 0002 0446     		mov	r4, r0
+ 404 0004 0D46     		mov	r5, r1
+  61:Core/Src/LoRa.c **** 	uint8_t    data;
+ 405              		.loc 1 61 2 is_stmt 1 view .LVU90
+  62:Core/Src/LoRa.c **** 
+ 406              		.loc 1 62 2 view .LVU91
+  64:Core/Src/LoRa.c **** 	data = read;
+ 407              		.loc 1 64 2 view .LVU92
+  64:Core/Src/LoRa.c **** 	data = read;
+ 408              		.loc 1 64 9 is_stmt 0 view .LVU93
+ 409 0006 0121     		movs	r1, #1
+ 410              	.LVL36:
+  64:Core/Src/LoRa.c **** 	data = read;
+ 411              		.loc 1 64 9 view .LVU94
+ 412 0008 FFF7FEFF 		bl	LoRa_read
+ 413              	.LVL37:
+  64:Core/Src/LoRa.c **** 	data = read;
+ 414              		.loc 1 64 9 view .LVU95
+ 415 000c 0246     		mov	r2, r0
+ 416              	.LVL38:
+  65:Core/Src/LoRa.c **** 
+ 417              		.loc 1 65 2 is_stmt 1 view .LVU96
+  67:Core/Src/LoRa.c **** 		data = (read & 0xF8) | 0x00;
+ 418              		.loc 1 67 2 view .LVU97
+  67:Core/Src/LoRa.c **** 		data = (read & 0xF8) | 0x00;
+ 419              		.loc 1 67 4 is_stmt 0 view .LVU98
+ 420 000e 45B9     		cbnz	r5, .L17
+  68:Core/Src/LoRa.c **** 		_LoRa->current_mode = SLEEP_MODE;
+ 421              		.loc 1 68 3 is_stmt 1 view .LVU99
+  68:Core/Src/LoRa.c **** 		_LoRa->current_mode = SLEEP_MODE;
+ 422              		.loc 1 68 8 is_stmt 0 view .LVU100
+ 423 0010 00F0F802 		and	r2, r0, #248
+ 424              	.LVL39:
+  69:Core/Src/LoRa.c **** 	}else if (mode == STNBY_MODE){
+ 425              		.loc 1 69 3 is_stmt 1 view .LVU101
+  69:Core/Src/LoRa.c **** 	}else if (mode == STNBY_MODE){
+ 426              		.loc 1 69 23 is_stmt 0 view .LVU102
+ 427 0014 0023     		movs	r3, #0
+ 428 0016 E361     		str	r3, [r4, #28]
+ 429              	.LVL40:
+ 430              	.L18:
+  84:Core/Src/LoRa.c **** 	//HAL_Delay(10);
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 14
+
+
+ 431              		.loc 1 84 2 is_stmt 1 view .LVU103
+ 432 0018 0121     		movs	r1, #1
+ 433 001a 2046     		mov	r0, r4
+ 434              	.LVL41:
+  84:Core/Src/LoRa.c **** 	//HAL_Delay(10);
+ 435              		.loc 1 84 2 is_stmt 0 view .LVU104
+ 436 001c FFF7FEFF 		bl	LoRa_write
+ 437              	.LVL42:
+  86:Core/Src/LoRa.c **** 
+ 438              		.loc 1 86 1 view .LVU105
+ 439 0020 38BD     		pop	{r3, r4, r5, pc}
+ 440              	.LVL43:
+ 441              	.L17:
+  70:Core/Src/LoRa.c **** 		data = (read & 0xF8) | 0x01;
+ 442              		.loc 1 70 8 is_stmt 1 view .LVU106
+ 443 0022 013D     		subs	r5, r5, #1
+ 444              	.LVL44:
+  70:Core/Src/LoRa.c **** 		data = (read & 0xF8) | 0x01;
+ 445              		.loc 1 70 8 is_stmt 0 view .LVU107
+ 446 0024 052D     		cmp	r5, #5
+ 447 0026 F7D8     		bhi	.L18
+ 448 0028 01A3     		adr	r3, .L20
+ 449 002a 53F825F0 		ldr	pc, [r3, r5, lsl #2]
+ 450 002e 00BF     		.p2align 2
+ 451              	.L20:
+ 452 0030 49000000 		.word	.L23+1
+ 453 0034 19000000 		.word	.L18+1
+ 454 0038 59000000 		.word	.L22+1
+ 455 003c 19000000 		.word	.L18+1
+ 456 0040 69000000 		.word	.L21+1
+ 457 0044 79000000 		.word	.L19+1
+ 458              		.p2align 1
+ 459              	.L23:
+  71:Core/Src/LoRa.c **** 		_LoRa->current_mode = STNBY_MODE;
+ 460              		.loc 1 71 3 is_stmt 1 view .LVU108
+ 461 0048 20F00702 		bic	r2, r0, #7
+ 462 004c 42F00102 		orr	r2, r2, #1
+ 463 0050 D2B2     		uxtb	r2, r2
+ 464              	.LVL45:
+  72:Core/Src/LoRa.c **** 	}else if (mode == TRANSMIT_MODE){
+ 465              		.loc 1 72 3 view .LVU109
+  72:Core/Src/LoRa.c **** 	}else if (mode == TRANSMIT_MODE){
+ 466              		.loc 1 72 23 is_stmt 0 view .LVU110
+ 467 0052 0123     		movs	r3, #1
+ 468 0054 E361     		str	r3, [r4, #28]
+ 469 0056 DFE7     		b	.L18
+ 470              	.LVL46:
+ 471              	.L22:
+  74:Core/Src/LoRa.c **** 		_LoRa->current_mode = TRANSMIT_MODE;
+ 472              		.loc 1 74 3 is_stmt 1 view .LVU111
+ 473 0058 20F00702 		bic	r2, r0, #7
+ 474 005c 42F00302 		orr	r2, r2, #3
+ 475 0060 D2B2     		uxtb	r2, r2
+ 476              	.LVL47:
+  75:Core/Src/LoRa.c **** 	}else if (mode == RXCONTIN_MODE){
+ 477              		.loc 1 75 3 view .LVU112
+  75:Core/Src/LoRa.c **** 	}else if (mode == RXCONTIN_MODE){
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 15
+
+
+ 478              		.loc 1 75 23 is_stmt 0 view .LVU113
+ 479 0062 0323     		movs	r3, #3
+ 480 0064 E361     		str	r3, [r4, #28]
+ 481 0066 D7E7     		b	.L18
+ 482              	.LVL48:
+ 483              	.L21:
+  77:Core/Src/LoRa.c **** 		_LoRa->current_mode = RXCONTIN_MODE;
+ 484              		.loc 1 77 3 is_stmt 1 view .LVU114
+ 485 0068 20F00702 		bic	r2, r0, #7
+ 486 006c 42F00502 		orr	r2, r2, #5
+ 487 0070 D2B2     		uxtb	r2, r2
+ 488              	.LVL49:
+  78:Core/Src/LoRa.c **** 	}else if (mode == RXSINGLE_MODE){
+ 489              		.loc 1 78 3 view .LVU115
+  78:Core/Src/LoRa.c **** 	}else if (mode == RXSINGLE_MODE){
+ 490              		.loc 1 78 23 is_stmt 0 view .LVU116
+ 491 0072 0523     		movs	r3, #5
+ 492 0074 E361     		str	r3, [r4, #28]
+ 493 0076 CFE7     		b	.L18
+ 494              	.LVL50:
+ 495              	.L19:
+  80:Core/Src/LoRa.c **** 		_LoRa->current_mode = RXSINGLE_MODE;
+ 496              		.loc 1 80 3 is_stmt 1 view .LVU117
+ 497 0078 20F00702 		bic	r2, r0, #7
+ 498 007c 42F00602 		orr	r2, r2, #6
+ 499 0080 D2B2     		uxtb	r2, r2
+ 500              	.LVL51:
+  81:Core/Src/LoRa.c **** 	}
+ 501              		.loc 1 81 3 view .LVU118
+  81:Core/Src/LoRa.c **** 	}
+ 502              		.loc 1 81 23 is_stmt 0 view .LVU119
+ 503 0082 0623     		movs	r3, #6
+ 504 0084 E361     		str	r3, [r4, #28]
+ 505 0086 C7E7     		b	.L18
+ 506              		.cfi_endproc
+ 507              	.LFE132:
+ 509              		.section	.text.LoRa_setFrequency,"ax",%progbits
+ 510              		.align	1
+ 511              		.global	LoRa_setFrequency
+ 512              		.syntax unified
+ 513              		.thumb
+ 514              		.thumb_func
+ 516              	LoRa_setFrequency:
+ 517              	.LVL52:
+ 518              	.LFB135:
+ 152:Core/Src/LoRa.c **** 	uint8_t  data;
+ 519              		.loc 1 152 46 is_stmt 1 view -0
+ 520              		.cfi_startproc
+ 521              		@ args = 0, pretend = 0, frame = 0
+ 522              		@ frame_needed = 0, uses_anonymous_args = 0
+ 152:Core/Src/LoRa.c **** 	uint8_t  data;
+ 523              		.loc 1 152 46 is_stmt 0 view .LVU121
+ 524 0000 38B5     		push	{r3, r4, r5, lr}
+ 525              		.cfi_def_cfa_offset 16
+ 526              		.cfi_offset 3, -16
+ 527              		.cfi_offset 4, -12
+ 528              		.cfi_offset 5, -8
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 16
+
+
+ 529              		.cfi_offset 14, -4
+ 530 0002 0446     		mov	r4, r0
+ 153:Core/Src/LoRa.c **** 	uint32_t F;
+ 531              		.loc 1 153 2 is_stmt 1 view .LVU122
+ 154:Core/Src/LoRa.c **** 	F = (freq * 524288)>>5;
+ 532              		.loc 1 154 2 view .LVU123
+ 155:Core/Src/LoRa.c **** 
+ 533              		.loc 1 155 2 view .LVU124
+ 155:Core/Src/LoRa.c **** 
+ 534              		.loc 1 155 12 is_stmt 0 view .LVU125
+ 535 0004 CA04     		lsls	r2, r1, #19
+ 155:Core/Src/LoRa.c **** 
+ 536              		.loc 1 155 21 view .LVU126
+ 537 0006 5511     		asrs	r5, r2, #5
+ 538              	.LVL53:
+ 158:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegFrMsb, data);
+ 539              		.loc 1 158 2 is_stmt 1 view .LVU127
+ 159:Core/Src/LoRa.c **** 	HAL_Delay(5);
+ 540              		.loc 1 159 2 view .LVU128
+ 541 0008 C2F34752 		ubfx	r2, r2, #21, #8
+ 542              	.LVL54:
+ 159:Core/Src/LoRa.c **** 	HAL_Delay(5);
+ 543              		.loc 1 159 2 is_stmt 0 view .LVU129
+ 544 000c 0621     		movs	r1, #6
+ 545              	.LVL55:
+ 159:Core/Src/LoRa.c **** 	HAL_Delay(5);
+ 546              		.loc 1 159 2 view .LVU130
+ 547 000e FFF7FEFF 		bl	LoRa_write
+ 548              	.LVL56:
+ 160:Core/Src/LoRa.c **** 
+ 549              		.loc 1 160 2 is_stmt 1 view .LVU131
+ 550 0012 0520     		movs	r0, #5
+ 551 0014 FFF7FEFF 		bl	HAL_Delay
+ 552              	.LVL57:
+ 163:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegFrMid, data);
+ 553              		.loc 1 163 2 view .LVU132
+ 163:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegFrMid, data);
+ 554              		.loc 1 163 11 is_stmt 0 view .LVU133
+ 555 0018 2A0A     		lsrs	r2, r5, #8
+ 556              	.LVL58:
+ 164:Core/Src/LoRa.c **** 	HAL_Delay(5);
+ 557              		.loc 1 164 2 is_stmt 1 view .LVU134
+ 558 001a D2B2     		uxtb	r2, r2
+ 164:Core/Src/LoRa.c **** 	HAL_Delay(5);
+ 559              		.loc 1 164 2 is_stmt 0 view .LVU135
+ 560 001c 0721     		movs	r1, #7
+ 561 001e 2046     		mov	r0, r4
+ 562 0020 FFF7FEFF 		bl	LoRa_write
+ 563              	.LVL59:
+ 165:Core/Src/LoRa.c **** 
+ 564              		.loc 1 165 2 is_stmt 1 view .LVU136
+ 565 0024 0520     		movs	r0, #5
+ 566 0026 FFF7FEFF 		bl	HAL_Delay
+ 567              	.LVL60:
+ 168:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegFrLsb, data);
+ 568              		.loc 1 168 2 view .LVU137
+ 169:Core/Src/LoRa.c **** 	HAL_Delay(5);
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 17
+
+
+ 569              		.loc 1 169 2 view .LVU138
+ 570 002a 0022     		movs	r2, #0
+ 571 002c 0821     		movs	r1, #8
+ 572 002e 2046     		mov	r0, r4
+ 573 0030 FFF7FEFF 		bl	LoRa_write
+ 574              	.LVL61:
+ 170:Core/Src/LoRa.c **** }
+ 575              		.loc 1 170 2 view .LVU139
+ 576 0034 0520     		movs	r0, #5
+ 577 0036 FFF7FEFF 		bl	HAL_Delay
+ 578              	.LVL62:
+ 171:Core/Src/LoRa.c **** 
+ 579              		.loc 1 171 1 is_stmt 0 view .LVU140
+ 580 003a 38BD     		pop	{r3, r4, r5, pc}
+ 171:Core/Src/LoRa.c **** 
+ 581              		.loc 1 171 1 view .LVU141
+ 582              		.cfi_endproc
+ 583              	.LFE135:
+ 585              		.section	.text.LoRa_setSpreadingFactor,"ax",%progbits
+ 586              		.align	1
+ 587              		.global	LoRa_setSpreadingFactor
+ 588              		.syntax unified
+ 589              		.thumb
+ 590              		.thumb_func
+ 592              	LoRa_setSpreadingFactor:
+ 593              	.LVL63:
+ 594              	.LFB136:
+ 184:Core/Src/LoRa.c **** 	uint8_t	data;
+ 595              		.loc 1 184 50 is_stmt 1 view -0
+ 596              		.cfi_startproc
+ 597              		@ args = 0, pretend = 0, frame = 0
+ 598              		@ frame_needed = 0, uses_anonymous_args = 0
+ 184:Core/Src/LoRa.c **** 	uint8_t	data;
+ 599              		.loc 1 184 50 is_stmt 0 view .LVU143
+ 600 0000 70B5     		push	{r4, r5, r6, lr}
+ 601              		.cfi_def_cfa_offset 16
+ 602              		.cfi_offset 4, -16
+ 603              		.cfi_offset 5, -12
+ 604              		.cfi_offset 6, -8
+ 605              		.cfi_offset 14, -4
+ 606 0002 0646     		mov	r6, r0
+ 185:Core/Src/LoRa.c **** 	uint8_t	read;
+ 607              		.loc 1 185 2 is_stmt 1 view .LVU144
+ 186:Core/Src/LoRa.c **** 
+ 608              		.loc 1 186 2 view .LVU145
+ 188:Core/Src/LoRa.c **** 		SF = 12;
+ 609              		.loc 1 188 2 view .LVU146
+ 188:Core/Src/LoRa.c **** 		SF = 12;
+ 610              		.loc 1 188 4 is_stmt 0 view .LVU147
+ 611 0004 0C29     		cmp	r1, #12
+ 612 0006 04DC     		bgt	.L30
+ 613 0008 0C46     		mov	r4, r1
+ 190:Core/Src/LoRa.c **** 		SF = 7;
+ 614              		.loc 1 190 2 is_stmt 1 view .LVU148
+ 190:Core/Src/LoRa.c **** 		SF = 7;
+ 615              		.loc 1 190 4 is_stmt 0 view .LVU149
+ 616 000a 0629     		cmp	r1, #6
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 18
+
+
+ 617 000c 02DC     		bgt	.L29
+ 191:Core/Src/LoRa.c **** 
+ 618              		.loc 1 191 6 view .LVU150
+ 619 000e 0724     		movs	r4, #7
+ 620 0010 00E0     		b	.L29
+ 621              	.L30:
+ 189:Core/Src/LoRa.c **** 	if(SF<7)
+ 622              		.loc 1 189 6 view .LVU151
+ 623 0012 0C24     		movs	r4, #12
+ 624              	.L29:
+ 625              	.LVL64:
+ 193:Core/Src/LoRa.c **** 	HAL_Delay(10);
+ 626              		.loc 1 193 2 is_stmt 1 view .LVU152
+ 193:Core/Src/LoRa.c **** 	HAL_Delay(10);
+ 627              		.loc 1 193 9 is_stmt 0 view .LVU153
+ 628 0014 1E21     		movs	r1, #30
+ 629 0016 3046     		mov	r0, r6
+ 630              	.LVL65:
+ 193:Core/Src/LoRa.c **** 	HAL_Delay(10);
+ 631              		.loc 1 193 9 view .LVU154
+ 632 0018 FFF7FEFF 		bl	LoRa_read
+ 633              	.LVL66:
+ 634 001c 0546     		mov	r5, r0
+ 635              	.LVL67:
+ 194:Core/Src/LoRa.c **** 
+ 636              		.loc 1 194 2 is_stmt 1 view .LVU155
+ 637 001e 0A20     		movs	r0, #10
+ 638 0020 FFF7FEFF 		bl	HAL_Delay
+ 639              	.LVL68:
+ 196:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegModemConfig2, data);
+ 640              		.loc 1 196 2 view .LVU156
+ 196:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegModemConfig2, data);
+ 641              		.loc 1 196 13 is_stmt 0 view .LVU157
+ 642 0024 2201     		lsls	r2, r4, #4
+ 643 0026 D2B2     		uxtb	r2, r2
+ 196:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegModemConfig2, data);
+ 644              		.loc 1 196 27 view .LVU158
+ 645 0028 05F00F05 		and	r5, r5, #15
+ 646              	.LVL69:
+ 196:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegModemConfig2, data);
+ 647              		.loc 1 196 7 view .LVU159
+ 648 002c 2A44     		add	r2, r2, r5
+ 649              	.LVL70:
+ 197:Core/Src/LoRa.c **** 	HAL_Delay(10);
+ 650              		.loc 1 197 2 is_stmt 1 view .LVU160
+ 651 002e D2B2     		uxtb	r2, r2
+ 197:Core/Src/LoRa.c **** 	HAL_Delay(10);
+ 652              		.loc 1 197 2 is_stmt 0 view .LVU161
+ 653 0030 1E21     		movs	r1, #30
+ 654 0032 3046     		mov	r0, r6
+ 655 0034 FFF7FEFF 		bl	LoRa_write
+ 656              	.LVL71:
+ 198:Core/Src/LoRa.c **** }
+ 657              		.loc 1 198 2 is_stmt 1 view .LVU162
+ 658 0038 0A20     		movs	r0, #10
+ 659 003a FFF7FEFF 		bl	HAL_Delay
+ 660              	.LVL72:
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 19
+
+
+ 199:Core/Src/LoRa.c **** 
+ 661              		.loc 1 199 1 is_stmt 0 view .LVU163
+ 662 003e 70BD     		pop	{r4, r5, r6, pc}
+ 199:Core/Src/LoRa.c **** 
+ 663              		.loc 1 199 1 view .LVU164
+ 664              		.cfi_endproc
+ 665              	.LFE136:
+ 667              		.section	.text.LoRa_setPower,"ax",%progbits
+ 668              		.align	1
+ 669              		.global	LoRa_setPower
+ 670              		.syntax unified
+ 671              		.thumb
+ 672              		.thumb_func
+ 674              	LoRa_setPower:
+ 675              	.LVL73:
+ 676              	.LFB137:
+ 212:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegPaConfig, power);
+ 677              		.loc 1 212 47 is_stmt 1 view -0
+ 678              		.cfi_startproc
+ 679              		@ args = 0, pretend = 0, frame = 0
+ 680              		@ frame_needed = 0, uses_anonymous_args = 0
+ 212:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegPaConfig, power);
+ 681              		.loc 1 212 47 is_stmt 0 view .LVU166
+ 682 0000 08B5     		push	{r3, lr}
+ 683              		.cfi_def_cfa_offset 8
+ 684              		.cfi_offset 3, -8
+ 685              		.cfi_offset 14, -4
+ 686 0002 0A46     		mov	r2, r1
+ 213:Core/Src/LoRa.c **** 	HAL_Delay(10);
+ 687              		.loc 1 213 2 is_stmt 1 view .LVU167
+ 688 0004 0921     		movs	r1, #9
+ 689              	.LVL74:
+ 213:Core/Src/LoRa.c **** 	HAL_Delay(10);
+ 690              		.loc 1 213 2 is_stmt 0 view .LVU168
+ 691 0006 FFF7FEFF 		bl	LoRa_write
+ 692              	.LVL75:
+ 214:Core/Src/LoRa.c **** }
+ 693              		.loc 1 214 2 is_stmt 1 view .LVU169
+ 694 000a 0A20     		movs	r0, #10
+ 695 000c FFF7FEFF 		bl	HAL_Delay
+ 696              	.LVL76:
+ 215:Core/Src/LoRa.c **** 
+ 697              		.loc 1 215 1 is_stmt 0 view .LVU170
+ 698 0010 08BD     		pop	{r3, pc}
+ 699              		.cfi_endproc
+ 700              	.LFE137:
+ 702              		.section	.text.LoRa_setOCP,"ax",%progbits
+ 703              		.align	1
+ 704              		.global	LoRa_setOCP
+ 705              		.syntax unified
+ 706              		.thumb
+ 707              		.thumb_func
+ 709              	LoRa_setOCP:
+ 710              	.LVL77:
+ 711              	.LFB138:
+ 228:Core/Src/LoRa.c **** 	uint8_t	OcpTrim = 0;
+ 712              		.loc 1 228 47 is_stmt 1 view -0
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 20
+
+
+ 713              		.cfi_startproc
+ 714              		@ args = 0, pretend = 0, frame = 0
+ 715              		@ frame_needed = 0, uses_anonymous_args = 0
+ 228:Core/Src/LoRa.c **** 	uint8_t	OcpTrim = 0;
+ 716              		.loc 1 228 47 is_stmt 0 view .LVU172
+ 717 0000 08B5     		push	{r3, lr}
+ 718              		.cfi_def_cfa_offset 8
+ 719              		.cfi_offset 3, -8
+ 720              		.cfi_offset 14, -4
+ 229:Core/Src/LoRa.c **** 
+ 721              		.loc 1 229 2 is_stmt 1 view .LVU173
+ 722              	.LVL78:
+ 231:Core/Src/LoRa.c **** 		current = 45;
+ 723              		.loc 1 231 2 view .LVU174
+ 231:Core/Src/LoRa.c **** 		current = 45;
+ 724              		.loc 1 231 4 is_stmt 0 view .LVU175
+ 725 0002 2C29     		cmp	r1, #44
+ 726 0004 0DD9     		bls	.L39
+ 233:Core/Src/LoRa.c **** 		current = 240;
+ 727              		.loc 1 233 2 is_stmt 1 view .LVU176
+ 233:Core/Src/LoRa.c **** 		current = 240;
+ 728              		.loc 1 233 4 is_stmt 0 view .LVU177
+ 729 0006 F029     		cmp	r1, #240
+ 730 0008 0CD9     		bls	.L36
+ 234:Core/Src/LoRa.c **** 
+ 731              		.loc 1 234 11 view .LVU178
+ 732 000a F021     		movs	r1, #240
+ 733              	.LVL79:
+ 734              	.L37:
+ 238:Core/Src/LoRa.c **** 		OcpTrim = (current + 30)/10;
+ 735              		.loc 1 238 7 is_stmt 1 view .LVU179
+ 238:Core/Src/LoRa.c **** 		OcpTrim = (current + 30)/10;
+ 736              		.loc 1 238 9 is_stmt 0 view .LVU180
+ 737 000c F029     		cmp	r1, #240
+ 738 000e 1CD8     		bhi	.L41
+ 239:Core/Src/LoRa.c **** 
+ 739              		.loc 1 239 3 is_stmt 1 view .LVU181
+ 239:Core/Src/LoRa.c **** 
+ 740              		.loc 1 239 22 is_stmt 0 view .LVU182
+ 741 0010 1E31     		adds	r1, r1, #30
+ 239:Core/Src/LoRa.c **** 
+ 742              		.loc 1 239 27 view .LVU183
+ 743 0012 0F4B     		ldr	r3, .L43
+ 744 0014 83FB0123 		smull	r2, r3, r3, r1
+ 745 0018 CA17     		asrs	r2, r1, #31
+ 746 001a C2EBA302 		rsb	r2, r2, r3, asr #2
+ 239:Core/Src/LoRa.c **** 
+ 747              		.loc 1 239 11 view .LVU184
+ 748 001e D2B2     		uxtb	r2, r2
+ 749              	.LVL80:
+ 239:Core/Src/LoRa.c **** 
+ 750              		.loc 1 239 11 view .LVU185
+ 751 0020 0AE0     		b	.L38
+ 752              	.LVL81:
+ 753              	.L39:
+ 232:Core/Src/LoRa.c **** 	if(current>240)
+ 754              		.loc 1 232 11 view .LVU186
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 21
+
+
+ 755 0022 2D21     		movs	r1, #45
+ 756              	.LVL82:
+ 757              	.L36:
+ 236:Core/Src/LoRa.c **** 		OcpTrim = (current - 45)/5;
+ 758              		.loc 1 236 2 is_stmt 1 view .LVU187
+ 236:Core/Src/LoRa.c **** 		OcpTrim = (current - 45)/5;
+ 759              		.loc 1 236 4 is_stmt 0 view .LVU188
+ 760 0024 7829     		cmp	r1, #120
+ 761 0026 F1D8     		bhi	.L37
+ 237:Core/Src/LoRa.c **** 	else if(current <= 240)
+ 762              		.loc 1 237 3 is_stmt 1 view .LVU189
+ 237:Core/Src/LoRa.c **** 	else if(current <= 240)
+ 763              		.loc 1 237 22 is_stmt 0 view .LVU190
+ 764 0028 2D39     		subs	r1, r1, #45
+ 765              	.LVL83:
+ 237:Core/Src/LoRa.c **** 	else if(current <= 240)
+ 766              		.loc 1 237 27 view .LVU191
+ 767 002a 094B     		ldr	r3, .L43
+ 768 002c 83FB0123 		smull	r2, r3, r3, r1
+ 769 0030 CA17     		asrs	r2, r1, #31
+ 770 0032 C2EB6302 		rsb	r2, r2, r3, asr #1
+ 237:Core/Src/LoRa.c **** 	else if(current <= 240)
+ 771              		.loc 1 237 11 view .LVU192
+ 772 0036 D2B2     		uxtb	r2, r2
+ 773              	.LVL84:
+ 774              	.L38:
+ 241:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegOcp, OcpTrim);
+ 775              		.loc 1 241 2 is_stmt 1 view .LVU193
+ 241:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegOcp, OcpTrim);
+ 776              		.loc 1 241 10 is_stmt 0 view .LVU194
+ 777 0038 2032     		adds	r2, r2, #32
+ 778              	.LVL85:
+ 242:Core/Src/LoRa.c **** 	HAL_Delay(10);
+ 779              		.loc 1 242 2 is_stmt 1 view .LVU195
+ 780 003a D2B2     		uxtb	r2, r2
+ 242:Core/Src/LoRa.c **** 	HAL_Delay(10);
+ 781              		.loc 1 242 2 is_stmt 0 view .LVU196
+ 782 003c 0B21     		movs	r1, #11
+ 783 003e FFF7FEFF 		bl	LoRa_write
+ 784              	.LVL86:
+ 243:Core/Src/LoRa.c **** }
+ 785              		.loc 1 243 2 is_stmt 1 view .LVU197
+ 786 0042 0A20     		movs	r0, #10
+ 787 0044 FFF7FEFF 		bl	HAL_Delay
+ 788              	.LVL87:
+ 244:Core/Src/LoRa.c **** 
+ 789              		.loc 1 244 1 is_stmt 0 view .LVU198
+ 790 0048 08BD     		pop	{r3, pc}
+ 791              	.LVL88:
+ 792              	.L41:
+ 229:Core/Src/LoRa.c **** 
+ 793              		.loc 1 229 10 view .LVU199
+ 794 004a 0022     		movs	r2, #0
+ 795 004c F4E7     		b	.L38
+ 796              	.L44:
+ 797 004e 00BF     		.align	2
+ 798              	.L43:
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 22
+
+
+ 799 0050 67666666 		.word	1717986919
+ 800              		.cfi_endproc
+ 801              	.LFE138:
+ 803              		.section	.text.LoRa_setTOMsb_setCRCon,"ax",%progbits
+ 804              		.align	1
+ 805              		.global	LoRa_setTOMsb_setCRCon
+ 806              		.syntax unified
+ 807              		.thumb
+ 808              		.thumb_func
+ 810              	LoRa_setTOMsb_setCRCon:
+ 811              	.LVL89:
+ 812              	.LFB139:
+ 256:Core/Src/LoRa.c **** 	uint8_t read, data;
+ 813              		.loc 1 256 41 is_stmt 1 view -0
+ 814              		.cfi_startproc
+ 815              		@ args = 0, pretend = 0, frame = 0
+ 816              		@ frame_needed = 0, uses_anonymous_args = 0
+ 256:Core/Src/LoRa.c **** 	uint8_t read, data;
+ 817              		.loc 1 256 41 is_stmt 0 view .LVU201
+ 818 0000 10B5     		push	{r4, lr}
+ 819              		.cfi_def_cfa_offset 8
+ 820              		.cfi_offset 4, -8
+ 821              		.cfi_offset 14, -4
+ 822 0002 0446     		mov	r4, r0
+ 257:Core/Src/LoRa.c **** 
+ 823              		.loc 1 257 2 is_stmt 1 view .LVU202
+ 259:Core/Src/LoRa.c **** 
+ 824              		.loc 1 259 2 view .LVU203
+ 259:Core/Src/LoRa.c **** 
+ 825              		.loc 1 259 9 is_stmt 0 view .LVU204
+ 826 0004 1E21     		movs	r1, #30
+ 827 0006 FFF7FEFF 		bl	LoRa_read
+ 828              	.LVL90:
+ 261:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegModemConfig2, data);\
+ 829              		.loc 1 261 2 is_stmt 1 view .LVU205
+ 261:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegModemConfig2, data);\
+ 830              		.loc 1 261 7 is_stmt 0 view .LVU206
+ 831 000a 40F00702 		orr	r2, r0, #7
+ 832              	.LVL91:
+ 262:Core/Src/LoRa.c **** 	HAL_Delay(10);
+ 833              		.loc 1 262 2 is_stmt 1 view .LVU207
+ 834 000e D2B2     		uxtb	r2, r2
+ 262:Core/Src/LoRa.c **** 	HAL_Delay(10);
+ 835              		.loc 1 262 2 is_stmt 0 view .LVU208
+ 836 0010 1E21     		movs	r1, #30
+ 837 0012 2046     		mov	r0, r4
+ 838              	.LVL92:
+ 262:Core/Src/LoRa.c **** 	HAL_Delay(10);
+ 839              		.loc 1 262 2 view .LVU209
+ 840 0014 FFF7FEFF 		bl	LoRa_write
+ 841              	.LVL93:
+ 263:Core/Src/LoRa.c **** }
+ 842              		.loc 1 263 2 is_stmt 1 view .LVU210
+ 843 0018 0A20     		movs	r0, #10
+ 844 001a FFF7FEFF 		bl	HAL_Delay
+ 845              	.LVL94:
+ 264:Core/Src/LoRa.c **** 
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 23
+
+
+ 846              		.loc 1 264 1 is_stmt 0 view .LVU211
+ 847 001e 10BD     		pop	{r4, pc}
+ 264:Core/Src/LoRa.c **** 
+ 848              		.loc 1 264 1 view .LVU212
+ 849              		.cfi_endproc
+ 850              	.LFE139:
+ 852              		.section	.text.LoRa_BurstWrite,"ax",%progbits
+ 853              		.align	1
+ 854              		.global	LoRa_BurstWrite
+ 855              		.syntax unified
+ 856              		.thumb
+ 857              		.thumb_func
+ 859              	LoRa_BurstWrite:
+ 860              	.LVL95:
+ 861              	.LFB142:
+ 309:Core/Src/LoRa.c **** 
+ 310:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+ 311:Core/Src/LoRa.c **** 		name        : LoRa_BurstWrite
+ 312:Core/Src/LoRa.c **** 
+ 313:Core/Src/LoRa.c **** 		description : write a set of values in a register by an address respectively
+ 314:Core/Src/LoRa.c **** 
+ 315:Core/Src/LoRa.c **** 		arguments   :
+ 316:Core/Src/LoRa.c **** 			LoRa*   LoRa        --> LoRa object handler
+ 317:Core/Src/LoRa.c **** 			uint8_t address     -->	address of the register e.g 0x1D
+ 318:Core/Src/LoRa.c **** 			uint8_t *value      --> address of values that you want to write
+ 319:Core/Src/LoRa.c **** 
+ 320:Core/Src/LoRa.c **** 		returns     : Nothing
+ 321:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+ 322:Core/Src/LoRa.c **** void LoRa_BurstWrite(LoRa* _LoRa, uint8_t address, uint8_t *value, uint8_t length){
+ 862              		.loc 1 322 83 is_stmt 1 view -0
+ 863              		.cfi_startproc
+ 864              		@ args = 0, pretend = 0, frame = 8
+ 865              		@ frame_needed = 0, uses_anonymous_args = 0
+ 866              		.loc 1 322 83 is_stmt 0 view .LVU214
+ 867 0000 70B5     		push	{r4, r5, r6, lr}
+ 868              		.cfi_def_cfa_offset 16
+ 869              		.cfi_offset 4, -16
+ 870              		.cfi_offset 5, -12
+ 871              		.cfi_offset 6, -8
+ 872              		.cfi_offset 14, -4
+ 873 0002 82B0     		sub	sp, sp, #8
+ 874              		.cfi_def_cfa_offset 24
+ 875 0004 0446     		mov	r4, r0
+ 876 0006 1546     		mov	r5, r2
+ 877 0008 1E46     		mov	r6, r3
+ 323:Core/Src/LoRa.c **** 	uint8_t addr;
+ 878              		.loc 1 323 2 is_stmt 1 view .LVU215
+ 324:Core/Src/LoRa.c **** 	addr = address | 0x80;
+ 879              		.loc 1 324 2 view .LVU216
+ 880              		.loc 1 324 7 is_stmt 0 view .LVU217
+ 881 000a 61F07F01 		orn	r1, r1, #127
+ 882              	.LVL96:
+ 883              		.loc 1 324 7 view .LVU218
+ 884 000e 8DF80710 		strb	r1, [sp, #7]
+ 325:Core/Src/LoRa.c **** 
+ 326:Core/Src/LoRa.c **** 	//NSS = 1
+ 327:Core/Src/LoRa.c **** 	HAL_GPIO_WritePin(_LoRa->CS_port, _LoRa->CS_pin, GPIO_PIN_RESET);
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 24
+
+
+ 885              		.loc 1 327 2 is_stmt 1 view .LVU219
+ 886 0012 0022     		movs	r2, #0
+ 887              	.LVL97:
+ 888              		.loc 1 327 2 is_stmt 0 view .LVU220
+ 889 0014 8188     		ldrh	r1, [r0, #4]
+ 890 0016 0068     		ldr	r0, [r0]
+ 891              	.LVL98:
+ 892              		.loc 1 327 2 view .LVU221
+ 893 0018 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 894              	.LVL99:
+ 328:Core/Src/LoRa.c **** 	
+ 329:Core/Src/LoRa.c **** 	HAL_SPI_Transmit(_LoRa->hSPIx, &addr, 1, TRANSMIT_TIMEOUT);
+ 895              		.loc 1 329 2 is_stmt 1 view .LVU222
+ 896 001c 4FF4FA63 		mov	r3, #2000
+ 897 0020 0122     		movs	r2, #1
+ 898 0022 0DF10701 		add	r1, sp, #7
+ 899 0026 A069     		ldr	r0, [r4, #24]
+ 900 0028 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 901              	.LVL100:
+ 330:Core/Src/LoRa.c **** 	while (HAL_SPI_GetState(_LoRa->hSPIx) != HAL_SPI_STATE_READY)
+ 902              		.loc 1 330 2 view .LVU223
+ 903              	.L48:
+ 904              		.loc 1 330 40 discriminator 1 view .LVU224
+ 905              		.loc 1 330 9 is_stmt 0 discriminator 1 view .LVU225
+ 906 002c A069     		ldr	r0, [r4, #24]
+ 907 002e FFF7FEFF 		bl	HAL_SPI_GetState
+ 908              	.LVL101:
+ 909              		.loc 1 330 40 discriminator 1 view .LVU226
+ 910 0032 0128     		cmp	r0, #1
+ 911 0034 FAD1     		bne	.L48
+ 331:Core/Src/LoRa.c **** 		;
+ 332:Core/Src/LoRa.c **** 	//Write data in FiFo
+ 333:Core/Src/LoRa.c **** 	HAL_SPI_Transmit(_LoRa->hSPIx, value, length, TRANSMIT_TIMEOUT);
+ 912              		.loc 1 333 2 is_stmt 1 view .LVU227
+ 913 0036 4FF4FA63 		mov	r3, #2000
+ 914 003a 3246     		mov	r2, r6
+ 915 003c 2946     		mov	r1, r5
+ 916 003e A069     		ldr	r0, [r4, #24]
+ 917 0040 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 918              	.LVL102:
+ 334:Core/Src/LoRa.c **** 	while (HAL_SPI_GetState(_LoRa->hSPIx) != HAL_SPI_STATE_READY)
+ 919              		.loc 1 334 2 view .LVU228
+ 920              	.L49:
+ 921              		.loc 1 334 40 discriminator 1 view .LVU229
+ 922              		.loc 1 334 9 is_stmt 0 discriminator 1 view .LVU230
+ 923 0044 A069     		ldr	r0, [r4, #24]
+ 924 0046 FFF7FEFF 		bl	HAL_SPI_GetState
+ 925              	.LVL103:
+ 926              		.loc 1 334 40 discriminator 1 view .LVU231
+ 927 004a 0128     		cmp	r0, #1
+ 928 004c FAD1     		bne	.L49
+ 335:Core/Src/LoRa.c **** 		;
+ 336:Core/Src/LoRa.c **** 	//NSS = 0
+ 337:Core/Src/LoRa.c **** 	//HAL_Delay(5);
+ 338:Core/Src/LoRa.c **** 	HAL_GPIO_WritePin(_LoRa->CS_port, _LoRa->CS_pin, GPIO_PIN_SET);
+ 929              		.loc 1 338 2 is_stmt 1 view .LVU232
+ 930 004e 0122     		movs	r2, #1
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 25
+
+
+ 931 0050 A188     		ldrh	r1, [r4, #4]
+ 932 0052 2068     		ldr	r0, [r4]
+ 933 0054 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 934              	.LVL104:
+ 339:Core/Src/LoRa.c **** }
+ 935              		.loc 1 339 1 is_stmt 0 view .LVU233
+ 936 0058 02B0     		add	sp, sp, #8
+ 937              		.cfi_def_cfa_offset 16
+ 938              		@ sp needed
+ 939 005a 70BD     		pop	{r4, r5, r6, pc}
+ 940              		.loc 1 339 1 view .LVU234
+ 941              		.cfi_endproc
+ 942              	.LFE142:
+ 944              		.section	.text.LoRa_isvalid,"ax",%progbits
+ 945              		.align	1
+ 946              		.global	LoRa_isvalid
+ 947              		.syntax unified
+ 948              		.thumb
+ 949              		.thumb_func
+ 951              	LoRa_isvalid:
+ 952              	.LVL105:
+ 953              	.LFB143:
+ 340:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+ 341:Core/Src/LoRa.c **** 		name        : LoRa_isvalid
+ 342:Core/Src/LoRa.c **** 
+ 343:Core/Src/LoRa.c **** 		description : check the LoRa instruct values
+ 344:Core/Src/LoRa.c **** 
+ 345:Core/Src/LoRa.c **** 		arguments   :
+ 346:Core/Src/LoRa.c **** 			LoRa* LoRa --> LoRa object handler
+ 347:Core/Src/LoRa.c **** 
+ 348:Core/Src/LoRa.c **** 		returns     : returns 1 if all of the values were given, otherwise returns 0
+ 349:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+ 350:Core/Src/LoRa.c **** uint8_t LoRa_isvalid(LoRa* _LoRa){
+ 954              		.loc 1 350 34 is_stmt 1 view -0
+ 955              		.cfi_startproc
+ 956              		@ args = 0, pretend = 0, frame = 0
+ 957              		@ frame_needed = 0, uses_anonymous_args = 0
+ 958              		@ link register save eliminated.
+ 351:Core/Src/LoRa.c **** 
+ 352:Core/Src/LoRa.c **** 	return 1;
+ 959              		.loc 1 352 2 view .LVU236
+ 353:Core/Src/LoRa.c **** }
+ 960              		.loc 1 353 1 is_stmt 0 view .LVU237
+ 961 0000 0120     		movs	r0, #1
+ 962              	.LVL106:
+ 963              		.loc 1 353 1 view .LVU238
+ 964 0002 7047     		bx	lr
+ 965              		.cfi_endproc
+ 966              	.LFE143:
+ 968              		.section	.text.LoRa_transmit,"ax",%progbits
+ 969              		.align	1
+ 970              		.global	LoRa_transmit
+ 971              		.syntax unified
+ 972              		.thumb
+ 973              		.thumb_func
+ 975              	LoRa_transmit:
+ 976              	.LVL107:
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 26
+
+
+ 977              	.LFB144:
+ 354:Core/Src/LoRa.c **** 
+ 355:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+ 356:Core/Src/LoRa.c **** 		name        : LoRa_transmit
+ 357:Core/Src/LoRa.c **** 
+ 358:Core/Src/LoRa.c **** 		description : Transmit data
+ 359:Core/Src/LoRa.c **** 
+ 360:Core/Src/LoRa.c **** 		arguments   :
+ 361:Core/Src/LoRa.c **** 			LoRa*    LoRa     --> LoRa object handler
+ 362:Core/Src/LoRa.c **** 			uint8_t  data			--> A pointer to the data you wanna send
+ 363:Core/Src/LoRa.c **** 			uint8_t	 length   --> Size of your data in Bytes
+ 364:Core/Src/LoRa.c **** 			uint16_t timeOut	--> Timeout in milliseconds
+ 365:Core/Src/LoRa.c **** 		returns     : 1 in case of success, 0 in case of timeout
+ 366:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+ 367:Core/Src/LoRa.c **** uint8_t LoRa_transmit(LoRa* _LoRa, uint8_t* data, uint8_t length, uint16_t timeout){
+ 978              		.loc 1 367 84 is_stmt 1 view -0
+ 979              		.cfi_startproc
+ 980              		@ args = 0, pretend = 0, frame = 0
+ 981              		@ frame_needed = 0, uses_anonymous_args = 0
+ 982              		.loc 1 367 84 is_stmt 0 view .LVU240
+ 983 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 984              		.cfi_def_cfa_offset 24
+ 985              		.cfi_offset 4, -24
+ 986              		.cfi_offset 5, -20
+ 987              		.cfi_offset 6, -16
+ 988              		.cfi_offset 7, -12
+ 989              		.cfi_offset 8, -8
+ 990              		.cfi_offset 14, -4
+ 991 0004 0646     		mov	r6, r0
+ 992 0006 0F46     		mov	r7, r1
+ 993 0008 1546     		mov	r5, r2
+ 994 000a 1C46     		mov	r4, r3
+ 368:Core/Src/LoRa.c **** 	uint8_t read;
+ 995              		.loc 1 368 2 is_stmt 1 view .LVU241
+ 369:Core/Src/LoRa.c **** 
+ 370:Core/Src/LoRa.c **** 	int mode = _LoRa->current_mode;
+ 996              		.loc 1 370 2 view .LVU242
+ 997              		.loc 1 370 6 is_stmt 0 view .LVU243
+ 998 000c D0F81C80 		ldr	r8, [r0, #28]
+ 999              	.LVL108:
+ 371:Core/Src/LoRa.c **** 	LoRa_gotoMode(_LoRa, STNBY_MODE);
+ 1000              		.loc 1 371 2 is_stmt 1 view .LVU244
+ 1001 0010 0121     		movs	r1, #1
+ 1002              	.LVL109:
+ 1003              		.loc 1 371 2 is_stmt 0 view .LVU245
+ 1004 0012 FFF7FEFF 		bl	LoRa_gotoMode
+ 1005              	.LVL110:
+ 372:Core/Src/LoRa.c **** 	read = LoRa_read(_LoRa, RegFiFoTxBaseAddr);
+ 1006              		.loc 1 372 2 is_stmt 1 view .LVU246
+ 1007              		.loc 1 372 9 is_stmt 0 view .LVU247
+ 1008 0016 0E21     		movs	r1, #14
+ 1009 0018 3046     		mov	r0, r6
+ 1010 001a FFF7FEFF 		bl	LoRa_read
+ 1011              	.LVL111:
+ 1012 001e 0246     		mov	r2, r0
+ 1013              	.LVL112:
+ 373:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegFiFoAddPtr, read);
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 27
+
+
+ 1014              		.loc 1 373 2 is_stmt 1 view .LVU248
+ 1015 0020 0D21     		movs	r1, #13
+ 1016 0022 3046     		mov	r0, r6
+ 1017 0024 FFF7FEFF 		bl	LoRa_write
+ 1018              	.LVL113:
+ 374:Core/Src/LoRa.c **** 	LoRa_write(_LoRa, RegPayloadLength, length);
+ 1019              		.loc 1 374 2 view .LVU249
+ 1020 0028 2A46     		mov	r2, r5
+ 1021 002a 2221     		movs	r1, #34
+ 1022 002c 3046     		mov	r0, r6
+ 1023 002e FFF7FEFF 		bl	LoRa_write
+ 1024              	.LVL114:
+ 375:Core/Src/LoRa.c **** 	LoRa_BurstWrite(_LoRa, RegFiFo, data, length);
+ 1025              		.loc 1 375 2 view .LVU250
+ 1026 0032 2B46     		mov	r3, r5
+ 1027 0034 3A46     		mov	r2, r7
+ 1028 0036 0021     		movs	r1, #0
+ 1029 0038 3046     		mov	r0, r6
+ 1030 003a FFF7FEFF 		bl	LoRa_BurstWrite
+ 1031              	.LVL115:
+ 376:Core/Src/LoRa.c **** 	LoRa_gotoMode(_LoRa, TRANSMIT_MODE);
+ 1032              		.loc 1 376 2 view .LVU251
+ 1033 003e 0321     		movs	r1, #3
+ 1034 0040 3046     		mov	r0, r6
+ 1035 0042 FFF7FEFF 		bl	LoRa_gotoMode
+ 1036              	.LVL116:
+ 1037 0046 0FE0     		b	.L56
+ 1038              	.LVL117:
+ 1039              	.L58:
+ 377:Core/Src/LoRa.c **** 	while(1){
+ 378:Core/Src/LoRa.c **** 		read = LoRa_read(_LoRa, RegIrqFlags);
+ 379:Core/Src/LoRa.c **** 		if((read & 0x08)!=0){
+ 380:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegIrqFlags, 0xFF);
+ 1040              		.loc 1 380 4 view .LVU252
+ 1041 0048 FF22     		movs	r2, #255
+ 1042 004a 1221     		movs	r1, #18
+ 1043 004c 3046     		mov	r0, r6
+ 1044              	.LVL118:
+ 1045              		.loc 1 380 4 is_stmt 0 view .LVU253
+ 1046 004e FFF7FEFF 		bl	LoRa_write
+ 1047              	.LVL119:
+ 381:Core/Src/LoRa.c **** 			LoRa_gotoMode(_LoRa, mode);
+ 1048              		.loc 1 381 4 is_stmt 1 view .LVU254
+ 1049 0052 4146     		mov	r1, r8
+ 1050 0054 3046     		mov	r0, r6
+ 1051 0056 FFF7FEFF 		bl	LoRa_gotoMode
+ 1052              	.LVL120:
+ 382:Core/Src/LoRa.c **** 			return 1;
+ 1053              		.loc 1 382 4 view .LVU255
+ 1054              		.loc 1 382 11 is_stmt 0 view .LVU256
+ 1055 005a 0125     		movs	r5, #1
+ 1056              	.L54:
+ 383:Core/Src/LoRa.c **** 		}
+ 384:Core/Src/LoRa.c **** 		else{
+ 385:Core/Src/LoRa.c **** 			if(--timeout==0){
+ 386:Core/Src/LoRa.c **** 				LoRa_gotoMode(_LoRa, mode);
+ 387:Core/Src/LoRa.c **** 				return 0;
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 28
+
+
+ 388:Core/Src/LoRa.c **** 			}
+ 389:Core/Src/LoRa.c **** 		}
+ 390:Core/Src/LoRa.c **** 		HAL_Delay(1);
+ 391:Core/Src/LoRa.c **** 	}
+ 392:Core/Src/LoRa.c **** }
+ 1057              		.loc 1 392 1 view .LVU257
+ 1058 005c 2846     		mov	r0, r5
+ 1059 005e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1060              	.LVL121:
+ 1061              	.L55:
+ 390:Core/Src/LoRa.c **** 	}
+ 1062              		.loc 1 390 3 is_stmt 1 view .LVU258
+ 1063 0062 0120     		movs	r0, #1
+ 1064              	.LVL122:
+ 390:Core/Src/LoRa.c **** 	}
+ 1065              		.loc 1 390 3 is_stmt 0 view .LVU259
+ 1066 0064 FFF7FEFF 		bl	HAL_Delay
+ 1067              	.LVL123:
+ 377:Core/Src/LoRa.c **** 		read = LoRa_read(_LoRa, RegIrqFlags);
+ 1068              		.loc 1 377 7 is_stmt 1 view .LVU260
+ 1069              	.L56:
+ 377:Core/Src/LoRa.c **** 		read = LoRa_read(_LoRa, RegIrqFlags);
+ 1070              		.loc 1 377 2 view .LVU261
+ 378:Core/Src/LoRa.c **** 		if((read & 0x08)!=0){
+ 1071              		.loc 1 378 3 view .LVU262
+ 378:Core/Src/LoRa.c **** 		if((read & 0x08)!=0){
+ 1072              		.loc 1 378 10 is_stmt 0 view .LVU263
+ 1073 0068 1221     		movs	r1, #18
+ 1074 006a 3046     		mov	r0, r6
+ 1075 006c FFF7FEFF 		bl	LoRa_read
+ 1076              	.LVL124:
+ 379:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegIrqFlags, 0xFF);
+ 1077              		.loc 1 379 3 is_stmt 1 view .LVU264
+ 379:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegIrqFlags, 0xFF);
+ 1078              		.loc 1 379 5 is_stmt 0 view .LVU265
+ 1079 0070 10F00805 		ands	r5, r0, #8
+ 1080 0074 E8D1     		bne	.L58
+ 385:Core/Src/LoRa.c **** 				LoRa_gotoMode(_LoRa, mode);
+ 1081              		.loc 1 385 4 is_stmt 1 view .LVU266
+ 385:Core/Src/LoRa.c **** 				LoRa_gotoMode(_LoRa, mode);
+ 1082              		.loc 1 385 6 is_stmt 0 view .LVU267
+ 1083 0076 013C     		subs	r4, r4, #1
+ 1084              	.LVL125:
+ 385:Core/Src/LoRa.c **** 				LoRa_gotoMode(_LoRa, mode);
+ 1085              		.loc 1 385 6 view .LVU268
+ 1086 0078 A4B2     		uxth	r4, r4
+ 1087              	.LVL126:
+ 385:Core/Src/LoRa.c **** 				LoRa_gotoMode(_LoRa, mode);
+ 1088              		.loc 1 385 6 view .LVU269
+ 1089 007a 002C     		cmp	r4, #0
+ 1090 007c F1D1     		bne	.L55
+ 386:Core/Src/LoRa.c **** 				return 0;
+ 1091              		.loc 1 386 5 is_stmt 1 view .LVU270
+ 1092 007e 4146     		mov	r1, r8
+ 1093 0080 3046     		mov	r0, r6
+ 1094              	.LVL127:
+ 386:Core/Src/LoRa.c **** 				return 0;
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 29
+
+
+ 1095              		.loc 1 386 5 is_stmt 0 view .LVU271
+ 1096 0082 FFF7FEFF 		bl	LoRa_gotoMode
+ 1097              	.LVL128:
+ 387:Core/Src/LoRa.c **** 			}
+ 1098              		.loc 1 387 5 is_stmt 1 view .LVU272
+ 387:Core/Src/LoRa.c **** 			}
+ 1099              		.loc 1 387 12 is_stmt 0 view .LVU273
+ 1100 0086 E9E7     		b	.L54
+ 1101              		.cfi_endproc
+ 1102              	.LFE144:
+ 1104              		.section	.text.LoRa_startReceiving,"ax",%progbits
+ 1105              		.align	1
+ 1106              		.global	LoRa_startReceiving
+ 1107              		.syntax unified
+ 1108              		.thumb
+ 1109              		.thumb_func
+ 1111              	LoRa_startReceiving:
+ 1112              	.LVL129:
+ 1113              	.LFB145:
+ 393:Core/Src/LoRa.c **** 
+ 394:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+ 395:Core/Src/LoRa.c **** 		name        : LoRa_startReceiving
+ 396:Core/Src/LoRa.c **** 
+ 397:Core/Src/LoRa.c **** 		description : Start receiving continuously
+ 398:Core/Src/LoRa.c **** 
+ 399:Core/Src/LoRa.c **** 		arguments   :
+ 400:Core/Src/LoRa.c **** 			LoRa*    LoRa     --> LoRa object handler
+ 401:Core/Src/LoRa.c **** 
+ 402:Core/Src/LoRa.c **** 		returns     : Nothing
+ 403:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+ 404:Core/Src/LoRa.c **** void LoRa_startReceiving(LoRa* _LoRa){
+ 1114              		.loc 1 404 38 is_stmt 1 view -0
+ 1115              		.cfi_startproc
+ 1116              		@ args = 0, pretend = 0, frame = 0
+ 1117              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1118              		.loc 1 404 38 is_stmt 0 view .LVU275
+ 1119 0000 08B5     		push	{r3, lr}
+ 1120              		.cfi_def_cfa_offset 8
+ 1121              		.cfi_offset 3, -8
+ 1122              		.cfi_offset 14, -4
+ 405:Core/Src/LoRa.c **** 	LoRa_gotoMode(_LoRa, RXCONTIN_MODE);
+ 1123              		.loc 1 405 2 is_stmt 1 view .LVU276
+ 1124 0002 0521     		movs	r1, #5
+ 1125 0004 FFF7FEFF 		bl	LoRa_gotoMode
+ 1126              	.LVL130:
+ 406:Core/Src/LoRa.c **** }
+ 1127              		.loc 1 406 1 is_stmt 0 view .LVU277
+ 1128 0008 08BD     		pop	{r3, pc}
+ 1129              		.cfi_endproc
+ 1130              	.LFE145:
+ 1132              		.section	.text.LoRa_receive,"ax",%progbits
+ 1133              		.align	1
+ 1134              		.global	LoRa_receive
+ 1135              		.syntax unified
+ 1136              		.thumb
+ 1137              		.thumb_func
+ 1139              	LoRa_receive:
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 30
+
+
+ 1140              	.LVL131:
+ 1141              	.LFB146:
+ 407:Core/Src/LoRa.c **** 
+ 408:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+ 409:Core/Src/LoRa.c **** 		name        : LoRa_Receive
+ 410:Core/Src/LoRa.c **** 
+ 411:Core/Src/LoRa.c **** 		description : Read received data from module
+ 412:Core/Src/LoRa.c **** 
+ 413:Core/Src/LoRa.c **** 		arguments   :
+ 414:Core/Src/LoRa.c **** 			LoRa*    LoRa     --> LoRa object handler
+ 415:Core/Src/LoRa.c **** 			uint8_t  data			--> A pointer to the array that you want to write bytes in it
+ 416:Core/Src/LoRa.c **** 			uint8_t	 length   --> Determines how many bytes you want to read
+ 417:Core/Src/LoRa.c **** 
+ 418:Core/Src/LoRa.c **** 		returns     : The number of bytes received
+ 419:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+ 420:Core/Src/LoRa.c **** uint8_t LoRa_receive(LoRa* _LoRa, uint8_t* data, uint8_t length){
+ 1142              		.loc 1 420 65 is_stmt 1 view -0
+ 1143              		.cfi_startproc
+ 1144              		@ args = 0, pretend = 0, frame = 0
+ 1145              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1146              		.loc 1 420 65 is_stmt 0 view .LVU279
+ 1147 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 1148              		.cfi_def_cfa_offset 24
+ 1149              		.cfi_offset 3, -24
+ 1150              		.cfi_offset 4, -20
+ 1151              		.cfi_offset 5, -16
+ 1152              		.cfi_offset 6, -12
+ 1153              		.cfi_offset 7, -8
+ 1154              		.cfi_offset 14, -4
+ 1155 0002 0646     		mov	r6, r0
+ 1156 0004 0C46     		mov	r4, r1
+ 1157 0006 1546     		mov	r5, r2
+ 421:Core/Src/LoRa.c **** 	uint8_t read;
+ 1158              		.loc 1 421 2 is_stmt 1 view .LVU280
+ 422:Core/Src/LoRa.c **** 	uint8_t number_of_bytes;
+ 1159              		.loc 1 422 2 view .LVU281
+ 423:Core/Src/LoRa.c **** 	uint8_t min = 0;
+ 1160              		.loc 1 423 2 view .LVU282
+ 1161              	.LVL132:
+ 424:Core/Src/LoRa.c **** 
+ 425:Core/Src/LoRa.c **** 	for(int i=0; i<length; i++)
+ 1162              		.loc 1 425 2 view .LVU283
+ 1163              	.LBB2:
+ 1164              		.loc 1 425 6 view .LVU284
+ 1165              		.loc 1 425 10 is_stmt 0 view .LVU285
+ 1166 0008 0023     		movs	r3, #0
+ 1167              		.loc 1 425 2 view .LVU286
+ 1168 000a 04E0     		b	.L62
+ 1169              	.LVL133:
+ 1170              	.L63:
+ 426:Core/Src/LoRa.c **** 		data[i]=0;
+ 1171              		.loc 1 426 3 is_stmt 1 discriminator 3 view .LVU287
+ 1172              		.loc 1 426 10 is_stmt 0 discriminator 3 view .LVU288
+ 1173 000c 4FF0000C 		mov	ip, #0
+ 1174 0010 04F803C0 		strb	ip, [r4, r3]
+ 425:Core/Src/LoRa.c **** 		data[i]=0;
+ 1175              		.loc 1 425 26 is_stmt 1 discriminator 3 view .LVU289
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 31
+
+
+ 1176 0014 0133     		adds	r3, r3, #1
+ 1177              	.LVL134:
+ 1178              	.L62:
+ 425:Core/Src/LoRa.c **** 		data[i]=0;
+ 1179              		.loc 1 425 16 discriminator 1 view .LVU290
+ 1180 0016 9D42     		cmp	r5, r3
+ 1181 0018 F8DC     		bgt	.L63
+ 1182              	.LBE2:
+ 427:Core/Src/LoRa.c **** 
+ 428:Core/Src/LoRa.c **** 	LoRa_gotoMode(_LoRa, STNBY_MODE);
+ 1183              		.loc 1 428 2 view .LVU291
+ 1184 001a 0121     		movs	r1, #1
+ 1185              	.LVL135:
+ 1186              		.loc 1 428 2 is_stmt 0 view .LVU292
+ 1187 001c 3046     		mov	r0, r6
+ 1188              	.LVL136:
+ 1189              		.loc 1 428 2 view .LVU293
+ 1190 001e FFF7FEFF 		bl	LoRa_gotoMode
+ 1191              	.LVL137:
+ 429:Core/Src/LoRa.c **** 	read = LoRa_read(_LoRa, RegIrqFlags);
+ 1192              		.loc 1 429 2 is_stmt 1 view .LVU294
+ 1193              		.loc 1 429 9 is_stmt 0 view .LVU295
+ 1194 0022 1221     		movs	r1, #18
+ 1195 0024 3046     		mov	r0, r6
+ 1196 0026 FFF7FEFF 		bl	LoRa_read
+ 1197              	.LVL138:
+ 430:Core/Src/LoRa.c **** 	if((read & 0x40) != 0){
+ 1198              		.loc 1 430 2 is_stmt 1 view .LVU296
+ 1199              		.loc 1 430 4 is_stmt 0 view .LVU297
+ 1200 002a 10F04007 		ands	r7, r0, #64
+ 1201 002e 05D1     		bne	.L68
+ 1202              	.LVL139:
+ 1203              	.L64:
+ 431:Core/Src/LoRa.c **** 		LoRa_write(_LoRa, RegIrqFlags, 0xFF);
+ 432:Core/Src/LoRa.c **** 		number_of_bytes = LoRa_read(_LoRa, RegRxNbBytes);
+ 433:Core/Src/LoRa.c **** 		read = LoRa_read(_LoRa, RegFiFoRxCurrentAddr);
+ 434:Core/Src/LoRa.c **** 		LoRa_write(_LoRa, RegFiFoAddPtr, read);
+ 435:Core/Src/LoRa.c **** 		min = length >= number_of_bytes ? number_of_bytes : length;
+ 436:Core/Src/LoRa.c **** 		for(int i=0; i<min; i++)
+ 437:Core/Src/LoRa.c **** 			data[i] = LoRa_read(_LoRa, RegFiFo);
+ 438:Core/Src/LoRa.c **** 	}
+ 439:Core/Src/LoRa.c **** 	LoRa_gotoMode(_LoRa, RXCONTIN_MODE);
+ 1204              		.loc 1 439 2 is_stmt 1 view .LVU298
+ 1205 0030 0521     		movs	r1, #5
+ 1206 0032 3046     		mov	r0, r6
+ 1207 0034 FFF7FEFF 		bl	LoRa_gotoMode
+ 1208              	.LVL140:
+ 440:Core/Src/LoRa.c ****     return min;
+ 1209              		.loc 1 440 5 view .LVU299
+ 441:Core/Src/LoRa.c **** }
+ 1210              		.loc 1 441 1 is_stmt 0 view .LVU300
+ 1211 0038 3846     		mov	r0, r7
+ 1212 003a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1213              	.LVL141:
+ 1214              	.L68:
+ 431:Core/Src/LoRa.c **** 		LoRa_write(_LoRa, RegIrqFlags, 0xFF);
+ 1215              		.loc 1 431 3 is_stmt 1 view .LVU301
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 32
+
+
+ 1216 003c FF22     		movs	r2, #255
+ 1217 003e 1221     		movs	r1, #18
+ 1218 0040 3046     		mov	r0, r6
+ 1219              	.LVL142:
+ 431:Core/Src/LoRa.c **** 		LoRa_write(_LoRa, RegIrqFlags, 0xFF);
+ 1220              		.loc 1 431 3 is_stmt 0 view .LVU302
+ 1221 0042 FFF7FEFF 		bl	LoRa_write
+ 1222              	.LVL143:
+ 432:Core/Src/LoRa.c **** 		read = LoRa_read(_LoRa, RegFiFoRxCurrentAddr);
+ 1223              		.loc 1 432 3 is_stmt 1 view .LVU303
+ 432:Core/Src/LoRa.c **** 		read = LoRa_read(_LoRa, RegFiFoRxCurrentAddr);
+ 1224              		.loc 1 432 21 is_stmt 0 view .LVU304
+ 1225 0046 1321     		movs	r1, #19
+ 1226 0048 3046     		mov	r0, r6
+ 1227 004a FFF7FEFF 		bl	LoRa_read
+ 1228              	.LVL144:
+ 1229 004e 0746     		mov	r7, r0
+ 1230              	.LVL145:
+ 433:Core/Src/LoRa.c **** 		LoRa_write(_LoRa, RegFiFoAddPtr, read);
+ 1231              		.loc 1 433 3 is_stmt 1 view .LVU305
+ 433:Core/Src/LoRa.c **** 		LoRa_write(_LoRa, RegFiFoAddPtr, read);
+ 1232              		.loc 1 433 10 is_stmt 0 view .LVU306
+ 1233 0050 1021     		movs	r1, #16
+ 1234 0052 3046     		mov	r0, r6
+ 1235 0054 FFF7FEFF 		bl	LoRa_read
+ 1236              	.LVL146:
+ 1237 0058 0246     		mov	r2, r0
+ 1238              	.LVL147:
+ 434:Core/Src/LoRa.c **** 		min = length >= number_of_bytes ? number_of_bytes : length;
+ 1239              		.loc 1 434 3 is_stmt 1 view .LVU307
+ 1240 005a 0D21     		movs	r1, #13
+ 1241 005c 3046     		mov	r0, r6
+ 1242 005e FFF7FEFF 		bl	LoRa_write
+ 1243              	.LVL148:
+ 435:Core/Src/LoRa.c **** 		for(int i=0; i<min; i++)
+ 1244              		.loc 1 435 3 view .LVU308
+ 435:Core/Src/LoRa.c **** 		for(int i=0; i<min; i++)
+ 1245              		.loc 1 435 7 is_stmt 0 view .LVU309
+ 1246 0062 BD42     		cmp	r5, r7
+ 1247 0064 28BF     		it	cs
+ 1248 0066 3D46     		movcs	r5, r7
+ 1249 0068 EFB2     		uxtb	r7, r5
+ 1250              	.LVL149:
+ 436:Core/Src/LoRa.c **** 			data[i] = LoRa_read(_LoRa, RegFiFo);
+ 1251              		.loc 1 436 3 is_stmt 1 view .LVU310
+ 1252              	.LBB3:
+ 436:Core/Src/LoRa.c **** 			data[i] = LoRa_read(_LoRa, RegFiFo);
+ 1253              		.loc 1 436 7 view .LVU311
+ 436:Core/Src/LoRa.c **** 			data[i] = LoRa_read(_LoRa, RegFiFo);
+ 1254              		.loc 1 436 11 is_stmt 0 view .LVU312
+ 1255 006a 0025     		movs	r5, #0
+ 436:Core/Src/LoRa.c **** 			data[i] = LoRa_read(_LoRa, RegFiFo);
+ 1256              		.loc 1 436 3 view .LVU313
+ 1257 006c 05E0     		b	.L65
+ 1258              	.LVL150:
+ 1259              	.L66:
+ 437:Core/Src/LoRa.c **** 	}
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 33
+
+
+ 1260              		.loc 1 437 4 is_stmt 1 discriminator 3 view .LVU314
+ 437:Core/Src/LoRa.c **** 	}
+ 1261              		.loc 1 437 14 is_stmt 0 discriminator 3 view .LVU315
+ 1262 006e 0021     		movs	r1, #0
+ 1263 0070 3046     		mov	r0, r6
+ 1264 0072 FFF7FEFF 		bl	LoRa_read
+ 1265              	.LVL151:
+ 437:Core/Src/LoRa.c **** 	}
+ 1266              		.loc 1 437 12 discriminator 3 view .LVU316
+ 1267 0076 6055     		strb	r0, [r4, r5]
+ 436:Core/Src/LoRa.c **** 			data[i] = LoRa_read(_LoRa, RegFiFo);
+ 1268              		.loc 1 436 24 is_stmt 1 discriminator 3 view .LVU317
+ 1269 0078 0135     		adds	r5, r5, #1
+ 1270              	.LVL152:
+ 1271              	.L65:
+ 436:Core/Src/LoRa.c **** 			data[i] = LoRa_read(_LoRa, RegFiFo);
+ 1272              		.loc 1 436 17 discriminator 1 view .LVU318
+ 1273 007a AF42     		cmp	r7, r5
+ 1274 007c F7DC     		bgt	.L66
+ 1275 007e D7E7     		b	.L64
+ 1276              	.LBE3:
+ 1277              		.cfi_endproc
+ 1278              	.LFE146:
+ 1280              		.section	.text.LoRa_getRSSI,"ax",%progbits
+ 1281              		.align	1
+ 1282              		.global	LoRa_getRSSI
+ 1283              		.syntax unified
+ 1284              		.thumb
+ 1285              		.thumb_func
+ 1287              	LoRa_getRSSI:
+ 1288              	.LVL153:
+ 1289              	.LFB147:
+ 442:Core/Src/LoRa.c **** 
+ 443:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+ 444:Core/Src/LoRa.c **** 		name        : LoRa_getRSSI
+ 445:Core/Src/LoRa.c **** 
+ 446:Core/Src/LoRa.c **** 		description : initialize and set the right setting according to LoRa sruct vars
+ 447:Core/Src/LoRa.c **** 
+ 448:Core/Src/LoRa.c **** 		arguments   :
+ 449:Core/Src/LoRa.c **** 			LoRa* LoRa        --> LoRa object handler
+ 450:Core/Src/LoRa.c **** 
+ 451:Core/Src/LoRa.c **** 		returns     : Returns the RSSI value of last received packet.
+ 452:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+ 453:Core/Src/LoRa.c **** int LoRa_getRSSI(LoRa* _LoRa){
+ 1290              		.loc 1 453 30 view -0
+ 1291              		.cfi_startproc
+ 1292              		@ args = 0, pretend = 0, frame = 0
+ 1293              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1294              		.loc 1 453 30 is_stmt 0 view .LVU320
+ 1295 0000 08B5     		push	{r3, lr}
+ 1296              		.cfi_def_cfa_offset 8
+ 1297              		.cfi_offset 3, -8
+ 1298              		.cfi_offset 14, -4
+ 454:Core/Src/LoRa.c **** 	uint8_t read;
+ 1299              		.loc 1 454 2 is_stmt 1 view .LVU321
+ 455:Core/Src/LoRa.c **** 	read = LoRa_read(_LoRa, RegPktRssiValue);
+ 1300              		.loc 1 455 2 view .LVU322
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 34
+
+
+ 1301              		.loc 1 455 9 is_stmt 0 view .LVU323
+ 1302 0002 1A21     		movs	r1, #26
+ 1303 0004 FFF7FEFF 		bl	LoRa_read
+ 1304              	.LVL154:
+ 456:Core/Src/LoRa.c **** 	return -164 + read;
+ 1305              		.loc 1 456 2 is_stmt 1 view .LVU324
+ 457:Core/Src/LoRa.c **** }
+ 1306              		.loc 1 457 1 is_stmt 0 view .LVU325
+ 1307 0008 A438     		subs	r0, r0, #164
+ 1308              	.LVL155:
+ 1309              		.loc 1 457 1 view .LVU326
+ 1310 000a 08BD     		pop	{r3, pc}
+ 1311              		.cfi_endproc
+ 1312              	.LFE147:
+ 1314              		.section	.text.LoRa_init,"ax",%progbits
+ 1315              		.align	1
+ 1316              		.global	LoRa_init
+ 1317              		.syntax unified
+ 1318              		.thumb
+ 1319              		.thumb_func
+ 1321              	LoRa_init:
+ 1322              	.LVL156:
+ 1323              	.LFB148:
+ 458:Core/Src/LoRa.c **** 
+ 459:Core/Src/LoRa.c **** /* ----------------------------------------------------------------------------- *\
+ 460:Core/Src/LoRa.c **** 		name        : LoRa_init
+ 461:Core/Src/LoRa.c **** 
+ 462:Core/Src/LoRa.c **** 		description : initialize and set the right setting according to LoRa sruct vars
+ 463:Core/Src/LoRa.c **** 
+ 464:Core/Src/LoRa.c **** 		arguments   :
+ 465:Core/Src/LoRa.c **** 			LoRa* LoRa        --> LoRa object handler
+ 466:Core/Src/LoRa.c **** 
+ 467:Core/Src/LoRa.c **** 		returns     : Nothing
+ 468:Core/Src/LoRa.c **** \* ----------------------------------------------------------------------------- */
+ 469:Core/Src/LoRa.c **** uint16_t LoRa_init(LoRa* _LoRa){
+ 1324              		.loc 1 469 32 is_stmt 1 view -0
+ 1325              		.cfi_startproc
+ 1326              		@ args = 0, pretend = 0, frame = 0
+ 1327              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1328              		.loc 1 469 32 is_stmt 0 view .LVU328
+ 1329 0000 38B5     		push	{r3, r4, r5, lr}
+ 1330              		.cfi_def_cfa_offset 16
+ 1331              		.cfi_offset 3, -16
+ 1332              		.cfi_offset 4, -12
+ 1333              		.cfi_offset 5, -8
+ 1334              		.cfi_offset 14, -4
+ 1335 0002 0446     		mov	r4, r0
+ 470:Core/Src/LoRa.c **** 	uint8_t    data;
+ 1336              		.loc 1 470 2 is_stmt 1 view .LVU329
+ 471:Core/Src/LoRa.c **** 	uint8_t    read;
+ 1337              		.loc 1 471 2 view .LVU330
+ 472:Core/Src/LoRa.c **** 
+ 473:Core/Src/LoRa.c **** 	if(LoRa_isvalid(_LoRa)){
+ 1338              		.loc 1 473 2 view .LVU331
+ 1339              		.loc 1 473 5 is_stmt 0 view .LVU332
+ 1340 0004 FFF7FEFF 		bl	LoRa_isvalid
+ 1341              	.LVL157:
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 35
+
+
+ 1342              		.loc 1 473 4 view .LVU333
+ 1343 0008 10B9     		cbnz	r0, .L76
+ 474:Core/Src/LoRa.c **** 		// goto sleep mode:
+ 475:Core/Src/LoRa.c **** 			LoRa_gotoMode(_LoRa, SLEEP_MODE);
+ 476:Core/Src/LoRa.c **** 			HAL_Delay(10);
+ 477:Core/Src/LoRa.c **** 
+ 478:Core/Src/LoRa.c **** 		// turn on LoRa mode:
+ 479:Core/Src/LoRa.c **** 			read = LoRa_read(_LoRa, RegOpMode);
+ 480:Core/Src/LoRa.c **** 			HAL_Delay(10);
+ 481:Core/Src/LoRa.c **** 			data = read | 0x80;
+ 482:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegOpMode, data);
+ 483:Core/Src/LoRa.c **** 			HAL_Delay(100);
+ 484:Core/Src/LoRa.c **** 
+ 485:Core/Src/LoRa.c **** 		// set frequency:
+ 486:Core/Src/LoRa.c **** 			LoRa_setFrequency(_LoRa, _LoRa->frequency);
+ 487:Core/Src/LoRa.c **** 
+ 488:Core/Src/LoRa.c **** 		// set output power gain:
+ 489:Core/Src/LoRa.c **** 			LoRa_setPower(_LoRa, _LoRa->power);
+ 490:Core/Src/LoRa.c **** 
+ 491:Core/Src/LoRa.c **** 		// set over current protection:
+ 492:Core/Src/LoRa.c **** 			LoRa_setOCP(_LoRa, _LoRa->overCurrentProtection);
+ 493:Core/Src/LoRa.c **** 
+ 494:Core/Src/LoRa.c **** 		// set LNA gain:
+ 495:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegLna, 0x23);
+ 496:Core/Src/LoRa.c **** 
+ 497:Core/Src/LoRa.c **** 		// set spreading factor, CRC on, and Timeout Msb:
+ 498:Core/Src/LoRa.c **** 			LoRa_setTOMsb_setCRCon(_LoRa);
+ 499:Core/Src/LoRa.c **** 			LoRa_setSpreadingFactor(_LoRa, _LoRa->spredingFactor);
+ 500:Core/Src/LoRa.c **** 
+ 501:Core/Src/LoRa.c **** 		// set Timeout Lsb:
+ 502:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegSymbTimeoutL, 0xFF);
+ 503:Core/Src/LoRa.c **** 
+ 504:Core/Src/LoRa.c **** 		// set bandwidth, coding rate and expilicit mode:
+ 505:Core/Src/LoRa.c **** 			// 8 bit RegModemConfig --> | X | X | X | X | X | X | X | X |
+ 506:Core/Src/LoRa.c **** 			//       bits represent --> |   bandwidth   |     CR    |I/E|
+ 507:Core/Src/LoRa.c **** 			data = 0;
+ 508:Core/Src/LoRa.c **** 			data = (_LoRa->bandWidth << 4) + (_LoRa->crcRate << 1);
+ 509:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegModemConfig1, data);
+ 510:Core/Src/LoRa.c **** 
+ 511:Core/Src/LoRa.c **** 		// set preamble:
+ 512:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegPreambleMsb, _LoRa->preamble >> 8);
+ 513:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegPreambleLsb, _LoRa->preamble >> 0);
+ 514:Core/Src/LoRa.c **** 
+ 515:Core/Src/LoRa.c **** 		// DIO mapping:   --> DIO: RxDone
+ 516:Core/Src/LoRa.c **** 			read = LoRa_read(_LoRa, RegDioMapping1);
+ 517:Core/Src/LoRa.c **** 			data = read | 0x3F;
+ 518:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegDioMapping1, data);
+ 519:Core/Src/LoRa.c **** 
+ 520:Core/Src/LoRa.c **** 		// goto standby mode:
+ 521:Core/Src/LoRa.c **** 			LoRa_gotoMode(_LoRa, STNBY_MODE);
+ 522:Core/Src/LoRa.c **** 			_LoRa->current_mode = STNBY_MODE;
+ 523:Core/Src/LoRa.c **** 			HAL_Delay(10);
+ 524:Core/Src/LoRa.c **** 
+ 525:Core/Src/LoRa.c **** 			read = LoRa_read(_LoRa, RegVersion);
+ 526:Core/Src/LoRa.c **** 			if(read == 0x12)
+ 527:Core/Src/LoRa.c **** 				return LORA_OK;
+ 528:Core/Src/LoRa.c **** 			else
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 36
+
+
+ 529:Core/Src/LoRa.c **** 				return LORA_NOT_FOUND;
+ 530:Core/Src/LoRa.c **** 	}
+ 531:Core/Src/LoRa.c **** 	else {
+ 532:Core/Src/LoRa.c **** 		return LORA_UNAVAILABLE;
+ 1344              		.loc 1 532 10 view .LVU334
+ 1345 000a 40F2F710 		movw	r0, #503
+ 1346              	.L72:
+ 533:Core/Src/LoRa.c **** 	}
+ 534:Core/Src/LoRa.c **** }
+ 1347              		.loc 1 534 1 view .LVU335
+ 1348 000e 38BD     		pop	{r3, r4, r5, pc}
+ 1349              	.LVL158:
+ 1350              	.L76:
+ 475:Core/Src/LoRa.c **** 			HAL_Delay(10);
+ 1351              		.loc 1 475 4 is_stmt 1 view .LVU336
+ 1352 0010 0021     		movs	r1, #0
+ 1353 0012 2046     		mov	r0, r4
+ 1354 0014 FFF7FEFF 		bl	LoRa_gotoMode
+ 1355              	.LVL159:
+ 476:Core/Src/LoRa.c **** 
+ 1356              		.loc 1 476 4 view .LVU337
+ 1357 0018 0A20     		movs	r0, #10
+ 1358 001a FFF7FEFF 		bl	HAL_Delay
+ 1359              	.LVL160:
+ 479:Core/Src/LoRa.c **** 			HAL_Delay(10);
+ 1360              		.loc 1 479 4 view .LVU338
+ 479:Core/Src/LoRa.c **** 			HAL_Delay(10);
+ 1361              		.loc 1 479 11 is_stmt 0 view .LVU339
+ 1362 001e 0121     		movs	r1, #1
+ 1363 0020 2046     		mov	r0, r4
+ 1364 0022 FFF7FEFF 		bl	LoRa_read
+ 1365              	.LVL161:
+ 1366 0026 0546     		mov	r5, r0
+ 1367              	.LVL162:
+ 480:Core/Src/LoRa.c **** 			data = read | 0x80;
+ 1368              		.loc 1 480 4 is_stmt 1 view .LVU340
+ 1369 0028 0A20     		movs	r0, #10
+ 1370 002a FFF7FEFF 		bl	HAL_Delay
+ 1371              	.LVL163:
+ 481:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegOpMode, data);
+ 1372              		.loc 1 481 4 view .LVU341
+ 481:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegOpMode, data);
+ 1373              		.loc 1 481 9 is_stmt 0 view .LVU342
+ 1374 002e 65F07F02 		orn	r2, r5, #127
+ 1375              	.LVL164:
+ 482:Core/Src/LoRa.c **** 			HAL_Delay(100);
+ 1376              		.loc 1 482 4 is_stmt 1 view .LVU343
+ 1377 0032 D2B2     		uxtb	r2, r2
+ 482:Core/Src/LoRa.c **** 			HAL_Delay(100);
+ 1378              		.loc 1 482 4 is_stmt 0 view .LVU344
+ 1379 0034 0121     		movs	r1, #1
+ 1380 0036 2046     		mov	r0, r4
+ 1381 0038 FFF7FEFF 		bl	LoRa_write
+ 1382              	.LVL165:
+ 483:Core/Src/LoRa.c **** 
+ 1383              		.loc 1 483 4 is_stmt 1 view .LVU345
+ 1384 003c 6420     		movs	r0, #100
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 37
+
+
+ 1385 003e FFF7FEFF 		bl	HAL_Delay
+ 1386              	.LVL166:
+ 486:Core/Src/LoRa.c **** 
+ 1387              		.loc 1 486 4 view .LVU346
+ 1388 0042 216A     		ldr	r1, [r4, #32]
+ 1389 0044 2046     		mov	r0, r4
+ 1390 0046 FFF7FEFF 		bl	LoRa_setFrequency
+ 1391              	.LVL167:
+ 489:Core/Src/LoRa.c **** 
+ 1392              		.loc 1 489 4 view .LVU347
+ 1393 004a 94F82A10 		ldrb	r1, [r4, #42]	@ zero_extendqisi2
+ 1394 004e 2046     		mov	r0, r4
+ 1395 0050 FFF7FEFF 		bl	LoRa_setPower
+ 1396              	.LVL168:
+ 492:Core/Src/LoRa.c **** 
+ 1397              		.loc 1 492 4 view .LVU348
+ 1398 0054 94F82B10 		ldrb	r1, [r4, #43]	@ zero_extendqisi2
+ 1399 0058 2046     		mov	r0, r4
+ 1400 005a FFF7FEFF 		bl	LoRa_setOCP
+ 1401              	.LVL169:
+ 495:Core/Src/LoRa.c **** 
+ 1402              		.loc 1 495 4 view .LVU349
+ 1403 005e 2322     		movs	r2, #35
+ 1404 0060 0C21     		movs	r1, #12
+ 1405 0062 2046     		mov	r0, r4
+ 1406 0064 FFF7FEFF 		bl	LoRa_write
+ 1407              	.LVL170:
+ 498:Core/Src/LoRa.c **** 			LoRa_setSpreadingFactor(_LoRa, _LoRa->spredingFactor);
+ 1408              		.loc 1 498 4 view .LVU350
+ 1409 0068 2046     		mov	r0, r4
+ 1410 006a FFF7FEFF 		bl	LoRa_setTOMsb_setCRCon
+ 1411              	.LVL171:
+ 499:Core/Src/LoRa.c **** 
+ 1412              		.loc 1 499 4 view .LVU351
+ 1413 006e 94F82410 		ldrb	r1, [r4, #36]	@ zero_extendqisi2
+ 1414 0072 2046     		mov	r0, r4
+ 1415 0074 FFF7FEFF 		bl	LoRa_setSpreadingFactor
+ 1416              	.LVL172:
+ 502:Core/Src/LoRa.c **** 
+ 1417              		.loc 1 502 4 view .LVU352
+ 1418 0078 FF22     		movs	r2, #255
+ 1419 007a 1F21     		movs	r1, #31
+ 1420 007c 2046     		mov	r0, r4
+ 1421 007e FFF7FEFF 		bl	LoRa_write
+ 1422              	.LVL173:
+ 507:Core/Src/LoRa.c **** 			data = (_LoRa->bandWidth << 4) + (_LoRa->crcRate << 1);
+ 1423              		.loc 1 507 4 view .LVU353
+ 508:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegModemConfig1, data);
+ 1424              		.loc 1 508 4 view .LVU354
+ 508:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegModemConfig1, data);
+ 1425              		.loc 1 508 17 is_stmt 0 view .LVU355
+ 1426 0082 94F82520 		ldrb	r2, [r4, #37]	@ zero_extendqisi2
+ 508:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegModemConfig1, data);
+ 1427              		.loc 1 508 29 view .LVU356
+ 1428 0086 1201     		lsls	r2, r2, #4
+ 1429 0088 D2B2     		uxtb	r2, r2
+ 508:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegModemConfig1, data);
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 38
+
+
+ 1430              		.loc 1 508 43 view .LVU357
+ 1431 008a 94F82630 		ldrb	r3, [r4, #38]	@ zero_extendqisi2
+ 508:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegModemConfig1, data);
+ 1432              		.loc 1 508 53 view .LVU358
+ 1433 008e 5B00     		lsls	r3, r3, #1
+ 1434 0090 DBB2     		uxtb	r3, r3
+ 508:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegModemConfig1, data);
+ 1435              		.loc 1 508 9 view .LVU359
+ 1436 0092 1A44     		add	r2, r2, r3
+ 1437              	.LVL174:
+ 509:Core/Src/LoRa.c **** 
+ 1438              		.loc 1 509 4 is_stmt 1 view .LVU360
+ 1439 0094 02F0FE02 		and	r2, r2, #254
+ 1440              	.LVL175:
+ 509:Core/Src/LoRa.c **** 
+ 1441              		.loc 1 509 4 is_stmt 0 view .LVU361
+ 1442 0098 1D21     		movs	r1, #29
+ 1443 009a 2046     		mov	r0, r4
+ 1444 009c FFF7FEFF 		bl	LoRa_write
+ 1445              	.LVL176:
+ 512:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegPreambleLsb, _LoRa->preamble >> 0);
+ 1446              		.loc 1 512 4 is_stmt 1 view .LVU362
+ 512:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegPreambleLsb, _LoRa->preamble >> 0);
+ 1447              		.loc 1 512 43 is_stmt 0 view .LVU363
+ 1448 00a0 228D     		ldrh	r2, [r4, #40]
+ 512:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegPreambleLsb, _LoRa->preamble >> 0);
+ 1449              		.loc 1 512 4 view .LVU364
+ 1450 00a2 120A     		lsrs	r2, r2, #8
+ 1451 00a4 2021     		movs	r1, #32
+ 1452 00a6 2046     		mov	r0, r4
+ 1453 00a8 FFF7FEFF 		bl	LoRa_write
+ 1454              	.LVL177:
+ 513:Core/Src/LoRa.c **** 
+ 1455              		.loc 1 513 4 is_stmt 1 view .LVU365
+ 1456 00ac 94F82820 		ldrb	r2, [r4, #40]	@ zero_extendqisi2
+ 1457 00b0 2121     		movs	r1, #33
+ 1458 00b2 2046     		mov	r0, r4
+ 1459 00b4 FFF7FEFF 		bl	LoRa_write
+ 1460              	.LVL178:
+ 516:Core/Src/LoRa.c **** 			data = read | 0x3F;
+ 1461              		.loc 1 516 4 view .LVU366
+ 516:Core/Src/LoRa.c **** 			data = read | 0x3F;
+ 1462              		.loc 1 516 11 is_stmt 0 view .LVU367
+ 1463 00b8 4021     		movs	r1, #64
+ 1464 00ba 2046     		mov	r0, r4
+ 1465 00bc FFF7FEFF 		bl	LoRa_read
+ 1466              	.LVL179:
+ 517:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegDioMapping1, data);
+ 1467              		.loc 1 517 4 is_stmt 1 view .LVU368
+ 517:Core/Src/LoRa.c **** 			LoRa_write(_LoRa, RegDioMapping1, data);
+ 1468              		.loc 1 517 9 is_stmt 0 view .LVU369
+ 1469 00c0 40F03F02 		orr	r2, r0, #63
+ 1470              	.LVL180:
+ 518:Core/Src/LoRa.c **** 
+ 1471              		.loc 1 518 4 is_stmt 1 view .LVU370
+ 1472 00c4 D2B2     		uxtb	r2, r2
+ 518:Core/Src/LoRa.c **** 
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 39
+
+
+ 1473              		.loc 1 518 4 is_stmt 0 view .LVU371
+ 1474 00c6 4021     		movs	r1, #64
+ 1475 00c8 2046     		mov	r0, r4
+ 1476              	.LVL181:
+ 518:Core/Src/LoRa.c **** 
+ 1477              		.loc 1 518 4 view .LVU372
+ 1478 00ca FFF7FEFF 		bl	LoRa_write
+ 1479              	.LVL182:
+ 521:Core/Src/LoRa.c **** 			_LoRa->current_mode = STNBY_MODE;
+ 1480              		.loc 1 521 4 is_stmt 1 view .LVU373
+ 1481 00ce 0121     		movs	r1, #1
+ 1482 00d0 2046     		mov	r0, r4
+ 1483 00d2 FFF7FEFF 		bl	LoRa_gotoMode
+ 1484              	.LVL183:
+ 522:Core/Src/LoRa.c **** 			HAL_Delay(10);
+ 1485              		.loc 1 522 4 view .LVU374
+ 522:Core/Src/LoRa.c **** 			HAL_Delay(10);
+ 1486              		.loc 1 522 24 is_stmt 0 view .LVU375
+ 1487 00d6 0123     		movs	r3, #1
+ 1488 00d8 E361     		str	r3, [r4, #28]
+ 523:Core/Src/LoRa.c **** 
+ 1489              		.loc 1 523 4 is_stmt 1 view .LVU376
+ 1490 00da 0A20     		movs	r0, #10
+ 1491 00dc FFF7FEFF 		bl	HAL_Delay
+ 1492              	.LVL184:
+ 525:Core/Src/LoRa.c **** 			if(read == 0x12)
+ 1493              		.loc 1 525 4 view .LVU377
+ 525:Core/Src/LoRa.c **** 			if(read == 0x12)
+ 1494              		.loc 1 525 11 is_stmt 0 view .LVU378
+ 1495 00e0 4221     		movs	r1, #66
+ 1496 00e2 2046     		mov	r0, r4
+ 1497 00e4 FFF7FEFF 		bl	LoRa_read
+ 1498              	.LVL185:
+ 526:Core/Src/LoRa.c **** 				return LORA_OK;
+ 1499              		.loc 1 526 4 is_stmt 1 view .LVU379
+ 526:Core/Src/LoRa.c **** 				return LORA_OK;
+ 1500              		.loc 1 526 6 is_stmt 0 view .LVU380
+ 1501 00e8 1228     		cmp	r0, #18
+ 1502 00ea 02D0     		beq	.L77
+ 529:Core/Src/LoRa.c **** 	}
+ 1503              		.loc 1 529 12 view .LVU381
+ 1504 00ec 4FF4CA70 		mov	r0, #404
+ 1505              	.LVL186:
+ 529:Core/Src/LoRa.c **** 	}
+ 1506              		.loc 1 529 12 view .LVU382
+ 1507 00f0 8DE7     		b	.L72
+ 1508              	.LVL187:
+ 1509              	.L77:
+ 527:Core/Src/LoRa.c **** 			else
+ 1510              		.loc 1 527 12 view .LVU383
+ 1511 00f2 C820     		movs	r0, #200
+ 1512              	.LVL188:
+ 527:Core/Src/LoRa.c **** 			else
+ 1513              		.loc 1 527 12 view .LVU384
+ 1514 00f4 8BE7     		b	.L72
+ 1515              		.cfi_endproc
+ 1516              	.LFE148:
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 40
+
+
+ 1518              		.text
+ 1519              	.Letext0:
+ 1520              		.file 2 "/Users/roryschram/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscod
+ 1521              		.file 3 "/Users/roryschram/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscod
+ 1522              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h"
+ 1523              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 1524              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 1525              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 1526              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h"
+ 1527              		.file 9 "Core/Inc/LoRa.h"
+ 1528              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s 			page 41
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 LoRa.c
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:21     .text.newLoRa:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:27     .text.newLoRa:00000000 newLoRa
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:70     .text.LoRa_reset:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:76     .text.LoRa_reset:00000000 LoRa_reset
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:118    .text.LoRa_readReg:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:124    .text.LoRa_readReg:00000000 LoRa_readReg
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:203    .text.LoRa_writeReg:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:209    .text.LoRa_writeReg:00000000 LoRa_writeReg
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:288    .text.LoRa_read:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:294    .text.LoRa_read:00000000 LoRa_read
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:333    .text.LoRa_write:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:339    .text.LoRa_write:00000000 LoRa_write
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:383    .text.LoRa_gotoMode:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:389    .text.LoRa_gotoMode:00000000 LoRa_gotoMode
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:452    .text.LoRa_gotoMode:00000030 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:458    .text.LoRa_gotoMode:00000048 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:510    .text.LoRa_setFrequency:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:516    .text.LoRa_setFrequency:00000000 LoRa_setFrequency
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:586    .text.LoRa_setSpreadingFactor:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:592    .text.LoRa_setSpreadingFactor:00000000 LoRa_setSpreadingFactor
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:668    .text.LoRa_setPower:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:674    .text.LoRa_setPower:00000000 LoRa_setPower
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:703    .text.LoRa_setOCP:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:709    .text.LoRa_setOCP:00000000 LoRa_setOCP
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:799    .text.LoRa_setOCP:00000050 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:804    .text.LoRa_setTOMsb_setCRCon:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:810    .text.LoRa_setTOMsb_setCRCon:00000000 LoRa_setTOMsb_setCRCon
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:853    .text.LoRa_BurstWrite:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:859    .text.LoRa_BurstWrite:00000000 LoRa_BurstWrite
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:945    .text.LoRa_isvalid:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:951    .text.LoRa_isvalid:00000000 LoRa_isvalid
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:969    .text.LoRa_transmit:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:975    .text.LoRa_transmit:00000000 LoRa_transmit
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:1105   .text.LoRa_startReceiving:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:1111   .text.LoRa_startReceiving:00000000 LoRa_startReceiving
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:1133   .text.LoRa_receive:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:1139   .text.LoRa_receive:00000000 LoRa_receive
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:1281   .text.LoRa_getRSSI:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:1287   .text.LoRa_getRSSI:00000000 LoRa_getRSSI
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:1315   .text.LoRa_init:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccoGH8vo.s:1321   .text.LoRa_init:00000000 LoRa_init
+
+UNDEFINED SYMBOLS
+HAL_GPIO_WritePin
+HAL_Delay
+HAL_SPI_Transmit
+HAL_SPI_GetState
+HAL_SPI_Receive
