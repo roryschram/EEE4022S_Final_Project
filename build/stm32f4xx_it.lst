@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 1
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 1
   28:Core/Src/stm32f4xx_it.c **** /* USER CODE BEGIN TD */
   29:Core/Src/stm32f4xx_it.c **** 
   30:Core/Src/stm32f4xx_it.c **** /* USER CODE END TD */
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 2
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s 			page 2
 
 
   31:Core/Src/stm32f4xx_it.c **** 
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 1
   77:Core/Src/stm32f4xx_it.c ****   {
   78:Core/Src/stm32f4xx_it.c ****   }
   37              		.loc 1 78 3 discriminator 1 view .LVU2
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 3
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s 			page 3
 
 
   76:Core/Src/stm32f4xx_it.c ****   {
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 1
   98:Core/Src/stm32f4xx_it.c ****   * @brief This function handles Memory management fault.
   99:Core/Src/stm32f4xx_it.c ****   */
  100:Core/Src/stm32f4xx_it.c **** void MemManage_Handler(void)
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 4
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s 			page 4
 
 
  101:Core/Src/stm32f4xx_it.c **** {
@@ -238,7 +238,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 1
  106              		.loc 1 124 3 discriminator 1 view .LVU14
  120:Core/Src/stm32f4xx_it.c ****   {
  107              		.loc 1 120 9 discriminator 1 view .LVU15
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 5
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s 			page 5
 
 
  108 0000 FEE7     		b	.L8
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 1
  146:Core/Src/stm32f4xx_it.c **** {
  144              		.loc 1 146 1 view -0
  145              		.cfi_startproc
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 6
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s 			page 6
 
 
  146              		@ args = 0, pretend = 0, frame = 0
@@ -358,7 +358,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 1
  169:Core/Src/stm32f4xx_it.c ****   * @brief This function handles Pendable request for system service.
  170:Core/Src/stm32f4xx_it.c ****   */
  171:Core/Src/stm32f4xx_it.c **** void PendSV_Handler(void)
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 7
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s 			page 7
 
 
  172:Core/Src/stm32f4xx_it.c **** {
@@ -415,16 +415,16 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 1
  213 0006 08BD     		pop	{r3, pc}
  214              		.cfi_endproc
  215              	.LFE138:
- 217              		.section	.text.USART1_IRQHandler,"ax",%progbits
+ 217              		.section	.text.EXTI9_5_IRQHandler,"ax",%progbits
  218              		.align	1
- 219              		.global	USART1_IRQHandler
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 8
+ 219              		.global	EXTI9_5_IRQHandler
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s 			page 8
 
 
  220              		.syntax unified
  221              		.thumb
  222              		.thumb_func
- 224              	USART1_IRQHandler:
+ 224              	EXTI9_5_IRQHandler:
  225              	.LFB139:
  194:Core/Src/stm32f4xx_it.c **** 
  195:Core/Src/stm32f4xx_it.c **** /******************************************************************************/
@@ -435,9 +435,9 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 1
  200:Core/Src/stm32f4xx_it.c **** /******************************************************************************/
  201:Core/Src/stm32f4xx_it.c **** 
  202:Core/Src/stm32f4xx_it.c **** /**
- 203:Core/Src/stm32f4xx_it.c ****   * @brief This function handles USART1 global interrupt.
+ 203:Core/Src/stm32f4xx_it.c ****   * @brief This function handles EXTI line[9:5] interrupts.
  204:Core/Src/stm32f4xx_it.c ****   */
- 205:Core/Src/stm32f4xx_it.c **** void USART1_IRQHandler(void)
+ 205:Core/Src/stm32f4xx_it.c **** void EXTI9_5_IRQHandler(void)
  206:Core/Src/stm32f4xx_it.c **** {
  226              		.loc 1 206 1 is_stmt 1 view -0
  227              		.cfi_startproc
@@ -447,112 +447,157 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 1
  231              		.cfi_def_cfa_offset 8
  232              		.cfi_offset 3, -8
  233              		.cfi_offset 14, -4
- 207:Core/Src/stm32f4xx_it.c ****   /* USER CODE BEGIN USART1_IRQn 0 */
+ 207:Core/Src/stm32f4xx_it.c ****   /* USER CODE BEGIN EXTI9_5_IRQn 0 */
  208:Core/Src/stm32f4xx_it.c **** 
- 209:Core/Src/stm32f4xx_it.c ****   /* USER CODE END USART1_IRQn 0 */
- 210:Core/Src/stm32f4xx_it.c ****   HAL_UART_IRQHandler(&huart1);
+ 209:Core/Src/stm32f4xx_it.c ****   /* USER CODE END EXTI9_5_IRQn 0 */
+ 210:Core/Src/stm32f4xx_it.c ****   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_9);
  234              		.loc 1 210 3 view .LVU30
- 235 0002 0248     		ldr	r0, .L18
- 236 0004 FFF7FEFF 		bl	HAL_UART_IRQHandler
+ 235 0002 4FF40070 		mov	r0, #512
+ 236 0006 FFF7FEFF 		bl	HAL_GPIO_EXTI_IRQHandler
  237              	.LVL1:
- 211:Core/Src/stm32f4xx_it.c ****   /* USER CODE BEGIN USART1_IRQn 1 */
+ 211:Core/Src/stm32f4xx_it.c ****   /* USER CODE BEGIN EXTI9_5_IRQn 1 */
  212:Core/Src/stm32f4xx_it.c **** 
- 213:Core/Src/stm32f4xx_it.c ****   /* USER CODE END USART1_IRQn 1 */
+ 213:Core/Src/stm32f4xx_it.c ****   /* USER CODE END EXTI9_5_IRQn 1 */
  214:Core/Src/stm32f4xx_it.c **** }
  238              		.loc 1 214 1 is_stmt 0 view .LVU31
- 239 0008 08BD     		pop	{r3, pc}
- 240              	.L19:
- 241 000a 00BF     		.align	2
- 242              	.L18:
- 243 000c 00000000 		.word	huart1
- 244              		.cfi_endproc
- 245              	.LFE139:
- 247              		.section	.text.USART2_IRQHandler,"ax",%progbits
- 248              		.align	1
- 249              		.global	USART2_IRQHandler
- 250              		.syntax unified
- 251              		.thumb
- 252              		.thumb_func
- 254              	USART2_IRQHandler:
- 255              	.LFB140:
+ 239 000a 08BD     		pop	{r3, pc}
+ 240              		.cfi_endproc
+ 241              	.LFE139:
+ 243              		.section	.text.USART1_IRQHandler,"ax",%progbits
+ 244              		.align	1
+ 245              		.global	USART1_IRQHandler
+ 246              		.syntax unified
+ 247              		.thumb
+ 248              		.thumb_func
+ 250              	USART1_IRQHandler:
+ 251              	.LFB140:
  215:Core/Src/stm32f4xx_it.c **** 
  216:Core/Src/stm32f4xx_it.c **** /**
- 217:Core/Src/stm32f4xx_it.c ****   * @brief This function handles USART2 global interrupt.
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 9
-
-
+ 217:Core/Src/stm32f4xx_it.c ****   * @brief This function handles USART1 global interrupt.
  218:Core/Src/stm32f4xx_it.c ****   */
- 219:Core/Src/stm32f4xx_it.c **** void USART2_IRQHandler(void)
+ 219:Core/Src/stm32f4xx_it.c **** void USART1_IRQHandler(void)
  220:Core/Src/stm32f4xx_it.c **** {
- 256              		.loc 1 220 1 is_stmt 1 view -0
- 257              		.cfi_startproc
- 258              		@ args = 0, pretend = 0, frame = 0
- 259              		@ frame_needed = 0, uses_anonymous_args = 0
- 260 0000 08B5     		push	{r3, lr}
- 261              		.cfi_def_cfa_offset 8
- 262              		.cfi_offset 3, -8
- 263              		.cfi_offset 14, -4
- 221:Core/Src/stm32f4xx_it.c ****   /* USER CODE BEGIN USART2_IRQn 0 */
+ 252              		.loc 1 220 1 is_stmt 1 view -0
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s 			page 9
+
+
+ 253              		.cfi_startproc
+ 254              		@ args = 0, pretend = 0, frame = 0
+ 255              		@ frame_needed = 0, uses_anonymous_args = 0
+ 256 0000 08B5     		push	{r3, lr}
+ 257              		.cfi_def_cfa_offset 8
+ 258              		.cfi_offset 3, -8
+ 259              		.cfi_offset 14, -4
+ 221:Core/Src/stm32f4xx_it.c ****   /* USER CODE BEGIN USART1_IRQn 0 */
  222:Core/Src/stm32f4xx_it.c **** 
- 223:Core/Src/stm32f4xx_it.c ****   /* USER CODE END USART2_IRQn 0 */
- 224:Core/Src/stm32f4xx_it.c ****   HAL_UART_IRQHandler(&huart2);
- 264              		.loc 1 224 3 view .LVU33
- 265 0002 0248     		ldr	r0, .L22
- 266 0004 FFF7FEFF 		bl	HAL_UART_IRQHandler
- 267              	.LVL2:
- 225:Core/Src/stm32f4xx_it.c ****   /* USER CODE BEGIN USART2_IRQn 1 */
+ 223:Core/Src/stm32f4xx_it.c ****   /* USER CODE END USART1_IRQn 0 */
+ 224:Core/Src/stm32f4xx_it.c ****   HAL_UART_IRQHandler(&huart1);
+ 260              		.loc 1 224 3 view .LVU33
+ 261 0002 0248     		ldr	r0, .L20
+ 262 0004 FFF7FEFF 		bl	HAL_UART_IRQHandler
+ 263              	.LVL2:
+ 225:Core/Src/stm32f4xx_it.c ****   /* USER CODE BEGIN USART1_IRQn 1 */
  226:Core/Src/stm32f4xx_it.c **** 
- 227:Core/Src/stm32f4xx_it.c ****   /* USER CODE END USART2_IRQn 1 */
+ 227:Core/Src/stm32f4xx_it.c ****   /* USER CODE END USART1_IRQn 1 */
  228:Core/Src/stm32f4xx_it.c **** }
- 268              		.loc 1 228 1 is_stmt 0 view .LVU34
- 269 0008 08BD     		pop	{r3, pc}
- 270              	.L23:
- 271 000a 00BF     		.align	2
- 272              	.L22:
- 273 000c 00000000 		.word	huart2
- 274              		.cfi_endproc
- 275              	.LFE140:
- 277              		.text
- 278              	.Letext0:
- 279              		.file 2 "/Users/roryschram/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscod
- 280              		.file 3 "/Users/roryschram/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscod
- 281              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h"
- 282              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
- 283              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
- 284              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
- 285              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s 			page 10
+ 264              		.loc 1 228 1 is_stmt 0 view .LVU34
+ 265 0008 08BD     		pop	{r3, pc}
+ 266              	.L21:
+ 267 000a 00BF     		.align	2
+ 268              	.L20:
+ 269 000c 00000000 		.word	huart1
+ 270              		.cfi_endproc
+ 271              	.LFE140:
+ 273              		.section	.text.USART2_IRQHandler,"ax",%progbits
+ 274              		.align	1
+ 275              		.global	USART2_IRQHandler
+ 276              		.syntax unified
+ 277              		.thumb
+ 278              		.thumb_func
+ 280              	USART2_IRQHandler:
+ 281              	.LFB141:
+ 229:Core/Src/stm32f4xx_it.c **** 
+ 230:Core/Src/stm32f4xx_it.c **** /**
+ 231:Core/Src/stm32f4xx_it.c ****   * @brief This function handles USART2 global interrupt.
+ 232:Core/Src/stm32f4xx_it.c ****   */
+ 233:Core/Src/stm32f4xx_it.c **** void USART2_IRQHandler(void)
+ 234:Core/Src/stm32f4xx_it.c **** {
+ 282              		.loc 1 234 1 is_stmt 1 view -0
+ 283              		.cfi_startproc
+ 284              		@ args = 0, pretend = 0, frame = 0
+ 285              		@ frame_needed = 0, uses_anonymous_args = 0
+ 286 0000 08B5     		push	{r3, lr}
+ 287              		.cfi_def_cfa_offset 8
+ 288              		.cfi_offset 3, -8
+ 289              		.cfi_offset 14, -4
+ 235:Core/Src/stm32f4xx_it.c ****   /* USER CODE BEGIN USART2_IRQn 0 */
+ 236:Core/Src/stm32f4xx_it.c **** 
+ 237:Core/Src/stm32f4xx_it.c ****   /* USER CODE END USART2_IRQn 0 */
+ 238:Core/Src/stm32f4xx_it.c ****   HAL_UART_IRQHandler(&huart2);
+ 290              		.loc 1 238 3 view .LVU36
+ 291 0002 0248     		ldr	r0, .L24
+ 292 0004 FFF7FEFF 		bl	HAL_UART_IRQHandler
+ 293              	.LVL3:
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s 			page 10
+
+
+ 239:Core/Src/stm32f4xx_it.c ****   /* USER CODE BEGIN USART2_IRQn 1 */
+ 240:Core/Src/stm32f4xx_it.c **** 
+ 241:Core/Src/stm32f4xx_it.c ****   /* USER CODE END USART2_IRQn 1 */
+ 242:Core/Src/stm32f4xx_it.c **** }
+ 294              		.loc 1 242 1 is_stmt 0 view .LVU37
+ 295 0008 08BD     		pop	{r3, pc}
+ 296              	.L25:
+ 297 000a 00BF     		.align	2
+ 298              	.L24:
+ 299 000c 00000000 		.word	huart2
+ 300              		.cfi_endproc
+ 301              	.LFE141:
+ 303              		.text
+ 304              	.Letext0:
+ 305              		.file 2 "/Users/roryschram/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscod
+ 306              		.file 3 "/Users/roryschram/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscod
+ 307              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h"
+ 308              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 309              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 310              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
+ 311              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 312              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_it.c
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:21     .text.NMI_Handler:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:27     .text.NMI_Handler:00000000 NMI_Handler
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:44     .text.HardFault_Handler:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:50     .text.HardFault_Handler:00000000 HardFault_Handler
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:67     .text.MemManage_Handler:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:73     .text.MemManage_Handler:00000000 MemManage_Handler
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:90     .text.BusFault_Handler:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:96     .text.BusFault_Handler:00000000 BusFault_Handler
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:113    .text.UsageFault_Handler:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:119    .text.UsageFault_Handler:00000000 UsageFault_Handler
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:136    .text.SVC_Handler:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:142    .text.SVC_Handler:00000000 SVC_Handler
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:155    .text.DebugMon_Handler:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:161    .text.DebugMon_Handler:00000000 DebugMon_Handler
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:174    .text.PendSV_Handler:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:180    .text.PendSV_Handler:00000000 PendSV_Handler
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:193    .text.SysTick_Handler:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:199    .text.SysTick_Handler:00000000 SysTick_Handler
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:218    .text.USART1_IRQHandler:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:224    .text.USART1_IRQHandler:00000000 USART1_IRQHandler
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:243    .text.USART1_IRQHandler:0000000c $d
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:248    .text.USART2_IRQHandler:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:254    .text.USART2_IRQHandler:00000000 USART2_IRQHandler
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccAOJRD6.s:273    .text.USART2_IRQHandler:0000000c $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:21     .text.NMI_Handler:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:27     .text.NMI_Handler:00000000 NMI_Handler
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:44     .text.HardFault_Handler:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:50     .text.HardFault_Handler:00000000 HardFault_Handler
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:67     .text.MemManage_Handler:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:73     .text.MemManage_Handler:00000000 MemManage_Handler
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:90     .text.BusFault_Handler:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:96     .text.BusFault_Handler:00000000 BusFault_Handler
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:113    .text.UsageFault_Handler:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:119    .text.UsageFault_Handler:00000000 UsageFault_Handler
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:136    .text.SVC_Handler:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:142    .text.SVC_Handler:00000000 SVC_Handler
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:155    .text.DebugMon_Handler:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:161    .text.DebugMon_Handler:00000000 DebugMon_Handler
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:174    .text.PendSV_Handler:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:180    .text.PendSV_Handler:00000000 PendSV_Handler
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:193    .text.SysTick_Handler:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:199    .text.SysTick_Handler:00000000 SysTick_Handler
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:218    .text.EXTI9_5_IRQHandler:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:224    .text.EXTI9_5_IRQHandler:00000000 EXTI9_5_IRQHandler
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:244    .text.USART1_IRQHandler:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:250    .text.USART1_IRQHandler:00000000 USART1_IRQHandler
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:269    .text.USART1_IRQHandler:0000000c $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:274    .text.USART2_IRQHandler:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:280    .text.USART2_IRQHandler:00000000 USART2_IRQHandler
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccpsk4gq.s:299    .text.USART2_IRQHandler:0000000c $d
 
 UNDEFINED SYMBOLS
 HAL_IncTick
+HAL_GPIO_EXTI_IRQHandler
 HAL_UART_IRQHandler
 huart1
 huart2
