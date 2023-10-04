@@ -30,6 +30,9 @@
 #include <float.h>
 #include <math.h>
 #include <LoRa.h>
+#include "ssd1306.h"
+#include "fonts.h"
+
 
 /* USER CODE END Includes */
 
@@ -51,6 +54,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c1;
+I2C_HandleTypeDef hi2c2;
 
 SPI_HandleTypeDef hspi3;
 
@@ -68,6 +72,9 @@ LoRa myLoRa;
 bool isLoraReady = true;
 int preTicks = 0;
 int currentTicks = 0;
+int iMode = 1;
+char sMode[10];
+bool bModeChanged = false;
 
 //Variables to work out altitude
 
@@ -99,6 +106,7 @@ static void MX_USART1_UART_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_SPI3_Init(void);
+static void MX_I2C2_Init(void);
 /* USER CODE BEGIN PFP */
 
 
@@ -141,6 +149,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_I2C1_Init();
   MX_SPI3_Init();
+  MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
 
   bmp280_init_default_params(&bmp280.params);
@@ -165,10 +174,17 @@ int main(void)
   myLoRa.DIO0_pin        = GPIO_PIN_9;
   myLoRa.hSPIx           = &hspi3;
 
+  myLoRa.frequency             = 433;             // default = 433 MHz
+  myLoRa.spredingFactor        = SF_7;            // default = SF_7
+  myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
+  myLoRa.crcRate               = CR_4_8;          // default = CR_4_5
+  myLoRa.power                 = POWER_20db;      // default = 20db
+  myLoRa.overCurrentProtection = 100;             // default = 100 mA
+  myLoRa.preamble              = 8;              // default = 8;
+
   uint16_t ret = LoRa_init(&myLoRa);
   uint8_t buff[128] = {"\0"};
-
-
+  
 
 if (ret==LORA_OK){
   snprintf(buff,sizeof(buff),"LoRa is running... :) \n\r");
@@ -180,14 +196,19 @@ else{
   HAL_UART_Transmit(&huart2, buff, sizeof(buff)/sizeof(buff[0]), 1000);
 }
 
-myLoRa.frequency             = 433;             // default = 433 MHz
-myLoRa.spredingFactor        = SF_7;            // default = SF_7
-myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
-myLoRa.crcRate               = CR_4_8;          // default = CR_4_5
-myLoRa.power                 = POWER_20db;      // default = 20db
-myLoRa.overCurrentProtection = 100;             // default = 100 mA
-myLoRa.preamble              = 8;              // default = 8;
 
+ssd1306_Init(&hi2c2);
+
+// Set cursors and write the word "mode"
+ssd1306_SetCursor(0, 0);
+ssd1306_WriteString("Mode:", Font_16x26, White);
+
+ssd1306_SetCursor(0, 35);
+sprintf(sMode, "%d", iMode);
+ssd1306_WriteString(sMode, Font_16x26, White);
+
+// Copy all data from local screenbuffer to the screen
+ssd1306_UpdateScreen(&hi2c2);
 
   /* USER CODE END 2 */
 
@@ -202,6 +223,38 @@ myLoRa.preamble              = 8;              // default = 8;
       LoRa_transmit(&myLoRa, (uint8_t*)transmit_data, 113, 100);
       flag = 0;
       memset(transmit_data, '\0', sizeof(transmit_data));
+    }
+
+    if (bModeChanged) {
+switch (iMode) {
+    case 1:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_8;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 2:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.bandWidth             = BW_250KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_8;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    default:
+      // default statements
+}
+      bModeChanged = false;
     }
     }
     
@@ -291,6 +344,40 @@ static void MX_I2C1_Init(void)
   /* USER CODE BEGIN I2C1_Init 2 */
 
   /* USER CODE END I2C1_Init 2 */
+
+}
+
+/**
+  * @brief I2C2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C2_Init(void)
+{
+
+  /* USER CODE BEGIN I2C2_Init 0 */
+
+  /* USER CODE END I2C2_Init 0 */
+
+  /* USER CODE BEGIN I2C2_Init 1 */
+
+  /* USER CODE END I2C2_Init 1 */
+  hi2c2.Instance = I2C2;
+  hi2c2.Init.ClockSpeed = 100000;
+  hi2c2.Init.DutyCycle = I2C_DUTYCYCLE_2;
+  hi2c2.Init.OwnAddress1 = 0;
+  hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c2.Init.OwnAddress2 = 0;
+  hi2c2.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c2.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C2_Init 2 */
+
+  /* USER CODE END I2C2_Init 2 */
 
 }
 
@@ -550,7 +637,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if(GPIO_Pin == GPIO_PIN_13) // INT Source is pin A1
+  if(GPIO_Pin == GPIO_PIN_13) // Left button pushed
     {
       //get the current time
       currentTicks = HAL_GetTick();
@@ -559,12 +646,43 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
         sprintf(transmit_data,"%s","\nLeft Button Pushed");
 	      HAL_UART_Transmit(&huart2, transmit_data, sizeof(transmit_data)/sizeof(transmit_data[0]),1000);
         memset(transmit_data, '\0', sizeof(transmit_data));
+        bModeChanged = true;
+
+        if (iMode == 1) {
+          iMode = 60;
+          // Set cursors and write the word "mode"
+          ssd1306_SetCursor(0, 0);
+          ssd1306_WriteString("Mode:", Font_16x26, White);
+
+          ssd1306_SetCursor(0, 35);
+          sprintf(sMode, "%d", iMode);
+          ssd1306_WriteString(sMode, Font_16x26, White);
+
+          // Copy all data from local screenbuffer to the screen
+          ssd1306_UpdateScreen(&hi2c2);
+        } else {
+          iMode = iMode - 1;
+          // Set cursors and write the word "mode"
+          ssd1306_SetCursor(0, 0);
+          ssd1306_WriteString("Mode:", Font_16x26, White);
+
+          ssd1306_SetCursor(0, 35);
+          sprintf(sMode, "%d", iMode);
+          ssd1306_WriteString(sMode, Font_16x26, White);
+
+          // Copy all data from local screenbuffer to the screen
+          ssd1306_UpdateScreen(&hi2c2);
+
+        }
+
+
+
       } else {
         //break
       }
     }
 
-  if(GPIO_Pin == GPIO_PIN_5) // INT Source is pin A1
+  if(GPIO_Pin == GPIO_PIN_5) // Right button pushed
     {
       //get the current time
       currentTicks = HAL_GetTick();
@@ -573,6 +691,36 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
         sprintf(transmit_data,"%s","\nRight Button Pushed");
 	      HAL_UART_Transmit(&huart2, transmit_data, sizeof(transmit_data)/sizeof(transmit_data[0]),1000);
         memset(transmit_data, '\0', sizeof(transmit_data));
+        bModeChanged = true;
+        
+        if (iMode == 60) {
+          iMode = 1;
+          // Set cursors and write the word "mode"
+          ssd1306_SetCursor(0, 0);
+          ssd1306_WriteString("Mode:", Font_16x26, White);
+
+          ssd1306_SetCursor(0, 35);
+          sprintf(sMode, "%d        ", iMode);
+          ssd1306_WriteString(sMode, Font_16x26, White);
+
+          // Copy all data from local screenbuffer to the screen
+          ssd1306_UpdateScreen(&hi2c2);
+        } else {
+          iMode = iMode + 1;
+          // Set cursors and write the word "mode"
+          ssd1306_SetCursor(0, 0);
+          ssd1306_WriteString("Mode:", Font_16x26, White);
+
+          ssd1306_SetCursor(0, 35);
+          sprintf(sMode, "%d        ", iMode);
+          ssd1306_WriteString(sMode, Font_16x26, White);
+
+          // Copy all data from local screenbuffer to the screen
+          ssd1306_UpdateScreen(&hi2c2);
+
+        }
+
+
       } else {
         //break
       }
