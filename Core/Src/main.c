@@ -66,6 +66,8 @@ bool bme280p;
 uint8_t transmit_data[256] = {"\0"};
 LoRa myLoRa;
 bool isLoraReady = true;
+int preTicks = 0;
+int currentTicks = 0;
 
 //Variables to work out altitude
 
@@ -180,8 +182,8 @@ else{
 
 myLoRa.frequency             = 433;             // default = 433 MHz
 myLoRa.spredingFactor        = SF_7;            // default = SF_7
-myLoRa.bandWidth             = BW_250KHz;       // default = BW_125KHz
-myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
+myLoRa.crcRate               = CR_4_8;          // default = CR_4_5
 myLoRa.power                 = POWER_20db;      // default = 20db
 myLoRa.overCurrentProtection = 100;             // default = 100 mA
 myLoRa.preamble              = 8;              // default = 8;
@@ -435,6 +437,18 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : rightButton_Pin */
+  GPIO_InitStruct.Pin = rightButton_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(rightButton_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : leftButton_Pin */
+  GPIO_InitStruct.Pin = leftButton_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(leftButton_GPIO_Port, &GPIO_InitStruct);
+
   /*Configure GPIO pin : PB8 */
   GPIO_InitStruct.Pin = GPIO_PIN_8;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -449,8 +463,11 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 2, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 2, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
@@ -485,7 +502,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
     struct minmea_sentence_rmc frame;
     if (minmea_parse_rmc(&frame, line)) {
       //memset(line_out, '\0', sizeof(line_out));
-      sprintf(transmit_data + strlen(transmit_data),"\n%d:%d:%d,",frame.time.hours, frame.time.minutes,frame.time.seconds);
+      sprintf(transmit_data + strlen(transmit_data),"%d:%d:%d,",frame.time.hours, frame.time.minutes,frame.time.seconds);
       //HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
 
       //memset(line_out, '\0', sizeof(line_out));
@@ -528,6 +545,39 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
   //Send interrupt when data from GPS is sent again
   //HAL_UARTEx_ReceiveToIdle_IT(&huart1,(uint8_t*)gps_raw, 512);
 
+}
+
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  if(GPIO_Pin == GPIO_PIN_13) // INT Source is pin A1
+    {
+      //get the current time
+      currentTicks = HAL_GetTick();
+      if ((currentTicks-preTicks)>250) {
+        memset(transmit_data, '\0', sizeof(transmit_data));
+        sprintf(transmit_data,"%s","\nLeft Button Pushed");
+	      HAL_UART_Transmit(&huart2, transmit_data, sizeof(transmit_data)/sizeof(transmit_data[0]),1000);
+        memset(transmit_data, '\0', sizeof(transmit_data));
+      } else {
+        //break
+      }
+    }
+
+  if(GPIO_Pin == GPIO_PIN_5) // INT Source is pin A1
+    {
+      //get the current time
+      currentTicks = HAL_GetTick();
+      if ((currentTicks-preTicks)>250) {
+        memset(transmit_data, '\0', sizeof(transmit_data));
+        sprintf(transmit_data,"%s","\nRight Button Pushed");
+	      HAL_UART_Transmit(&huart2, transmit_data, sizeof(transmit_data)/sizeof(transmit_data[0]),1000);
+        memset(transmit_data, '\0', sizeof(transmit_data));
+      } else {
+        //break
+      }
+    }  
+  preTicks = currentTicks;
 }
 
 /* USER CODE END 4 */
