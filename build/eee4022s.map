@@ -3079,25 +3079,25 @@ LOAD /Users/roryschram/Library/Application Support/Code/User/globalStorage/bmd.s
  .debug_rnglists
                 0x00000b57       0x19 build/startup_stm32f411xe.o
 
-.debug_line     0x00000000    0x1439c
+.debug_line     0x00000000    0x14397
  .debug_line    0x00000000      0x852 build/LoRa.o
  .debug_line    0x00000852      0x9ba build/bmp280.o
  .debug_line    0x0000120c      0x1c6 build/fonts.o
- .debug_line    0x000013d2     0x1adf build/main.o
- .debug_line    0x00002eb1      0xf74 build/minmea.o
- .debug_line    0x00003e25      0x666 build/ssd1306.o
- .debug_line    0x0000448b      0x599 build/stm32f4xx_hal_msp.o
- .debug_line    0x00004a24      0x3dd build/stm32f4xx_it.o
- .debug_line    0x00004e01      0x315 build/system_stm32f4xx.o
- .debug_line    0x00005116      0x62d build/stm32f4xx_hal.o
- .debug_line    0x00005743      0x8d8 build/stm32f4xx_hal_cortex.o
- .debug_line    0x0000601b      0xf21 build/stm32f4xx_hal_dma.o
- .debug_line    0x00006f3c      0x766 build/stm32f4xx_hal_gpio.o
- .debug_line    0x000076a2     0x5461 build/stm32f4xx_hal_i2c.o
- .debug_line    0x0000cb03      0xbc9 build/stm32f4xx_hal_rcc.o
- .debug_line    0x0000d6cc     0x25b8 build/stm32f4xx_hal_spi.o
- .debug_line    0x0000fc84     0x46a2 build/stm32f4xx_hal_uart.o
- .debug_line    0x00014326       0x76 build/startup_stm32f411xe.o
+ .debug_line    0x000013d2     0x1ada build/main.o
+ .debug_line    0x00002eac      0xf74 build/minmea.o
+ .debug_line    0x00003e20      0x666 build/ssd1306.o
+ .debug_line    0x00004486      0x599 build/stm32f4xx_hal_msp.o
+ .debug_line    0x00004a1f      0x3dd build/stm32f4xx_it.o
+ .debug_line    0x00004dfc      0x315 build/system_stm32f4xx.o
+ .debug_line    0x00005111      0x62d build/stm32f4xx_hal.o
+ .debug_line    0x0000573e      0x8d8 build/stm32f4xx_hal_cortex.o
+ .debug_line    0x00006016      0xf21 build/stm32f4xx_hal_dma.o
+ .debug_line    0x00006f37      0x766 build/stm32f4xx_hal_gpio.o
+ .debug_line    0x0000769d     0x5461 build/stm32f4xx_hal_i2c.o
+ .debug_line    0x0000cafe      0xbc9 build/stm32f4xx_hal_rcc.o
+ .debug_line    0x0000d6c7     0x25b8 build/stm32f4xx_hal_spi.o
+ .debug_line    0x0000fc7f     0x46a2 build/stm32f4xx_hal_uart.o
+ .debug_line    0x00014321       0x76 build/startup_stm32f411xe.o
 
 .debug_str      0x00000000     0x4570
  .debug_str     0x00000000      0x83c build/LoRa.o
