@@ -93,7 +93,7 @@ char sTemperature[128] = {"\0"};
 char sHumidity[128] = {"\0"};
 char sAltitude[128] = {"\0"};
 
-uint16_t size;
+size_t size;
 uint8_t Data[256] = {"\0"};
 
 
@@ -177,7 +177,7 @@ int main(void)
   myLoRa.frequency             = 433;             // default = 433 MHz
   myLoRa.spredingFactor        = SF_7;            // default = SF_7
   myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
-  myLoRa.crcRate               = CR_4_8;          // default = CR_4_5
+  myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
   myLoRa.power                 = POWER_20db;      // default = 20db
   myLoRa.overCurrentProtection = 100;             // default = 100 mA
   myLoRa.preamble              = 8;              // default = 8;
@@ -188,12 +188,14 @@ int main(void)
 
 if (ret==LORA_OK){
   snprintf(buff,sizeof(buff),"LoRa is running... :) \n\r");
-  LoRa_transmit(&myLoRa, (uint8_t*)buff, 120, 100);
-  HAL_UART_Transmit(&huart2, buff, sizeof(buff)/sizeof(buff[0]), 1000);
+  size = strlen(&buff);
+  LoRa_transmit(&myLoRa, (uint8_t*)buff, size, 100);
+  HAL_UART_Transmit(&huart2, buff, size, 1000);
 }
 else{
   snprintf(buff,sizeof(buff),"\n\r LoRa failed :( \n\r Error code: %d \n\r", ret);
-  HAL_UART_Transmit(&huart2, buff, sizeof(buff)/sizeof(buff[0]), 1000);
+  size = strlen(&buff);
+  HAL_UART_Transmit(&huart2, buff, size, 1000);
 }
 
 
@@ -220,7 +222,8 @@ ssd1306_UpdateScreen(&hi2c2);
     if (isLoraReady){
       HAL_UARTEx_ReceiveToIdle_IT(&huart1,(uint8_t*)gps_raw,512);
       if (flag == 1) {
-      LoRa_transmit(&myLoRa, (uint8_t*)transmit_data, 113, 100);
+      size = strlen(&transmit_data);
+      LoRa_transmit(&myLoRa, (uint8_t*)"H", 1, 100);
       flag = 0;
       memset(transmit_data, '\0', sizeof(transmit_data));
     }
@@ -232,7 +235,7 @@ switch (iMode) {
       myLoRa.frequency             = 433;             // default = 433 MHz
       myLoRa.spredingFactor        = SF_7;            // default = SF_7
       myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
-      myLoRa.crcRate               = CR_4_8;          // default = CR_4_5
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
       myLoRa.overCurrentProtection = 100;             // default = 100 mA
       myLoRa.preamble              = 8;              // default = 8;
@@ -243,8 +246,704 @@ switch (iMode) {
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
       myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.bandWidth             = BW_10_4KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 3:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.bandWidth             = BW_15_6KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 4:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.bandWidth             = BW_20_8KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 5:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.bandWidth             = BW_31_25KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 6:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.bandWidth             = BW_41_7KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 7:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.bandWidth             = BW_62_5KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 8:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.bandWidth             = BW_125KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 9:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_7;            // default = SF_7
       myLoRa.bandWidth             = BW_250KHz;       // default = BW_125KHz
-      myLoRa.crcRate               = CR_4_8;          // default = CR_4_5
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 10:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.bandWidth             = BW_500KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+    
+    case 11:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 12:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.bandWidth             = BW_10_4KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 13:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.bandWidth             = BW_15_6KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 14:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.bandWidth             = BW_20_8KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 15:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.bandWidth             = BW_31_25KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 16:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.bandWidth             = BW_41_7KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 17:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.bandWidth             = BW_62_5KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 18:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.bandWidth             = BW_125KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 19:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.bandWidth             = BW_250KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 20:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.bandWidth             = BW_500KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 21:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 22:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.bandWidth             = BW_10_4KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 23:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.bandWidth             = BW_15_6KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 24:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.bandWidth             = BW_20_8KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 25:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.bandWidth             = BW_31_25KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 26:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.bandWidth             = BW_41_7KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 27:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.bandWidth             = BW_62_5KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 28:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.bandWidth             = BW_125KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 29:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.bandWidth             = BW_250KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 30:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.bandWidth             = BW_500KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 31:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 32:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.bandWidth             = BW_10_4KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 33:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.bandWidth             = BW_15_6KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 34:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.bandWidth             = BW_20_8KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 35:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.bandWidth             = BW_31_25KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 36:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.bandWidth             = BW_41_7KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 37:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.bandWidth             = BW_62_5KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 38:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.bandWidth             = BW_125KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 39:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.bandWidth             = BW_250KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 40:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.bandWidth             = BW_500KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 41:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 42:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.bandWidth             = BW_10_4KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 43:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.bandWidth             = BW_15_6KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 44:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.bandWidth             = BW_20_8KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 45:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.bandWidth             = BW_31_25KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 46:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.bandWidth             = BW_41_7KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 47:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.bandWidth             = BW_62_5KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 48:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.bandWidth             = BW_125KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 49:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.bandWidth             = BW_250KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 50:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.bandWidth             = BW_500KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 51:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 52:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.bandWidth             = BW_10_4KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 53:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.bandWidth             = BW_15_6KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 54:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.bandWidth             = BW_20_8KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 55:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.bandWidth             = BW_31_25KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 56:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.bandWidth             = BW_41_7KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 57:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.bandWidth             = BW_62_5KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 58:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.bandWidth             = BW_125KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 59:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.bandWidth             = BW_250KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
+      myLoRa.power                 = POWER_20db;      // default = 20db
+      myLoRa.overCurrentProtection = 100;             // default = 100 mA
+      myLoRa.preamble              = 8;              // default = 8;
+      LoRa_init(&myLoRa);
+      break;
+
+    case 60:
+      // statements
+      myLoRa.frequency             = 433;             // default = 433 MHz
+      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.bandWidth             = BW_500KHz;       // default = BW_125KHz
+      myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
       myLoRa.overCurrentProtection = 100;             // default = 100 mA
       myLoRa.preamble              = 8;              // default = 8;
@@ -622,8 +1321,9 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
   gcvt(temperature, 4, sTemperature);
   gcvt(humidity, 4, sHumidity);
 
-	size = sprintf(transmit_data + strlen(transmit_data),"%s,%s,%s,%s",sPressure, sTemperature, sHumidity, sAltitude);
-	HAL_UART_Transmit(&huart2, transmit_data, sizeof(transmit_data)/sizeof(transmit_data[0]), 1000);
+	sprintf(transmit_data + strlen(transmit_data),"%s,%s,%s,%s",sPressure, sTemperature, sHumidity, sAltitude);
+  size = strlen(&transmit_data);
+	HAL_UART_Transmit(&huart2, transmit_data, size, 1000);
 
 
 
@@ -641,7 +1341,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     {
       //get the current time
       currentTicks = HAL_GetTick();
-      if ((currentTicks-preTicks)>250) {
+      if ((currentTicks-preTicks)>200) {
         memset(transmit_data, '\0', sizeof(transmit_data));
         sprintf(transmit_data,"%s","\nLeft Button Pushed");
 	      HAL_UART_Transmit(&huart2, transmit_data, sizeof(transmit_data)/sizeof(transmit_data[0]),1000);
@@ -655,7 +1355,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
           ssd1306_WriteString("Mode:", Font_16x26, White);
 
           ssd1306_SetCursor(0, 35);
-          sprintf(sMode, "%d", iMode);
+          sprintf(sMode, "%d        ", iMode);
           ssd1306_WriteString(sMode, Font_16x26, White);
 
           // Copy all data from local screenbuffer to the screen
@@ -667,7 +1367,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
           ssd1306_WriteString("Mode:", Font_16x26, White);
 
           ssd1306_SetCursor(0, 35);
-          sprintf(sMode, "%d", iMode);
+          sprintf(sMode, "%d        ", iMode);
           ssd1306_WriteString(sMode, Font_16x26, White);
 
           // Copy all data from local screenbuffer to the screen
@@ -686,7 +1386,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     {
       //get the current time
       currentTicks = HAL_GetTick();
-      if ((currentTicks-preTicks)>250) {
+      if ((currentTicks-preTicks)>200) {
         memset(transmit_data, '\0', sizeof(transmit_data));
         sprintf(transmit_data,"%s","\nRight Button Pushed");
 	      HAL_UART_Transmit(&huart2, transmit_data, sizeof(transmit_data)/sizeof(transmit_data[0]),1000);
