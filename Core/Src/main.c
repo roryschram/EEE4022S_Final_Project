@@ -58,6 +58,8 @@ I2C_HandleTypeDef hi2c2;
 
 SPI_HandleTypeDef hspi3;
 
+TIM_HandleTypeDef htim3;
+
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 
@@ -75,6 +77,7 @@ int currentTicks = 0;
 int iMode = 1;
 char sMode[10];
 bool bModeChanged = false;
+bool sendData = false;
 
 //Variables to work out altitude
 
@@ -107,6 +110,7 @@ static void MX_USART2_UART_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_SPI3_Init(void);
 static void MX_I2C2_Init(void);
+static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
 
 
@@ -150,7 +154,11 @@ int main(void)
   MX_I2C1_Init();
   MX_SPI3_Init();
   MX_I2C2_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+  
+  // Start timer
+  HAL_TIM_Base_Start_IT(&htim3);
 
   bmp280_init_default_params(&bmp280.params);
 	bmp280.addr = 0x77;
@@ -173,7 +181,8 @@ int main(void)
   myLoRa.DIO0_port       = GPIOB;
   myLoRa.DIO0_pin        = GPIO_PIN_9;
   myLoRa.hSPIx           = &hspi3;
-
+  
+  
   myLoRa.frequency             = 433;             // default = 433 MHz
   myLoRa.spredingFactor        = SF_7;            // default = SF_7
   myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
@@ -212,6 +221,7 @@ ssd1306_WriteString(sMode, Font_16x26, White);
 // Copy all data from local screenbuffer to the screen
 ssd1306_UpdateScreen(&hi2c2);
 
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -221,10 +231,12 @@ ssd1306_UpdateScreen(&hi2c2);
     //HAL_UARTEx_ReceiveToIdle_DMA(&huart1,(uint8_t*)gps_raw,512);
     if (isLoraReady){
       HAL_UARTEx_ReceiveToIdle_IT(&huart1,(uint8_t*)gps_raw,512);
-      if (flag == 1) {
+      if (sendData) {
       size = strlen(&transmit_data);
-      LoRa_transmit(&myLoRa, (uint8_t*)"H", 1, 100);
-      flag = 0;
+      ret = LoRa_transmit(&myLoRa, (uint8_t*)"H", 1, 10000);
+      size = strlen(&transmit_data);
+	    HAL_UART_Transmit(&huart2, transmit_data, size, 1000);
+      sendData = false;
       memset(transmit_data, '\0', sizeof(transmit_data));
     }
 
@@ -1119,6 +1131,51 @@ static void MX_SPI3_Init(void)
 }
 
 /**
+  * @brief TIM3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM3_Init(void)
+{
+
+  /* USER CODE BEGIN TIM3_Init 0 */
+
+  /* USER CODE END TIM3_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM3_Init 1 */
+
+  /* USER CODE END TIM3_Init 1 */
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 1600-1;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 10000-1;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM3_Init 2 */
+
+  /* USER CODE END TIM3_Init 2 */
+
+}
+
+/**
   * @brief USART1 Initialization Function
   * @param None
   * @retval None
@@ -1263,6 +1320,7 @@ static void MX_GPIO_Init(void)
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
   //Set a flag high when the GPS sends data
   flag = 1;
+  isLoraReady = false;
 
   //Set memory of line_out to emtpy
   //memset(line_out, '\0', sizeof(line_out));
@@ -1322,11 +1380,10 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
   gcvt(humidity, 4, sHumidity);
 
 	sprintf(transmit_data + strlen(transmit_data),"%s,%s,%s,%s",sPressure, sTemperature, sHumidity, sAltitude);
-  size = strlen(&transmit_data);
-	HAL_UART_Transmit(&huart2, transmit_data, size, 1000);
 
 
 
+  isLoraReady = true;
   //Set flag low to indicate that data transfer is done
   
   //Send interrupt when data from GPS is sent again
@@ -1426,6 +1483,17 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       }
     }  
   preTicks = currentTicks;
+}
+
+
+// Callback: timer has rolled over
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  // Check which version of the timer triggered this callback and toggle LED
+  if (htim == &htim3)
+  {
+    sendData = true;
+  }
 }
 
 /* USER CODE END 4 */
