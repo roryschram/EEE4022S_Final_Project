@@ -1,4 +1,5 @@
 #include "LoRa.h"
+#include <math.h>
 
 /* ----------------------------------------------------------------------------- *\
 		name        : newLoRa
@@ -20,12 +21,13 @@ LoRa newLoRa(){
 	LoRa new_LoRa;
 
 	new_LoRa.frequency             = 433       ;
-	new_LoRa.spredingFactor        = SF_7      ;
+	new_LoRa.spreadingFactor        = SF_7      ;
 	new_LoRa.bandWidth			   = BW_125KHz ;
 	new_LoRa.crcRate               = CR_4_5    ;
 	new_LoRa.power				   = POWER_20db;
 	new_LoRa.overCurrentProtection = 100       ;
 	new_LoRa.preamble			   = 8         ;
+	new_LoRa.lowDataRateOptimization = 0;
 
 	return new_LoRa;
 }
@@ -197,6 +199,73 @@ void LoRa_setSpreadingFactor(LoRa* _LoRa, int SF){
 	LoRa_write(_LoRa, RegModemConfig2, data);
 	HAL_Delay(10);
 }
+
+
+
+
+/* ----------------------------------------------------------------------------- *\
+		name        : LoRa_setLowDataRateOptimizer
+
+		description : Turn on or off the LowDatarateOptimizer
+
+		arguments   :
+			LoRa* LoRa        --> LoRa object handler
+			uint8_t   mode    --> 0 for off, 1 for on. DEFAULT = 0
+
+		returns     : Nothing
+\* ----------------------------------------------------------------------------- */
+void LoRa_setLowDataRateOptimizer(LoRa* _LoRa){
+		float fBandwidth = 0;
+
+		switch (_LoRa->bandWidth)
+		{
+		case 0:
+			fBandwidth = 7.8;
+			break;
+		case 1:
+			fBandwidth = 10.4;
+			break;
+		case 2:
+			fBandwidth = 15.6;
+			break;
+		case 3:
+			fBandwidth = 20.8;
+			break;
+		case 4:
+			fBandwidth = 31.25;
+			break;
+		case 5:
+			fBandwidth = 41.7;
+			break;
+		case 6:
+			fBandwidth = 62.5;
+			break;
+		case 7:
+			fBandwidth = 125;
+			break;
+		case 8:
+			fBandwidth = 250;
+			break;
+		case 9:
+			fBandwidth = 500;
+			break;
+		
+		default:
+			break;
+		}
+
+		float symbolTime = 1/((fBandwidth)/pow(2,(_LoRa->spreadingFactor)));
+		
+		if (symbolTime > 16) {
+			LoRa_write(_LoRa, REG_MODEM_CONFIG_3, 0x8);
+			_LoRa->lowDataRateOptimization = 1;
+		} else {
+			LoRa_write(_LoRa, REG_MODEM_CONFIG_3, 0x00);
+			_LoRa->lowDataRateOptimization = 0;;
+		}
+}
+
+
 
 /* ----------------------------------------------------------------------------- *\
 		name        : LoRa_setPower
@@ -496,7 +565,7 @@ uint16_t LoRa_init(LoRa* _LoRa){
 
 		// set spreading factor, CRC on, and Timeout Msb:
 			LoRa_setTOMsb_setCRCon(_LoRa);
-			LoRa_setSpreadingFactor(_LoRa, _LoRa->spredingFactor);
+			LoRa_setSpreadingFactor(_LoRa, _LoRa->spreadingFactor);
 
 		// set Timeout Lsb:
 			LoRa_write(_LoRa, RegSymbTimeoutL, 0xFF);
@@ -516,6 +585,9 @@ uint16_t LoRa_init(LoRa* _LoRa){
 			read = LoRa_read(_LoRa, RegDioMapping1);
 			data = read | 0x3F;
 			LoRa_write(_LoRa, RegDioMapping1, data);
+
+		// Rory's Code --> turn the low data rate optimizer on/off based on spreading factor and bandwidth
+			LoRa_setLowDataRateOptimizer(_LoRa);
 
 		// goto standby mode:
 			LoRa_gotoMode(_LoRa, STNBY_MODE);

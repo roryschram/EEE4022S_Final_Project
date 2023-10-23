@@ -76,8 +76,12 @@ int preTicks = 0;
 int currentTicks = 0;
 int iMode = 1;
 char sMode[10];
-bool bModeChanged = false;
+bool bModeChanged = true;
 bool sendData = false;
+
+
+bool beginRead = false;
+uint16_t packetSize = 0;
 
 //Variables to work out altitude
 
@@ -112,6 +116,7 @@ static void MX_SPI3_Init(void);
 static void MX_I2C2_Init(void);
 static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
+uint16_t buildDataPacket();
 
 
 /* USER CODE END PFP */
@@ -184,7 +189,7 @@ int main(void)
   
   
   myLoRa.frequency             = 433;             // default = 433 MHz
-  myLoRa.spredingFactor        = SF_7;            // default = SF_7
+  myLoRa.spreadingFactor        = SF_7;            // default = SF_7
   myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
   myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
   myLoRa.power                 = POWER_20db;      // default = 20db
@@ -199,12 +204,12 @@ if (ret==LORA_OK){
   snprintf(buff,sizeof(buff),"LoRa is running... :) \n\r");
   size = strlen(&buff);
   LoRa_transmit(&myLoRa, (uint8_t*)buff, size, 100);
-  HAL_UART_Transmit(&huart2, buff, size, 1000);
+  HAL_UART_Transmit_IT(&huart2, buff, size);
 }
 else{
   snprintf(buff,sizeof(buff),"\n\r LoRa failed :( \n\r Error code: %d \n\r", ret);
   size = strlen(&buff);
-  HAL_UART_Transmit(&huart2, buff, size, 1000);
+  HAL_UART_Transmit_IT(&huart2, buff, size);
 }
 
 
@@ -222,30 +227,38 @@ ssd1306_WriteString(sMode, Font_16x26, White);
 ssd1306_UpdateScreen(&hi2c2);
 
 
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    //HAL_UARTEx_ReceiveToIdle_DMA(&huart1,(uint8_t*)gps_raw,512);
-    if (isLoraReady){
-      HAL_UARTEx_ReceiveToIdle_IT(&huart1,(uint8_t*)gps_raw,512);
-      if (sendData) {
+
+    if (beginRead) {
+      HAL_UARTEx_ReceiveToIdle(&huart1,(uint8_t*)gps_raw,512,512,1000);
+      packetSize = buildDataPacket();
+      //HAL_UART_Transmit(&huart2,(uint8_t *)transmit_data,packetSize, 1000);
+
       size = strlen(&transmit_data);
-      ret = LoRa_transmit(&myLoRa, (uint8_t*)"H", 1, 10000);
-      size = strlen(&transmit_data);
-	    HAL_UART_Transmit(&huart2, transmit_data, size, 1000);
-      sendData = false;
+      ret = LoRa_transmit(&myLoRa, (uint8_t*)"1234", 4, 10000);
       memset(transmit_data, '\0', sizeof(transmit_data));
-    }
+
+      sprintf(transmit_data, "Data sent with code %u\n", ret);
+      size = strlen(&transmit_data);
+	    HAL_UART_Transmit(&huart2, (uint8_t *)transmit_data, size, 1000);
+      memset(transmit_data, '\0', sizeof(transmit_data));
+      
+      
+      beginRead = false;
+    }      
 
     if (bModeChanged) {
 switch (iMode) {
     case 1:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_7;            // default = SF_7
       myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -257,7 +270,7 @@ switch (iMode) {
     case 2:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_7;            // default = SF_7
       myLoRa.bandWidth             = BW_10_4KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -269,7 +282,7 @@ switch (iMode) {
     case 3:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_7;            // default = SF_7
       myLoRa.bandWidth             = BW_15_6KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -281,7 +294,7 @@ switch (iMode) {
     case 4:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_7;            // default = SF_7
       myLoRa.bandWidth             = BW_20_8KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -293,7 +306,7 @@ switch (iMode) {
     case 5:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_7;            // default = SF_7
       myLoRa.bandWidth             = BW_31_25KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -305,7 +318,7 @@ switch (iMode) {
     case 6:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_7;            // default = SF_7
       myLoRa.bandWidth             = BW_41_7KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -317,7 +330,7 @@ switch (iMode) {
     case 7:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_7;            // default = SF_7
       myLoRa.bandWidth             = BW_62_5KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -329,7 +342,7 @@ switch (iMode) {
     case 8:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_7;            // default = SF_7
       myLoRa.bandWidth             = BW_125KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -341,7 +354,7 @@ switch (iMode) {
     case 9:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_7;            // default = SF_7
       myLoRa.bandWidth             = BW_250KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -353,7 +366,7 @@ switch (iMode) {
     case 10:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_7;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_7;            // default = SF_7
       myLoRa.bandWidth             = BW_500KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -365,7 +378,7 @@ switch (iMode) {
     case 11:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_8;            // default = SF_7
       myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -377,7 +390,7 @@ switch (iMode) {
     case 12:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_8;            // default = SF_7
       myLoRa.bandWidth             = BW_10_4KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -389,7 +402,7 @@ switch (iMode) {
     case 13:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_8;            // default = SF_7
       myLoRa.bandWidth             = BW_15_6KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -401,7 +414,7 @@ switch (iMode) {
     case 14:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_8;            // default = SF_7
       myLoRa.bandWidth             = BW_20_8KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -413,7 +426,7 @@ switch (iMode) {
     case 15:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_8;            // default = SF_7
       myLoRa.bandWidth             = BW_31_25KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -425,7 +438,7 @@ switch (iMode) {
     case 16:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_8;            // default = SF_7
       myLoRa.bandWidth             = BW_41_7KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -437,7 +450,7 @@ switch (iMode) {
     case 17:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_8;            // default = SF_7
       myLoRa.bandWidth             = BW_62_5KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -449,7 +462,7 @@ switch (iMode) {
     case 18:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_8;            // default = SF_7
       myLoRa.bandWidth             = BW_125KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -461,7 +474,7 @@ switch (iMode) {
     case 19:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_8;            // default = SF_7
       myLoRa.bandWidth             = BW_250KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -473,7 +486,7 @@ switch (iMode) {
     case 20:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_8;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_8;            // default = SF_7
       myLoRa.bandWidth             = BW_500KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -485,7 +498,7 @@ switch (iMode) {
     case 21:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_9;            // default = SF_7
       myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -497,7 +510,7 @@ switch (iMode) {
     case 22:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_9;            // default = SF_7
       myLoRa.bandWidth             = BW_10_4KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -509,7 +522,7 @@ switch (iMode) {
     case 23:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_9;            // default = SF_7
       myLoRa.bandWidth             = BW_15_6KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -521,7 +534,7 @@ switch (iMode) {
     case 24:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_9;            // default = SF_7
       myLoRa.bandWidth             = BW_20_8KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -533,7 +546,7 @@ switch (iMode) {
     case 25:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_9;            // default = SF_7
       myLoRa.bandWidth             = BW_31_25KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -545,7 +558,7 @@ switch (iMode) {
     case 26:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_9;            // default = SF_7
       myLoRa.bandWidth             = BW_41_7KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -557,7 +570,7 @@ switch (iMode) {
     case 27:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_9;            // default = SF_7
       myLoRa.bandWidth             = BW_62_5KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -569,7 +582,7 @@ switch (iMode) {
     case 28:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_9;            // default = SF_7
       myLoRa.bandWidth             = BW_125KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -581,7 +594,7 @@ switch (iMode) {
     case 29:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_9;            // default = SF_7
       myLoRa.bandWidth             = BW_250KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -593,7 +606,7 @@ switch (iMode) {
     case 30:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_9;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_9;            // default = SF_7
       myLoRa.bandWidth             = BW_500KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -605,7 +618,7 @@ switch (iMode) {
     case 31:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_10;            // default = SF_7
       myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -617,7 +630,7 @@ switch (iMode) {
     case 32:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_10;            // default = SF_7
       myLoRa.bandWidth             = BW_10_4KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -629,7 +642,7 @@ switch (iMode) {
     case 33:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_10;            // default = SF_7
       myLoRa.bandWidth             = BW_15_6KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -641,7 +654,7 @@ switch (iMode) {
     case 34:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_10;            // default = SF_7
       myLoRa.bandWidth             = BW_20_8KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -653,7 +666,7 @@ switch (iMode) {
     case 35:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_10;            // default = SF_7
       myLoRa.bandWidth             = BW_31_25KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -665,7 +678,7 @@ switch (iMode) {
     case 36:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_10;            // default = SF_7
       myLoRa.bandWidth             = BW_41_7KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -677,7 +690,7 @@ switch (iMode) {
     case 37:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_10;            // default = SF_7
       myLoRa.bandWidth             = BW_62_5KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -689,7 +702,7 @@ switch (iMode) {
     case 38:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_10;            // default = SF_7
       myLoRa.bandWidth             = BW_125KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -701,7 +714,7 @@ switch (iMode) {
     case 39:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_10;            // default = SF_7
       myLoRa.bandWidth             = BW_250KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -713,7 +726,7 @@ switch (iMode) {
     case 40:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_10;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_10;            // default = SF_7
       myLoRa.bandWidth             = BW_500KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -725,7 +738,7 @@ switch (iMode) {
     case 41:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_11;            // default = SF_7
       myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -737,7 +750,7 @@ switch (iMode) {
     case 42:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_11;            // default = SF_7
       myLoRa.bandWidth             = BW_10_4KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -749,7 +762,7 @@ switch (iMode) {
     case 43:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_11;            // default = SF_7
       myLoRa.bandWidth             = BW_15_6KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -761,7 +774,7 @@ switch (iMode) {
     case 44:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_11;            // default = SF_7
       myLoRa.bandWidth             = BW_20_8KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -773,7 +786,7 @@ switch (iMode) {
     case 45:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_11;            // default = SF_7
       myLoRa.bandWidth             = BW_31_25KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -785,7 +798,7 @@ switch (iMode) {
     case 46:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_11;            // default = SF_7
       myLoRa.bandWidth             = BW_41_7KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -797,7 +810,7 @@ switch (iMode) {
     case 47:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_11;            // default = SF_7
       myLoRa.bandWidth             = BW_62_5KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -809,7 +822,7 @@ switch (iMode) {
     case 48:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_11;            // default = SF_7
       myLoRa.bandWidth             = BW_125KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -821,7 +834,7 @@ switch (iMode) {
     case 49:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_11;            // default = SF_7
       myLoRa.bandWidth             = BW_250KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -833,7 +846,7 @@ switch (iMode) {
     case 50:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_11;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_11;            // default = SF_7
       myLoRa.bandWidth             = BW_500KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -845,7 +858,7 @@ switch (iMode) {
     case 51:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_12;            // default = SF_7
       myLoRa.bandWidth             = BW_7_8KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -857,7 +870,7 @@ switch (iMode) {
     case 52:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_12;            // default = SF_7
       myLoRa.bandWidth             = BW_10_4KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -869,7 +882,7 @@ switch (iMode) {
     case 53:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_12;            // default = SF_7
       myLoRa.bandWidth             = BW_15_6KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -881,7 +894,7 @@ switch (iMode) {
     case 54:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_12;            // default = SF_7
       myLoRa.bandWidth             = BW_20_8KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -893,7 +906,7 @@ switch (iMode) {
     case 55:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_12;            // default = SF_7
       myLoRa.bandWidth             = BW_31_25KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -905,7 +918,7 @@ switch (iMode) {
     case 56:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_12;            // default = SF_7
       myLoRa.bandWidth             = BW_41_7KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -917,7 +930,7 @@ switch (iMode) {
     case 57:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_12;            // default = SF_7
       myLoRa.bandWidth             = BW_62_5KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -929,7 +942,7 @@ switch (iMode) {
     case 58:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_12;            // default = SF_7
       myLoRa.bandWidth             = BW_125KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -941,7 +954,7 @@ switch (iMode) {
     case 59:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_12;            // default = SF_7
       myLoRa.bandWidth             = BW_250KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -953,7 +966,7 @@ switch (iMode) {
     case 60:
       // statements
       myLoRa.frequency             = 433;             // default = 433 MHz
-      myLoRa.spredingFactor        = SF_12;            // default = SF_7
+      myLoRa.spreadingFactor        = SF_12;            // default = SF_7
       myLoRa.bandWidth             = BW_500KHz;       // default = BW_125KHz
       myLoRa.crcRate               = CR_4_5;          // default = CR_4_5
       myLoRa.power                 = POWER_20db;      // default = 20db
@@ -966,8 +979,13 @@ switch (iMode) {
       // default statements
 }
       bModeChanged = false;
+
+      // sprintf(transmit_data, "Data Optimization %d\n", myLoRa.lowDataRateOptimization);
+      // size = strlen(&transmit_data);
+	    // HAL_UART_Transmit(&huart2, (uint8_t *)transmit_data, size, 1000);
+      // memset(transmit_data, '\0', sizeof(transmit_data));
     }
-    }
+
     
     
     
@@ -978,6 +996,7 @@ switch (iMode) {
     //HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 
     //HAL_Delay(1000); 
+    HAL_UARTEx_ReceiveToIdle_IT(&huart1,(uint8_t*)gps_raw,512);
 
   }
   /* USER CODE END 3 */
@@ -1149,11 +1168,12 @@ static void MX_TIM3_Init(void)
 
   /* USER CODE END TIM3_Init 1 */
   htim3.Instance = TIM3;
-  htim3.Init.Prescaler = 1600-1;
+  htim3.Init.Prescaler = 16000-1;
   htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim3.Init.Period = 10000-1;
+  htim3.Init.Period = 1000-1;
   htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+
   if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
   {
     Error_Handler();
@@ -1224,7 +1244,7 @@ static void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 230400;
+  huart2.Init.BaudRate = 115200;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -1317,11 +1337,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
-  //Set a flag high when the GPS sends data
-  flag = 1;
-  isLoraReady = false;
-
+uint16_t buildDataPacket() {
   //Set memory of line_out to emtpy
   //memset(line_out, '\0', sizeof(line_out));
   memset(transmit_data, '\0', sizeof(transmit_data));
@@ -1364,13 +1380,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
   	//HAL_Delay(100);
 	while (!bmp280_read_float(&bmp280, &temperature, &pressure, &humidity)) {
 	  size = sprintf(transmit_data + strlen(transmit_data),"Temperature/pressure reading failed\n");
-	  //HAL_UART_Transmit(&huart2, Data, size, 1000);
 	}
-
-
-
-
-  //altitude = H_b + (T_b/L_b)*(pow((pressure/P_b),(-1*R*L_b)/(G_0*M))-1);
 
   altitude = 44330*(1-pow((pressure/P_b),(1/5.255)));
 
@@ -1380,15 +1390,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
   gcvt(humidity, 4, sHumidity);
 
 	sprintf(transmit_data + strlen(transmit_data),"%s,%s,%s,%s",sPressure, sTemperature, sHumidity, sAltitude);
-
-
-
-  isLoraReady = true;
-  //Set flag low to indicate that data transfer is done
-  
-  //Send interrupt when data from GPS is sent again
-  //HAL_UARTEx_ReceiveToIdle_IT(&huart1,(uint8_t*)gps_raw, 512);
-
+  return strlen(transmit_data);
 }
 
 
@@ -1492,7 +1494,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   // Check which version of the timer triggered this callback and toggle LED
   if (htim == &htim3)
   {
-    sendData = true;
+    beginRead = true;
   }
 }
 

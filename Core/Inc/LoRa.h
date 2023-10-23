@@ -72,6 +72,7 @@
 #define RegPreambleMsb				0x20
 #define RegPreambleLsb				0x21
 #define RegPayloadLength			0x22
+#define REG_MODEM_CONFIG_3			0x26
 #define RegDioMapping1				0x40
 #define RegDioMapping2				0x41
 #define RegVersion						0x42
@@ -96,12 +97,13 @@ typedef struct LoRa_setting{
 	// Module settings:
 	int					current_mode;
 	int 				frequency;
-	uint8_t			spredingFactor;
+	uint8_t			spreadingFactor;
 	uint8_t			bandWidth;
 	uint8_t			crcRate;
 	uint16_t		preamble;
 	uint8_t			power;
 	uint8_t			overCurrentProtection;
+	uint8_t		lowDataRateOptimization;
 	
 } LoRa;
 
