@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
   28:Core/Src/bmp280.c **** 
   29:Core/Src/bmp280.c **** #include "bmp280.h"
   30:Core/Src/bmp280.c **** 
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 2
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 2
 
 
   31:Core/Src/bmp280.c **** /**
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
   85:Core/Src/bmp280.c **** 		return 1;
   86:Core/Src/bmp280.c **** 
   87:Core/Src/bmp280.c **** }
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 3
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 3
 
 
   88:Core/Src/bmp280.c **** 
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  142:Core/Src/bmp280.c **** 	if (dev->addr != BMP280_I2C_ADDRESS_0
  143:Core/Src/bmp280.c **** 			&& dev->addr != BMP280_I2C_ADDRESS_1) {
  144:Core/Src/bmp280.c **** 
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 4
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 4
 
 
  145:Core/Src/bmp280.c **** 		return false;
@@ -238,7 +238,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  199:Core/Src/bmp280.c **** 		return false;
  200:Core/Src/bmp280.c **** 	}
  201:Core/Src/bmp280.c **** 
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 5
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 5
 
 
  202:Core/Src/bmp280.c **** 	return true;
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
   47              		.loc 1 237 4 view .LVU8
   48 0010 0EFB0CFC 		mul	ip, lr, ip
   49              	.LVL1:
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 6
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 6
 
 
  238:Core/Src/bmp280.c **** 	var2 = (((((adc_temp >> 4) - (int32_t) dev->dig_T1)
@@ -358,7 +358,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  250:Core/Src/bmp280.c ****  */
  251:Core/Src/bmp280.c **** static inline uint32_t compensate_pressure(BMP280_HandleTypedef *dev, int32_t adc_press,
  252:Core/Src/bmp280.c **** 		int32_t fine_temp) {
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 7
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 7
 
 
   93              		.loc 1 252 22 is_stmt 1 view -0
@@ -418,7 +418,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  142 0042 A0FB0208 		umull	r0, r8, r0, r2
  143 0046 4544     		add	r5, r5, r8
  144              		.loc 1 257 48 view .LVU40
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 8
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 8
 
 
  145 0048 6D04     		lsls	r5, r5, #17
@@ -478,7 +478,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  194 009e 03F50043 		add	r3, r3, #32768
  195              	.LVL16:
  196              		.loc 1 261 54 view .LVU59
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 9
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 9
 
 
  197 00a2 E288     		ldrh	r2, [r4, #6]
@@ -538,7 +538,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  244 00fa 41EA9C71 		orr	r1, r1, ip, lsr #30
  245 00fe 4FEA8C00 		lsl	r0, ip, #2
  246 0102 4019     		adds	r0, r0, r5
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 10
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 10
 
 
  247              		.loc 1 268 4 view .LVU73
@@ -598,7 +598,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  297              		.loc 1 272 10 view .LVU90
  298 015e 41EB6561 		adc	r1, r1, r5, asr #25
  299              		.loc 1 272 17 view .LVU91
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 11
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 11
 
 
  300 0162 9B19     		adds	r3, r3, r6
@@ -658,7 +658,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  285:Core/Src/bmp280.c **** 	v_x1_u32r = fine_temp - (int32_t) 76800;
  342              		.loc 1 285 2 view .LVU102
  343              		.loc 1 285 12 is_stmt 0 view .LVU103
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 12
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 12
 
 
  344 0000 A2F5963C 		sub	ip, r2, #76800
@@ -718,7 +718,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  286:Core/Src/bmp280.c **** 			- ((int32_t) dev->dig_H5 * v_x1_u32r)) + (int32_t) 16384) >> 15)
  391              		.loc 1 286 12 view .LVU126
  392 004a 01FB03F3 		mul	r3, r1, r3
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 13
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 13
 
 
  393              	.LVL39:
@@ -778,7 +778,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
   79:Core/Src/bmp280.c **** 	uint16_t tx_buff;
  440              		.loc 1 79 16 is_stmt 0 view .LVU142
  441 0000 10B5     		push	{r4, lr}
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 14
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 14
 
 
  442              		.cfi_def_cfa_offset 8
@@ -838,7 +838,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  484              	.LFE132:
  486              		.section	.text.read_register16,"ax",%progbits
  487              		.align	1
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 15
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 15
 
 
  488              		.syntax unified
@@ -898,7 +898,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  532 0022 FFF7FEFF 		bl	HAL_I2C_Mem_Read
  533              	.LVL54:
   69:Core/Src/bmp280.c **** 			== HAL_OK) {
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 16
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 16
 
 
  534              		.loc 1 69 5 view .LVU166
@@ -958,7 +958,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  579              		.cfi_def_cfa_offset 8
  580              		.cfi_offset 4, -8
  581              		.cfi_offset 14, -4
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 17
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 17
 
 
  582 0002 0446     		mov	r4, r0
@@ -1018,7 +1018,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  625 003e 9021     		movs	r1, #144
  626 0040 2046     		mov	r0, r4
  627 0042 FFF7FEFF 		bl	read_register16
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 18
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 18
 
 
  628              	.LVL62:
@@ -1078,7 +1078,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  672 0092 FFF7FEFF 		bl	read_register16
  673              	.LVL67:
  100:Core/Src/bmp280.c **** 			&& read_register16(dev, 0x9c, (uint16_t *) &dev->dig_P8)
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 19
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 19
 
 
  674              		.loc 1 100 4 view .LVU199
@@ -1138,7 +1138,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  722 0008 00F11802 		add	r2, r0, #24
  723 000c A121     		movs	r1, #161
  724 000e FFF7FEFF 		bl	read_data
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 20
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 20
 
 
  725              	.LVL71:
@@ -1198,7 +1198,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  117:Core/Src/bmp280.c **** 			&& read_register16(dev, 0xe5, &h5)
  770              		.loc 1 117 4 view .LVU217
  771 004e 0546     		mov	r5, r0
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 21
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 21
 
 
  772 0050 0028     		cmp	r0, #0
@@ -1258,7 +1258,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  813              		.loc 1 123 3 is_stmt 1 view .LVU230
  123:Core/Src/bmp280.c **** 	}
  814              		.loc 1 123 10 is_stmt 0 view .LVU231
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 22
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 22
 
 
  815 0092 C0E7     		b	.L21
@@ -1318,7 +1318,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  861 0022 806A     		ldr	r0, [r0, #40]
  862              	.LVL82:
  134:Core/Src/bmp280.c **** 		return false;
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 23
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 23
 
 
  863              		.loc 1 134 6 view .LVU242
@@ -1378,7 +1378,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  907 000a C370     		strb	r3, [r0, #3]
   60:Core/Src/bmp280.c **** 	params->standby = BMP280_STANDBY_250;
  908              		.loc 1 60 2 is_stmt 1 view .LVU255
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 24
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 24
 
 
   60:Core/Src/bmp280.c **** 	params->standby = BMP280_STANDBY_250;
@@ -1438,7 +1438,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  954              	.LVL86:
  955              	.L35:
  203:Core/Src/bmp280.c **** 
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 25
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 25
 
 
  956              		.loc 1 203 1 view .LVU267
@@ -1498,7 +1498,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  998              		.loc 1 158 5 view .LVU279
  999 0040 0028     		cmp	r0, #0
  1000 0042 53D1     		bne	.L46
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 26
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 26
 
 
  1001              	.L39:
@@ -1558,7 +1558,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  1040 0074 7379     		ldrb	r3, [r6, #5]	@ zero_extendqisi2
  178:Core/Src/bmp280.c **** 	if (write_register8(dev, BMP280_REG_CONFIG, config)) {
  1041              		.loc 1 178 51 view .LVU295
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 27
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 27
 
 
  1042 0076 7278     		ldrb	r2, [r6, #1]	@ zero_extendqisi2
@@ -1618,7 +1618,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  1080 00a2 DFB2     		uxtb	r7, r3
  1081              	.LVL96:
  190:Core/Src/bmp280.c **** 		// Write crtl hum reg first, only active after write to BMP280_REG_CTRL.
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 28
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 28
 
 
  1082              		.loc 1 190 2 is_stmt 1 view .LVU312
@@ -1678,7 +1678,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  1124              		.loc 1 192 3 is_stmt 1 view .LVU324
  193:Core/Src/bmp280.c **** 			return false;
  1125              		.loc 1 193 3 view .LVU325
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 29
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 29
 
 
  193:Core/Src/bmp280.c **** 			return false;
@@ -1738,7 +1738,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  1173              		@ args = 0, pretend = 0, frame = 8
  1174              		@ frame_needed = 0, uses_anonymous_args = 0
  205:Core/Src/bmp280.c **** 	uint8_t ctrl;
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 30
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 30
 
 
  1175              		.loc 1 205 58 is_stmt 0 view .LVU335
@@ -1798,7 +1798,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  1217 0030 2046     		mov	r0, r4
  1218 0032 FFF7FEFF 		bl	write_register8
  1219              	.LVL108:
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 31
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 31
 
 
  211:Core/Src/bmp280.c **** 		return false;
@@ -1858,7 +1858,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  221:Core/Src/bmp280.c **** 		return true;
  1265              		.loc 1 221 5 view .LVU359
  1266 0016 13F0080F 		tst	r3, #8
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 32
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 32
 
 
  1267 001a 04D1     		bne	.L65
@@ -1918,7 +1918,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  1316              		.loc 1 302 2 is_stmt 1 view .LVU365
  303:Core/Src/bmp280.c **** 	int32_t adc_temp;
  1317              		.loc 1 303 2 view .LVU366
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 33
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 33
 
 
  304:Core/Src/bmp280.c **** 	uint8_t data[8];
@@ -1978,7 +1978,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  318:Core/Src/bmp280.c **** 
  319:Core/Src/bmp280.c **** 	adc_pressure = data[0] << 12 | data[1] << 4 | data[2] >> 4;
  320:Core/Src/bmp280.c **** 	adc_temp = data[3] << 12 | data[4] << 4 | data[5] >> 4;
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 34
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 34
 
 
  321:Core/Src/bmp280.c **** 
@@ -2038,7 +2038,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  319:Core/Src/bmp280.c **** 	adc_temp = data[3] << 12 | data[4] << 4 | data[5] >> 4;
  1391              		.loc 1 319 52 view .LVU394
  1392 0050 9DF80A30 		ldrb	r3, [sp, #10]	@ zero_extendqisi2
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 35
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 35
 
 
  319:Core/Src/bmp280.c **** 	adc_temp = data[3] << 12 | data[4] << 4 | data[5] >> 4;
@@ -2098,7 +2098,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  1430              		.loc 1 326 5 is_stmt 0 view .LVU411
  1431 0086 65B1     		cbz	r5, .L74
  1432              	.LBB4:
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 36
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 36
 
 
  327:Core/Src/bmp280.c **** 		*humidity = compensate_humidity(dev, adc_humidity, fine_temp);
@@ -2158,7 +2158,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  1477 0000 70B5     		push	{r4, r5, r6, lr}
  1478              		.cfi_def_cfa_offset 16
  1479              		.cfi_offset 4, -16
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 37
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 37
 
 
  1480              		.cfi_offset 5, -12
@@ -2218,7 +2218,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  341:Core/Src/bmp280.c **** 		*pressure = (float) fixed_pressure / 256;
  1519              		.loc 1 341 18 is_stmt 0 view .LVU434
  1520 001c DDED037A 		vldr.32	s15, [sp, #12]	@ int
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 38
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 38
 
 
  1521 0020 F8EEE77A 		vcvt.f32.s32	s15, s15
@@ -2278,7 +2278,7 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  1562              	.Letext0:
  1563              		.file 2 "/Users/roryschram/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscod
  1564              		.file 3 "/Users/roryschram/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscod
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 39
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 39
 
 
  1565              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h"
@@ -2287,40 +2287,40 @@ ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 1
  1568              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
  1569              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h"
  1570              		.file 9 "Core/Inc/bmp280.h"
-ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s 			page 40
+ARM GAS  /var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s 			page 40
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 bmp280.c
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:21     .text.compensate_temperature:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:26     .text.compensate_temperature:00000000 compensate_temperature
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:85     .text.compensate_pressure:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:90     .text.compensate_pressure:00000000 compensate_pressure
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:328    .text.compensate_humidity:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:333    .text.compensate_humidity:00000000 compensate_humidity
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:428    .text.read_data:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:433    .text.read_data:00000000 read_data
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:487    .text.read_register16:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:492    .text.read_register16:00000000 read_register16
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:565    .text.read_calibration_data:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:570    .text.read_calibration_data:00000000 read_calibration_data
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:697    .text.read_hum_calibration_data:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:702    .text.read_hum_calibration_data:00000000 read_hum_calibration_data
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:820    .text.write_register8:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:825    .text.write_register8:00000000 write_register8
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:880    .text.bmp280_init_default_params:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:886    .text.bmp280_init_default_params:00000000 bmp280_init_default_params
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:920    .text.bmp280_init:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:926    .text.bmp280_init:00000000 bmp280_init
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:1162   .text.bmp280_force_measurement:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:1168   .text.bmp280_force_measurement:00000000 bmp280_force_measurement
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:1233   .text.bmp280_is_measuring:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:1239   .text.bmp280_is_measuring:00000000 bmp280_is_measuring
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:1288   .text.bmp280_read_fixed:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:1294   .text.bmp280_read_fixed:00000000 bmp280_read_fixed
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:1463   .text.bmp280_read_float:00000000 $t
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:1469   .text.bmp280_read_float:00000000 bmp280_read_float
-/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//ccgEfmir.s:1555   .text.bmp280_read_float:00000060 $d
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:21     .text.compensate_temperature:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:26     .text.compensate_temperature:00000000 compensate_temperature
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:85     .text.compensate_pressure:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:90     .text.compensate_pressure:00000000 compensate_pressure
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:328    .text.compensate_humidity:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:333    .text.compensate_humidity:00000000 compensate_humidity
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:428    .text.read_data:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:433    .text.read_data:00000000 read_data
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:487    .text.read_register16:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:492    .text.read_register16:00000000 read_register16
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:565    .text.read_calibration_data:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:570    .text.read_calibration_data:00000000 read_calibration_data
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:697    .text.read_hum_calibration_data:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:702    .text.read_hum_calibration_data:00000000 read_hum_calibration_data
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:820    .text.write_register8:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:825    .text.write_register8:00000000 write_register8
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:880    .text.bmp280_init_default_params:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:886    .text.bmp280_init_default_params:00000000 bmp280_init_default_params
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:920    .text.bmp280_init:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:926    .text.bmp280_init:00000000 bmp280_init
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:1162   .text.bmp280_force_measurement:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:1168   .text.bmp280_force_measurement:00000000 bmp280_force_measurement
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:1233   .text.bmp280_is_measuring:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:1239   .text.bmp280_is_measuring:00000000 bmp280_is_measuring
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:1288   .text.bmp280_read_fixed:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:1294   .text.bmp280_read_fixed:00000000 bmp280_read_fixed
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:1463   .text.bmp280_read_float:00000000 $t
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:1469   .text.bmp280_read_float:00000000 bmp280_read_float
+/var/folders/_g/2c7lhzm90n5_zxwlm2w6npkr0000gn/T//cc0hXJj8.s:1555   .text.bmp280_read_float:00000060 $d
 
 UNDEFINED SYMBOLS
 __aeabi_ldivmod

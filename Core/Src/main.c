@@ -66,8 +66,7 @@ UART_HandleTypeDef huart2;
 /* USER CODE BEGIN PV */
 uint8_t gps_raw[512] = {"\0"};
 uint8_t flag = 0;
-char line_out[512] = {"\0"};
-char line[512] = {"\0"};
+char line[64] = {"\0"};
 bool bme280p;
 uint8_t transmit_data[256] = {"\0"};
 LoRa myLoRa;
@@ -80,7 +79,7 @@ bool bModeChanged = true;
 bool sendData = false;
 
 
-bool beginRead = false;
+bool beginTransmit = false;
 uint16_t packetSize = 0;
 
 //Variables to work out altitude
@@ -226,6 +225,7 @@ ssd1306_WriteString(sMode, Font_16x26, White);
 // Copy all data from local screenbuffer to the screen
 ssd1306_UpdateScreen(&hi2c2);
 
+HAL_UARTEx_ReceiveToIdle(&huart1,(uint8_t*)gps_raw,512,512,1000);
 
 
   /* USER CODE END 2 */
@@ -235,22 +235,22 @@ ssd1306_UpdateScreen(&hi2c2);
   while (1)
   {
 
-    if (beginRead) {
-      HAL_UARTEx_ReceiveToIdle(&huart1,(uint8_t*)gps_raw,512,512,1000);
+
+    if (beginTransmit) {
+      //HAL_UART_Transmit(&huart2,(uint8_t *)gps_raw,512, 1000);
+      HAL_UARTEx_ReceiveToIdle_IT(&huart1,(uint8_t*)gps_raw,512);
       packetSize = buildDataPacket();
-      //HAL_UART_Transmit(&huart2,(uint8_t *)transmit_data,packetSize, 1000);
-
+      
       size = strlen(&transmit_data);
-      ret = LoRa_transmit(&myLoRa, (uint8_t*)"1234", 4, 10000);
+      ret = LoRa_transmit(&myLoRa, (uint8_t*)transmit_data, packetSize, 10000);
       memset(transmit_data, '\0', sizeof(transmit_data));
 
-      sprintf(transmit_data, "Data sent with code %u\n", ret);
-      size = strlen(&transmit_data);
-	    HAL_UART_Transmit(&huart2, (uint8_t *)transmit_data, size, 1000);
-      memset(transmit_data, '\0', sizeof(transmit_data));
+      // sprintf(transmit_data, "Data sent with code %u\n", ret);
+      // size = strlen(&transmit_data);
+	    // HAL_UART_Transmit(&huart2, (uint8_t *)transmit_data, size, 1000);
+      // memset(transmit_data, '\0', sizeof(transmit_data));
       
-      
-      beginRead = false;
+      beginTransmit = false;
     }      
 
     if (bModeChanged) {
@@ -994,8 +994,6 @@ switch (iMode) {
     /* USER CODE BEGIN 3 */
     //HAL_UART_Transmit_IT(&huart2, (uint8_t *)Gpsdata, sizeof(Gpsdata));
     //HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-
-    //HAL_Delay(1000); 
     HAL_UARTEx_ReceiveToIdle_IT(&huart1,(uint8_t*)gps_raw,512);
 
   }
@@ -1170,10 +1168,9 @@ static void MX_TIM3_Init(void)
   htim3.Instance = TIM3;
   htim3.Init.Prescaler = 16000-1;
   htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim3.Init.Period = 1000-1;
+  htim3.Init.Period = 4000-1;
   htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-
   if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
   {
     Error_Handler();
@@ -1326,10 +1323,10 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 2, 0);
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
-  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 2, 0);
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
@@ -1361,19 +1358,22 @@ uint16_t buildDataPacket() {
     strcpy(line, token);
     struct minmea_sentence_rmc frame;
     if (minmea_parse_rmc(&frame, line)) {
+      //Set gps_raw data register to empty
+      memset(gps_raw, '\0', sizeof(gps_raw));
       //memset(line_out, '\0', sizeof(line_out));
-      sprintf(transmit_data + strlen(transmit_data),"%d:%d:%d,",frame.time.hours, frame.time.minutes,frame.time.seconds);
+      sprintf(transmit_data + strlen(transmit_data),"%d:%d:%d|",frame.time.hours, frame.time.minutes,frame.time.seconds);
       //HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
 
       //memset(line_out, '\0', sizeof(line_out));
-      sprintf(transmit_data + strlen(transmit_data), "(%d,%d),",minmea_rescale(&frame.latitude, 1000),minmea_rescale(&frame.longitude, 1000));
+      sprintf(transmit_data + strlen(transmit_data), "(%d,%d)|", frame.latitude.value,frame.longitude.value);
       //HAL_UART_Transmit(&huart2, (uint8_t*)line_out, sizeof(line_out)/sizeof(line_out[0]), 1000);
-      
     }
   }
 
-  //Set gps_raw data register to empty
-  memset(gps_raw, '\0', sizeof(gps_raw));
+
+
+
+
 
 
 
@@ -1389,7 +1389,7 @@ uint16_t buildDataPacket() {
   gcvt(temperature, 4, sTemperature);
   gcvt(humidity, 4, sHumidity);
 
-	sprintf(transmit_data + strlen(transmit_data),"%s,%s,%s,%s",sPressure, sTemperature, sHumidity, sAltitude);
+	sprintf(transmit_data + strlen(transmit_data),"%s|%s|%s|%s",sPressure, sTemperature, sHumidity, sAltitude);
   return strlen(transmit_data);
 }
 
@@ -1400,7 +1400,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     {
       //get the current time
       currentTicks = HAL_GetTick();
-      if ((currentTicks-preTicks)>200) {
+      if (((currentTicks-preTicks)>200)) {
         memset(transmit_data, '\0', sizeof(transmit_data));
         sprintf(transmit_data,"%s","\nLeft Button Pushed");
 	      HAL_UART_Transmit(&huart2, transmit_data, sizeof(transmit_data)/sizeof(transmit_data[0]),1000);
@@ -1445,7 +1445,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     {
       //get the current time
       currentTicks = HAL_GetTick();
-      if ((currentTicks-preTicks)>200) {
+      if (((currentTicks-preTicks)>200 )) {
         memset(transmit_data, '\0', sizeof(transmit_data));
         sprintf(transmit_data,"%s","\nRight Button Pushed");
 	      HAL_UART_Transmit(&huart2, transmit_data, sizeof(transmit_data)/sizeof(transmit_data[0]),1000);
@@ -1494,7 +1494,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   // Check which version of the timer triggered this callback and toggle LED
   if (htim == &htim3)
   {
-    beginRead = true;
+    beginTransmit = true;
   }
 }
 
