@@ -1,0 +1,10 @@
+Designator,Val,Package,Mid X,Mid Y,Rotation,Layer
+B1,~,Battery HolderCharger,72.644,-49.022,0.0,top
+U1,~,STM32f4_Black_Pill,58.5455,-83.82,-90.0,top
+U2,~,SX1278,96.251,-154.457,90.0,top
+U3,~,NEO-6M,98.171,-106.045,0.0,top
+U4,~,BME280,68.122,-119.489,0.0,top
+U5,~,FTDI,41.484,-105.156,90.0,top
+U6,Left Button,Push Button,34.27,-139.979,0.0,top
+U7,Right Button,Push Button,46.462,-139.979,0.0,top
+U8,~,OLED Display,40.376,-118.9015,0.0,top

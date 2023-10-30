@@ -1,0 +1,5 @@
+Designator,Val,Package,Mid X,Mid Y,Rotation,Layer
+U1,~,ESP8266,112.525,-100.338,180.0,top
+U2,Navigator Button,Push Button,91.166,-125.755,0.0,top
+U4,~,SX1278,110.998,-128.016,90.0,top
+U5,~,OLED Display,91.43,-110.7735,0.0,top

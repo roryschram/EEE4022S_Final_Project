@@ -1,0 +1,10 @@
+Comment,Designator,Footprint,LCSC
+~,U5,FTDI,
+~,U3,NEO-6M,
+Left Button,U6,Push Button,
+~,U4,BME280,
+Right Button,U7,Push Button,
+~,B1,Battery HolderCharger,
+~,U1,STM32f4_Black_Pill,
+~,U8,OLED Display,
+~,U2,SX1278,

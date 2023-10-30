@@ -1,0 +1,5 @@
+Comment,Designator,Footprint,LCSC
+~,U1,ESP8266,
+~,U4,SX1278,
+Navigator Button,U2,Push Button,
+~,U5,OLED Display,
